@@ -1,0 +1,21 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+interface Props { project: CollectionEntry<'projects'>; }
+const { project } = Astro.props;
+const { title, slug, disciplines, context, client, year, summary, cover } = project.data;
+const projectContext = [context, client, year].filter(Boolean).join(' · ');
+---
+<article class="project-card brief-card" data-project-format="brief">
+  <a class="brief-card-link" href={`/work/${slug}/`} aria-label={`View project: ${title}`}>
+    <div class="brief-card-top"><span class="eyebrow">Project brief</span><span class="brief-arrow" aria-hidden="true">+</span></div>
+    <h3>{title}</h3>
+    <ul class="tags" aria-label="Project disciplines">{disciplines.map((discipline) => <li>{discipline}</li>)}</ul>
+    {projectContext && <p class="project-context">{projectContext}</p>}
+    <div class="brief-reveal"><div class="brief-reveal-inner">
+      {cover && <div class="brief-preview"><Image src={cover.src} alt={cover.alt} widths={[240, 480]} sizes="160px" loading="lazy" /></div>}
+      <p>{summary}</p>
+      <span class="brief-cta">View project <span aria-hidden="true">›</span></span>
+    </div></div>
+  </a>
+</article>

@@ -1,0 +1,19 @@
+---
+import type { ImageMetadata } from 'astro';
+interface Props { asset: { src: ImageMetadata; alt: string; caption?: string }; year: '2025' | '2026'; }
+const { asset, year } = Astro.props;
+// Paths follow the printed surround in each original 3024 × 4032 photograph.
+const cutout = year === '2025'
+ ? { box: '95 1210 2685 2070', path: 'M 297 1235 Q 202 1235 187 1340 L 108 3110 Q 101 3214 213 3231 L 2650 3244 Q 2767 3246 2760 3134 L 2735 1395 Q 2732 1295 2629 1280 Z' }
+ : { box: '30 800 2965 2195', path: 'M 245 917 Q 600 830 1440 822 Q 2350 835 2830 924 Q 2941 943 2943 1065 L 2965 2772 Q 2968 2880 2850 2900 Q 1570 3070 150 2896 Q 40 2886 39 2770 L 188 1050 Q 186 962 245 917 Z' };
+const id = `kiosk-cutout-${year}`;
+---
+<figure class="conference-kiosk">
+ <a href={asset.src.src} target="_blank" rel="noopener noreferrer" aria-label={`View original photo: ${asset.alt}`}>
+  <svg viewBox={cutout.box} role="img" aria-label={asset.alt}>
+   <defs><clipPath id={id}><path d={cutout.path} /></clipPath></defs>
+   <image href={asset.src.src} width="3024" height="4032" clip-path={`url(#${id})`} />
+  </svg>
+ </a>
+ <figcaption class="project-caption">{asset.caption}</figcaption>
+</figure>

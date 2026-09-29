@@ -1,0 +1,18 @@
+---
+import ContentPage from '../../components/ContentPage.astro';
+import ProjectGrid from '../../components/ProjectGrid.astro';
+import { getPublishedProjects } from '../../lib/projects';
+const projects = await getPublishedProjects();
+const caseStudies = projects.filter(({ data }) => data.format === 'case-study');
+const selectedProjects = projects.filter(({ data }) => data.format === 'brief');
+---
+<ContentPage id="work" introduction>
+  <section aria-labelledby="case-studies" data-project-format="case-study">
+    <h2 id="case-studies">Featured Case Studies</h2>
+    <ProjectGrid projects={caseStudies} presentation="features" />
+  </section>
+  <section class="work-section work-briefs" aria-labelledby="selected-projects" data-project-format="brief">
+    <h2 id="selected-projects">Marketing Projects</h2>
+    <ProjectGrid projects={selectedProjects} presentation="reveals" />
+  </section>
+</ContentPage>

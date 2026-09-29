@@ -1,0 +1,61 @@
+---
+interface Props { section: string; }
+const { section } = Astro.props;
+const framework = [
+ ['PERFORMANCE','Speed Index · Largest Contentful Paint · First Contentful Paint'],
+ ['ACCESSIBILITY','Accessibility score · Alt text · Color contrast'],
+ ['EXPERIENCE','Navigation · Mobile responsiveness · Content hierarchy · Calls to action'],
+];
+const recommendations = [
+ ['Slow LCP / visual loading','Primary content takes longer to become usable or visible.','Optimize large image and video assets.'],
+ ['Missing alt text','Important visual information may not be available to users relying on assistive technology.','Add meaningful alternative text to informative imagery.'],
+ ['Insufficient contrast','Content can become more difficult to perceive and read.','Adjust color usage to provide sufficient visual contrast.'],
+];
+---
+{section === 'analysis' && <div class="audit-framework">
+ <dl class="framework-grid">{framework.map(([label,body])=><div><dt>{label}</dt><dd>{body}</dd></div>)}</dl>
+ <p class="tools"><strong>TOOLS</strong> Lighthouse + qualitative UX review</p>
+</div>}
+{section === 'findings' && <div class="audit-findings">
+ <section class="airbnb" aria-labelledby="airbnb-finding"><h3 id="airbnb-finding">AIRBNB</h3>
+  <div class="diagnostic">
+   <dl class="metrics"><div><dt>Speed Index</dt><dd>6.8<span>s</span></dd></div><div><dt>Largest Contentful Paint</dt><dd>14.3<span>s</span></dd></div></dl>
+   <div class="interpretation"><h4>INSIGHT</h4><p>The performance data indicated that large visual assets were slowing how quickly meaningful content appeared for users.</p><h4>RECOMMENDATION</h4><p>Optimize image and video assets to improve loading performance and reduce the time users wait for primary content.</p></div>
+  </div>
+ </section>
+ <section class="nike" aria-labelledby="nike-finding"><h3 id="nike-finding">NIKE</h3><div class="nike-columns"><div><h4>ISSUES IDENTIFIED</h4><ul><li>Performance concerns</li><li>Missing image alt text</li><li>Insufficient color contrast</li></ul></div><div><h4>RECOMMENDATIONS</h4><ul><li>Optimize media assets</li><li>Add meaningful alternative text</li><li>Improve color contrast where needed</li></ul></div></div></section>
+</div>}
+{section === 'recommendations' && <>
+ <div class="recommendations" role="table" aria-label="Finding, user impact, and recommendation">
+  <div class="table-head" role="row"><span role="columnheader">FINDING <span aria-hidden="true">›</span></span><span role="columnheader">USER IMPACT <span aria-hidden="true">›</span></span><span role="columnheader">RECOMMENDATION</span></div>
+  {recommendations.map(row=><div class="recommendation-row" role="row">{row.map((cell,i)=><div role="cell"><span class="mobile-label" aria-hidden="true">{['FINDING','USER IMPACT','RECOMMENDATION'][i]}</span>{cell}</div>)}</div>)}
+ </div>
+ <p class="audit-takeaway">Technical performance and user experience are not separate problems. Performance, accessibility, content, and interface decisions all shape how easily someone can use a website.</p>
+</>}
+<style>
+ .audit-framework,.audit-findings,.recommendations { margin-top:var(--space-8); }
+ .framework-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--space-8); margin:0; }
+ .framework-grid >div { border-top:var(--border-default); padding-top:var(--space-5); }
+ dt,h4,.tools strong,.table-head,.mobile-label { font-family:var(--font-family-body); font-size:.75rem; font-weight:700; letter-spacing:.07em; color:var(--color-plum); }
+ dd { margin:.75rem 0 0; }
+ .tools { display:flex; flex-wrap:wrap; align-items:baseline; gap:var(--space-4); margin:var(--space-6) 0 0; font-size:.9rem; }
+ h3 { font-family:var(--font-family-body); font-size:.85rem; color:var(--color-plum); letter-spacing:.1em; margin:0 0 var(--space-5); }
+ h4 { margin:0 0 .65rem; }
+ .airbnb { border-top:var(--border-default); padding-top:var(--space-6); }
+ .diagnostic { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-12); }
+ .metrics { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-6); margin:0; }
+ .metrics dd { font-family:var(--font-family-heading); font-size:clamp(3rem,6.5vw,6rem); line-height:1.05; color:var(--color-plum); font-variant-numeric:tabular-nums; }
+ .metrics dd span { font-size:.45em; }
+ .interpretation p { margin:0 0 var(--space-5); }
+ .interpretation p:last-child { margin:0; }
+ .nike { margin-top:var(--space-8); border-top:var(--border-default); padding-top:var(--space-6); }
+ .nike-columns { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-12); }
+ ul { padding-left:1.1rem; margin:0; }
+ li+li { margin-top:.3rem; }
+ .table-head,.recommendation-row { display:grid; grid-template-columns:.8fr 1.2fr 1fr; gap:var(--space-8); border-bottom:var(--border-default); padding-block:var(--space-5); }
+ .table-head { border-top:var(--border-default); }
+ .table-head >span { display:flex; justify-content:space-between; }
+ .mobile-label { display:none; }
+ .audit-takeaway { margin:var(--space-8) 0 0; border-left:2px solid var(--color-plum); padding-left:var(--space-6); max-width:70ch; color:var(--color-plum); font-size:1.1rem; }
+ @media(max-width:48rem) { .framework-grid,.diagnostic,.nike-columns,.recommendation-row { grid-template-columns:1fr; gap:var(--space-6); } .table-head { display:none; } .recommendations { border-top:var(--border-default); } .mobile-label { display:block; margin-bottom:.5rem; } .metrics { grid-template-columns:1fr; } }
+</style>

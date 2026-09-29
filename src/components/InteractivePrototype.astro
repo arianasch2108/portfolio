@@ -1,0 +1,61 @@
+---
+interface Props { title: string; stages: string[]; }
+const { title, stages } = Astro.props;
+---
+<div class="interactive-prototype" data-prototype-frame>
+ <div data-inline-host>
+  <div class="prototype-panel">
+   <div class="prototype-toolbar"><span>Interactive recreation</span><div><button type="button" data-reset>Reset journey</button><button type="button" data-expand>Expand <span aria-hidden="true">↗</span></button><button type="button" data-close hidden>Close <span aria-hidden="true">×</span></button></div></div>
+   <ol class="prototype-stages" aria-label="Journey progress">{stages.map((stage,i)=><li aria-current={i===0?'step':undefined}><span>0{i+1}</span> {stage}</li>)}</ol>
+   <div class="prototype-viewport" tabindex="0" role="region" aria-label={title}><slot /></div>
+  </div>
+ </div>
+ <dialog aria-label={`${title} — expanded view`}><div data-dialog-host></div></dialog>
+</div>
+<script>
+ for (const frame of document.querySelectorAll<HTMLElement>('[data-prototype-frame]')) {
+  const panel=frame.querySelector<HTMLElement>('.prototype-panel')!;
+  const viewport=frame.querySelector<HTMLElement>('.prototype-viewport')!;
+  const dialog=frame.querySelector<HTMLDialogElement>('dialog')!;
+  const expand=frame.querySelector<HTMLButtonElement>('[data-expand]')!;
+  const close=frame.querySelector<HTMLButtonElement>('[data-close]')!;
+  const inline=frame.querySelector<HTMLElement>('[data-inline-host]')!;
+  let bodyOverflow='';
+  expand.addEventListener('click',()=>{
+   inline.style.minHeight=`${panel.offsetHeight}px`;
+   bodyOverflow=document.body.style.overflow; document.body.style.overflow='hidden';
+   frame.querySelector('[data-dialog-host]')!.append(panel);
+   expand.hidden=true;close.hidden=false;dialog.showModal();close.focus();
+  });
+  close.addEventListener('click',()=>dialog.close());
+  dialog.addEventListener('close',()=>{
+   const scroll=viewport.scrollTop;
+   inline.append(panel);inline.style.minHeight='';
+   expand.hidden=false;close.hidden=true;document.body.style.overflow=bodyOverflow;
+   viewport.scrollTop=scroll;expand.focus({preventScroll:true});
+  });
+  frame.querySelector('[data-reset]')!.addEventListener('click',()=>frame.dispatchEvent(new CustomEvent('prototype-reset')));
+  frame.addEventListener('prototype-stage',(event)=>{
+   const stage=(event as CustomEvent<number>).detail;
+   frame.querySelectorAll('.prototype-stages li').forEach((item,i)=>{if(i===stage)item.setAttribute('aria-current','step');else item.removeAttribute('aria-current');});
+  });
+ }
+</script>
+<style>
+ .interactive-prototype { margin-block: var(--space-8); }
+ .prototype-panel { border: 1px solid var(--color-border); background: var(--color-background); }
+ .prototype-toolbar { padding: .8rem 1rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; border-bottom: var(--border-default); }
+ .prototype-toolbar > span { text-transform: uppercase; font-size: .75rem; letter-spacing: .08em; color: var(--color-plum); }
+ button { font: inherit; font-size: .85rem; color: var(--color-plum); background: transparent; border: 0; padding: .6rem; cursor: pointer; }
+ button:hover { text-decoration: underline; }
+ button[hidden] { display: none; }
+ .prototype-stages { list-style: none; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); padding: .8rem 1rem; gap: .5rem; margin: 0; font-size: .8rem; }
+ .prototype-stages li { border-bottom: 2px solid var(--color-border); padding-bottom: .5rem; color: var(--color-muted); }
+ .prototype-stages li[aria-current] { color: var(--color-plum); border-color: var(--color-plum); font-weight: 700; }
+ .prototype-stages span { margin-right: .35rem; }
+ .prototype-viewport { height: min(72vh,48rem); min-height: 25rem; overflow: auto; overscroll-behavior: contain; background: white; }
+ dialog { width: min(96vw,100rem); max-width: none; max-height: 96dvh; padding: 0; border: 0; background: var(--color-background); color: var(--color-text); }
+ dialog::backdrop { background: #14151ed9; }
+ dialog .prototype-viewport { height: calc(94dvh - 9rem); min-height: 12rem; }
+ @media(max-width:40rem) { .prototype-toolbar { flex-wrap: wrap; gap: .25rem; } .prototype-stages { font-size: .65rem; padding-inline: .6rem; } .prototype-stages span { display: block; } .prototype-viewport { height: 65dvh; min-height: 23rem; } }
+</style>

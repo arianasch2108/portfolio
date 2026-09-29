@@ -1,0 +1,161 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import CosmicDetail from './CosmicDetail.astro';
+import site from '../data/site.json';
+interface Props { home: NonNullable<CollectionEntry<'pages'>['data']['homepage']>; }
+const { home } = Astro.props;
+const [first, ...last] = site.name.split(' ');
+const disciplines = ['Digital Strategy', 'Content Management', 'Creative Design', 'Marketing'];
+// Nodes and labels share coordinates sampled directly from the ellipse geometry.
+const points = [[280,116,-17,-50],[244,137,28,-10],[280,116,-17,110],[244,137,28,160]].map(([rx,ry,angle,position]) => {
+ const a = angle * Math.PI / 180, t = position * Math.PI / 180;
+ return { x:340 + rx*Math.cos(t)*Math.cos(a) - ry*Math.sin(t)*Math.sin(a), y:200 + rx*Math.cos(t)*Math.sin(a) + ry*Math.sin(t)*Math.cos(a) };
+});
+---
+<section class="hero orbital-hero" aria-labelledby="hero-title">
+ <CosmicDetail />
+ <div class="container">
+  <div class="orbital-composition">
+   <h1 id="hero-title" class="orbital-name"><span class="orbital-first">{first.toUpperCase()}</span><span class="orbital-surname">{last.join(' ')}</span></h1>
+   <div class="discipline-system">
+    <svg class="orbit-paths orbit-back" viewBox="0 0 680 400" fill="none" aria-hidden="true" focusable="false">
+     <ellipse cx="340" cy="200" rx="280" ry="116" transform="rotate(-17 340 200)" />
+     <ellipse cx="340" cy="200" rx="244" ry="137" transform="rotate(28 340 200)" />
+     <ellipse class="orbit-third" cx="340" cy="200" rx="180" ry="142" transform="rotate(-52 340 200)" />
+    </svg>
+    <div class="orbital-portrait">{home.portrait ? <img src={home.portrait.src.src} alt={home.portrait.alt} width={home.portrait.src.width} height={home.portrait.src.height} loading="eager" fetchpriority="high" /> : <span>Portrait to be supplied</span>}</div>
+    <svg class="orbit-paths orbit-front" viewBox="0 0 680 400" fill="none" aria-hidden="true" focusable="false"><path d="M73 234 C118 327 380 354 598 185" /><path d="M167 309 C251 365 400 352 469 279" /></svg>
+    <svg class="orbit-paths orbit-nodes" viewBox="0 0 680 400" aria-hidden="true" focusable="false">{points.map(p => <circle cx={p.x} cy={p.y} r="3" fill="var(--color-pale-lilac)" stroke="none" />)}</svg>
+    <ul class="discipline-labels" aria-label="Disciplines">{disciplines.map((label,i)=><li class={`discipline-${i}`} style={`--node-x:${points[i].x / 680 * 100}%;--node-y:${points[i].y / 400 * 100}%`}><span aria-hidden="true"></span>{label}</li>)}</ul>
+   </div>
+   <div class="orbital-positioning"><p>{home.positioning}</p><span class="orbital-location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" /></svg>{site.location}</span></div>
+  </div>
+  <div class="orbital-information">
+   <div class="orbital-intro"><slot /></div>
+   <div class="orbital-links"><a class="orbital-work-button" href="#featured-work">View my work <span aria-hidden="true">›</span></a><a href={`mailto:${site.email}`}>Get in touch <span aria-hidden="true">›</span></a></div>
+  </div>
+ </div>
+</section>
+<style>
+ .orbital-hero { padding: 1.5rem 0 2rem; background: var(--color-dark); color: var(--color-on-dark); }
+ .orbital-hero :global(> .orbital-detail) { display: none; }
+ .orbital-hero :global(.star-reveal.is-revealed) { opacity: calc(.35 * var(--orbit-fade, 1)); }
+ .orbital-composition { position: relative; height: clamp(35rem,43vw,41rem); }
+ .orbital-name { position: absolute; top: 0; left: 0; z-index: 2; margin: 0; max-width: none; line-height: .9; }
+ .orbital-first { font-family: var(--font-family-display); font-weight: 800; display: block; font-size: clamp(5rem,9.2vw,9rem); letter-spacing: -.065em; padding-right: .09em; color: var(--color-pale-lilac); }
+ .orbital-surname { display: block; font-family: var(--font-family-display); font-size: clamp(1.7rem,3vw,3rem); font-weight: 500; letter-spacing: -.025em; margin-top: .6rem; }
+ @supports (background-clip: text) {
+  .orbital-first { background: var(--gradient-pearl); background-size: 160% 100%; background-clip: text; color: transparent; transition: background-position 1.8s ease; }
+  .orbital-name:hover .orbital-first { background-position: 100% 50%; }
+ }
+ .discipline-system { position: absolute; width: min(58vw,46rem); aspect-ratio: 680 / 400; left: 50%; top: 46%; transform: translate(-50%,-50%); }
+ .orbit-paths { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; stroke: var(--color-lilac); stroke-width: .7; overflow: visible; transition: opacity .6s ease; }
+ .orbit-back { opacity: calc(.38 * var(--orbit-fade, 1)); }
+ .orbit-front { opacity: calc(.35 * var(--orbit-fade, 1)); z-index: 2; }
+ .orbital-portrait { position: absolute; width: 41%; aspect-ratio: 1; top: 50%; left: 50%; transform: translate(-50%,-50%); border-radius: 50%; border: 1px solid #cbb9e180; overflow: hidden; background: var(--gradient-pearl); background-size: 300% 100%; animation: portrait-pearl 18s ease-in-out infinite alternate; }
+ .orbital-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center 42%; display: block; }
+ .discipline-labels { list-style: none; padding: 0; margin: 0; }
+ .discipline-labels li { position: absolute; display: flex; gap: .6rem; align-items: center; font-size: clamp(.7rem,1vw,.85rem); letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; z-index: 3; }
+ .discipline-labels li > span { flex: 0 0 .5rem; width: .5rem; height: .5rem; border-radius: 50%; background: var(--gradient-pearl); box-shadow: 0 0 0 3px var(--color-dark); }
+ .orbit-nodes { z-index: 3; opacity: var(--node-fade, 1); }
+ .discipline-labels { opacity: var(--label-fade, 1); }
+ .discipline-labels li { left: var(--node-x); top: var(--node-y); transform: translateY(-50%); padding-left: 14px; }
+ .discipline-labels li > span { display: none; }
+ .discipline-labels .discipline-2, .discipline-labels .discipline-3 { transform: translate(-100%,-50%); padding-left: 0; padding-right: 14px; }
+ .discipline-system:hover .orbit-back, .discipline-system:hover .orbit-front { opacity: calc(.65 * var(--orbit-fade, 1)); }
+ .orbit-paths :global(ellipse), .orbit-paths :global(path) { vector-effect: non-scaling-stroke; }
+ .orbital-hero.is-scroll-orbit .orbit-paths { transition: none; }
+ .orbital-positioning { position: absolute; right: 0; bottom: 1.8rem; width: 47%; font-family: var(--font-family-body); font-weight: 500; font-size: clamp(1.8rem,2.8vw,2.8rem); line-height: 1.15; letter-spacing: -.045em; color: var(--color-lilac); margin: 0; text-wrap: balance; }
+ .orbital-information { display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; align-items: center; border-top: 1px solid var(--color-dark-border); padding-top: 1.5rem; }
+ .orbital-intro { font-size: .95rem; max-width: 62ch; color: var(--color-muted-on-dark); }
+ .orbital-intro :global(p) { margin: 0; }
+ .orbital-links { display: flex; justify-content: flex-end; align-items: center; flex-wrap: wrap; gap: .5rem 2rem; }
+ .orbital-links a { font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; text-decoration: none; padding-block: .8rem; border-bottom: 1px solid transparent; }
+ .orbital-links a:hover { border-image: var(--gradient-pearl) 1; }
+ .orbital-links a.orbital-work-button { display: inline-flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 48px; padding: .85rem 1.35rem; background: var(--color-lilac); color: var(--color-dark); border: 1px solid var(--color-lilac); font-weight: 700; }
+ .orbital-links a.orbital-work-button:hover { background: var(--color-pale-lilac); border-color: var(--color-pale-lilac); border-image: none; }
+ .orbital-links a:focus-visible { outline: 2px solid var(--color-lilac); outline-offset: 4px; }
+ .orbital-links a span { display: inline-block; margin-left: .4rem; }
+ .orbital-positioning > p { margin: 0; }
+ @media (min-width:58.001rem) and (prefers-reduced-motion:no-preference) {
+  .is-scroll-orbit .orbital-positioning { right:calc(var(--orbit-progress, 0) * 53%); }
+ }
+ .orbital-location svg { width:1rem; height:1rem; flex-shrink:0; }
+ .orbital-location { display:flex; align-items:center; gap:.4rem; margin-top:1rem; font-family:var(--font-family-body); font-weight:400; letter-spacing:normal; line-height:1.5; width: 100%; text-align: left; font-size: .8rem; color: var(--color-muted-on-dark); }
+ @media(max-width: 58rem) {
+  .orbital-hero { padding-top: 1.75rem; }
+  .orbital-composition { height: auto; display: flex; flex-direction: column; gap: 1.5rem; }
+  .orbital-name, .discipline-system, .orbital-positioning { position: relative; top: auto; left: auto; right: auto; bottom: auto; transform: none; }
+  .orbital-first { font-size: clamp(2.5rem,14vw,7rem); white-space: nowrap; }
+  .orbital-surname { font-size: clamp(1.6rem,5vw,2.5rem); }
+  .discipline-system { width: min(100%,40rem); align-self: center; margin-block: .5rem; padding-bottom: 4.5rem; aspect-ratio: auto; height: auto; }
+  .orbit-paths { position: relative; display: block; width: 100%; height: auto; }
+  .orbit-front { position: absolute; top: 0; }
+  .orbit-third, .orbit-nodes { display: none; }
+  .orbital-portrait { top: 0; margin-top: 9%; transform: translateX(-50%); width: 41%; }
+  .discipline-labels { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; position: absolute; bottom: 0; width: 100%; }
+  .discipline-labels li, .discipline-labels .discipline-2, .discipline-labels .discipline-3 { transform: none; padding: 0; }
+  .discipline-labels li > span { display: block; }
+  .discipline-labels li { position: static; flex-direction: row; white-space: normal; font-size: .75rem; letter-spacing: .035em; }
+  .orbital-positioning { width: 100%; max-width: 27rem; align-self: flex-end; font-size: clamp(1.65rem,4.8vw,2.4rem); margin-block: .75rem 1.75rem; }
+  .orbital-information { grid-template-columns: 1fr; gap: 1rem; }
+  .orbital-links { justify-content: flex-start; }
+  .orbital-location { text-align: left; }
+ }
+ @keyframes portrait-pearl { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+ @media(prefers-reduced-motion: reduce) { .orbital-portrait { animation: none; } .orbital-first,.orbit-paths { transition: none; } .orbital-name:hover .orbital-first { background-position: 0% 50%; } }
+ @media(forced-colors: active) { .orbital-first { background: none; color: CanvasText; } }
+</style>
+
+<script>
+ const hero = document.querySelector<HTMLElement>('.orbital-hero');
+ if (hero) {
+  const enabled = matchMedia('(min-width: 58.001rem) and (prefers-reduced-motion: no-preference)');
+  const ellipses = Array.from(hero.querySelectorAll<SVGEllipseElement>('.orbit-back ellipse'));
+  const fronts = Array.from(hero.querySelectorAll<SVGPathElement>('.orbit-front path'));
+  const nodes = Array.from(hero.querySelectorAll<SVGCircleElement>('.orbit-nodes circle'));
+  const labels = Array.from(hero.querySelectorAll<HTMLElement>('.discipline-labels li'));
+  const geometry = [[280,116,-17],[244,137,28],[180,142,-52]];
+  const locations = [[0,-50],[1,-10],[0,110],[1,160]];
+  const clamp = (n:number) => Math.max(0,Math.min(1,n));
+  let start = 0, distance = 1, pending = 0, previous = -1;
+  const measure = () => { start = hero.getBoundingClientRect().top + window.scrollY; distance = hero.offsetHeight; };
+  const update = () => {
+   pending = 0;
+   const progress = enabled.matches ? clamp((window.scrollY - start) / distance) : 0;
+   if (progress === previous) return;
+   previous = progress;
+   const expansion = clamp((progress - .18) / .82);
+   const rotation = progress * 120;
+   const sizes = geometry.map(([rx,ry],i) => [rx*(1+expansion*(2.6+i*.5)),ry*(1+expansion*(2+i*.4))]);
+   hero.classList.toggle('is-scroll-orbit', enabled.matches);
+   hero.style.setProperty('--orbit-progress',String(progress));
+   hero.style.setProperty('--orbit-fade',String(1-clamp((progress-.78)/.22)));
+   hero.style.setProperty('--label-fade',String(1-clamp((progress-.42)/.23)));
+   hero.style.setProperty('--node-fade',String(1-clamp((progress-.65)/.2)));
+   ellipses.forEach((ellipse,i) => { ellipse.setAttribute('rx',String(sizes[i][0])); ellipse.setAttribute('ry',String(sizes[i][1])); ellipse.setAttribute('transform',`rotate(${geometry[i][2]+rotation} 340 200)`); });
+   // Rotate around the portrait while preserving the existing expansion.
+   fronts.forEach((path,i) => path.setAttribute('transform',`translate(340 200) rotate(${rotation}) scale(${1+expansion*(2.6+i*.5)} ${1+expansion*(2+i*.4)}) translate(-340 -200)`));
+   locations.forEach(([orbit,angle],i) => {
+    const a=(geometry[orbit][2]+rotation)*Math.PI/180,t=angle*Math.PI/180;
+    const [rx,ry]=sizes[orbit];
+    const x=340+rx*Math.cos(t)*Math.cos(a)-ry*Math.sin(t)*Math.sin(a);
+    const y=200+rx*Math.cos(t)*Math.sin(a)+ry*Math.sin(t)*Math.cos(a);
+    nodes[i].setAttribute('cx',String(x)); nodes[i].setAttribute('cy',String(y));
+    // Labels follow early expansion, then stop drifting while fading out.
+    const labelExpansion=Math.min(expansion,.28);
+    const lx=340+(x-340)*(1+labelExpansion*(2.6+orbit*.5))/(1+expansion*(2.6+orbit*.5));
+    const ly=200+(y-200)*(1+labelExpansion*(2+orbit*.4))/(1+expansion*(2+orbit*.4));
+    labels[i].style.setProperty('--node-x',`${lx/680*100}%`);
+    labels[i].style.setProperty('--node-y',`${ly/400*100}%`);
+   });
+  };
+  const schedule = () => { if (!pending) pending=requestAnimationFrame(update); };
+  const refresh = () => { measure(); previous=-1; schedule(); };
+  window.addEventListener('scroll',schedule,{passive:true});
+  window.addEventListener('resize',refresh);
+  enabled.addEventListener('change',refresh);
+  new ResizeObserver(refresh).observe(hero);
+  measure(); update();
+ }
+</script>

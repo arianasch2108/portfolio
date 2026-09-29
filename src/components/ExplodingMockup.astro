@@ -1,0 +1,20 @@
+---
+import type { ImageMetadata } from 'astro';
+interface Props { background: ImageMetadata; backgroundCrop?: [number, number, number, number]; }
+const { background, backgroundCrop } = Astro.props;
+---
+<div class="exploding-mockup">
+ <div class="device" aria-hidden="true">
+  <div class="screen">{backgroundCrop ? <svg viewBox={backgroundCrop.join(' ')}><image href={background.src} width={background.width} height={background.height} /></svg> : <img src={background.src} width={background.width} height={background.height} alt="" loading="lazy" />}</div>
+  <div class="base"></div>
+ </div>
+ <slot />
+</div>
+<style>
+ .exploding-mockup { position:absolute; inset:0; isolation:isolate; }
+ .device { position:absolute; left:8%; top:8%; width:84%; z-index:-1; opacity:.58; pointer-events:none; }
+ .screen { padding:10px; border:2px solid #95939c; border-radius:14px 14px 3px 3px; background:#d8d6dd; box-shadow:0 3px 10px #14151e0a; }
+ .screen img { display:block; width:100%; height:auto; aspect-ratio:16 / 9; object-fit:cover; object-position:top center; border-radius:5px 5px 0 0; filter:saturate(.45) contrast(.8); opacity:.4; }
+ .screen svg { display:block; width:100%; aspect-ratio:16 / 9; border-radius:5px 5px 0 0; overflow:hidden; filter:saturate(.45) contrast(.8); opacity:.4; }
+ .base { height:14px; margin:0 -7%; border:1px solid #aaa7b2; background:linear-gradient(#e3e1e7,#c9c6d0); border-radius:1px 1px 50% 50%; }
+</style>

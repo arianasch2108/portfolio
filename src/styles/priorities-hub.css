@@ -1,0 +1,46 @@
+/* This concise composition shares the existing case-study foundation. */
+.priorities-study .case-intro { margin-bottom: var(--space-6); }
+.priorities-study .case-intro:last-child { margin-bottom: 0; }
+.priorities-study .case-metadata > div { flex: 1; min-width: 0; }
+.priorities-study .case-section { padding-block: clamp(2.75rem, 5vw, 5rem); }
+.priorities-study .case-section-copy { margin-bottom: var(--space-8); }
+.priorities-study h3, .priorities-study dt { font-family: var(--font-family-body); font-size: .95rem; line-height: 1.4; font-weight: 700; letter-spacing: .03em; color: var(--color-plum); margin: 0 0 .75rem; }
+.priorities-study dd { margin: 0; }
+.priorities-opportunity-visual { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: var(--space-10); align-items: center; }
+.priorities-live { display: inline-block; margin-top: 1rem; }
+.priorities-flow { list-style: none; padding: 0; margin: 0; text-align: center; }
+.priorities-flow li { position: relative; padding: 0 0 2.25rem; }
+.priorities-flow li:last-child { padding-bottom: 0; }
+.priorities-flow li:not(:last-child)::after { content: '↓'; position: absolute; bottom: .4rem; left: 50%; transform: translateX(-50%); color: var(--color-plum); }
+.priorities-flow .section-marker { display: block; margin: 0 0 .35rem; }
+.priorities-flow strong { display: block; font-size: 1rem; font-weight: 600; }
+.priorities-status { font-size: var(--font-size-small); color: var(--color-muted); margin: var(--space-6) 0 0; }
+.priorities-index { display: flex; flex-wrap: wrap; list-style: none; padding: var(--space-6) 0; margin: 0 0 var(--space-8); gap: 1rem 2rem; border-block: var(--border-default); }
+.priorities-index a { font-size: .9rem; font-weight: 700; text-transform: uppercase; }
+.priorities-strategy-detail { display: grid; grid-template-columns: 1.4fr 1fr; gap: var(--space-12); align-items: start; }
+.priorities-model { margin: 0; }
+.priorities-model > div { display: grid; grid-template-columns: 11rem 1fr; gap: 1rem; padding-block: .9rem; border-bottom: var(--border-default); }
+.priorities-model > div:first-child { padding-top: 0; }
+.priorities-model dt { margin: 0; }
+.priorities-search { padding: var(--space-6); background: var(--color-pale-lilac); }
+.priorities-search p { margin: 0; }
+.priorities-design-artifact { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: var(--space-10); align-items: start; }
+.priorities-annotations { list-style: none; padding: 0; margin: 0; }
+.priorities-annotations li { display: grid; grid-template-columns: auto 1fr; gap: 1rem; border-top: var(--border-default); padding-block: var(--space-6); }
+.priorities-annotations li > span { color: var(--color-plum); font-size: 1.2rem; }
+.priorities-annotations p { margin: 0; }
+.priorities-strip { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: var(--space-6); margin-top: var(--space-8); }
+.priorities-strip figure { margin: 0; }
+.priorities-strip figcaption { padding-top: .75rem; font-size: var(--font-size-small); }
+.priorities-campaign-detail { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-12); align-items: center; background: var(--color-pale-lilac); padding: var(--space-8); }
+.priorities-takeaway { font-size: clamp(1.2rem,2vw,1.65rem); color: var(--color-plum); margin: 0; }
+.priorities-outcomes { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: var(--space-8); margin: 0; }
+.priorities-outcomes > div { border-top: var(--border-default); padding-top: var(--space-6); }
+@media(max-width: 48rem) {
+ .priorities-opportunity-visual, .priorities-strategy-detail, .priorities-design-artifact, .priorities-campaign-detail { grid-template-columns: minmax(0,1fr); gap: var(--space-8); }
+ .priorities-strip { grid-template-columns: repeat(2,minmax(0,1fr)); }
+ .priorities-outcomes { grid-template-columns: 1fr; }
+ .priorities-model > div { grid-template-columns: 1fr; gap: .5rem; }
+}
+
+.priorities-study .case-hero h1 { max-width: none; font-size: clamp(2.5rem, 5.6vw, 5.6rem); }

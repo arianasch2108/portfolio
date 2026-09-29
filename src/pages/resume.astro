@@ -1,0 +1,91 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import ResumeDownload from '../components/ResumeDownload.astro';
+import { getEntry } from 'astro:content';
+const page = await getEntry('pages', 'resume');
+const roles = [
+ {title:'Digital Content Specialist', organization:'Legal Services Corporation (LSC), 501(c)(3)', dates:'Jun 2023 – Present', bullets:[
+ 'Manage website content and digital initiatives serving 558,000+ annual users across Drupal, Cvent, and Bonterra, ensuring accuracy, accessibility, functionality, and brand consistency.',
+ 'Create, edit, format, and publish web content to improve accessibility, UX, SEO, and brand standards.',
+ 'Partner with Program, Research, Development, Government Affairs, and Communications teams on digital content and campaigns generating 1M+ annual views and increasing newsletter signups by 19%.',
+ 'Use Google Analytics and web performance data to inform content strategy, SEO, audience engagement, and website improvements.',
+ 'Conduct content audits and QA reviews, resolving broken links, outdated content, formatting issues, accessibility barriers, and functionality problems; managing content guidelines.',
+ 'Make custom HTML/CSS components in Drupal to improve page formatting, content presentation, and functionality.',
+ ], metrics:[['558K+','Annual users'],['1M+','Annual views'],['+19%','Newsletter signups']]},
+ {title:'Founder & Digital Strategist', organization:'ASC Digital Strategy', dates:'Sep 2021 – Present', bullets:[
+ 'Founded and operate a digital strategy consultancy managing 6 nonprofit client relationships, providing website strategy, content development, UX, SEO, and digital communications; generated $10K+ in revenue.',
+ 'Develop and maintain websites using WordPress, Squarespace, and WildApricot, with a focus on usability, accessibility, content organization, and brand consistency.',
+ 'Deliver website redesigns, content audits, UX writing, SEO optimization, email marketing, and social media projects.',
+ ], metrics:[['6','Nonprofit client relationships'],['$10K+','Revenue']]},
+];
+const skills = [
+ ['CMS + Web',['Drupal','WordPress','Squarespace','Framer','Bonterra','Cvent','HTML/CSS','Content Management','Content Editing & Publishing']],
+ ['Experience + Quality',['Figma','Canva','Adobe CS','UX','Accessibility','Content Audits','QA','SEO']],
+ ['Analytics + Marketing',['Google Analytics','Datawrapper','Email Marketing','Klaviyo']],
+ ['Workflow',['Jira','Trello','Smartsheet','Codex']],
+] as const;
+---
+<SiteLayout title={page!.data.title} description={page!.data.description} fullWidth>
+ <article class="resume-page container">
+  <header class="resume-hero">
+   <p class="section-marker">Resume</p>
+   <h1>Experience at the intersection of content, technology + strategy.</h1>
+   <div class="hero-detail"><p>Digital content and web professional with 3+ years of experience managing website content, CMS platforms, and digital communications for nonprofit and public-sector organizations. Skilled in web content management, WordPress, Drupal, HTML/CSS, SEO, accessibility, UX, content audits, and QA. Experienced in translating technical requirements into user-friendly digital experiences and collaborating with cross-functional stakeholders.</p><ResumeDownload /></div>
+   <nav aria-label="Resume sections"><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#education">Education</a></nav>
+  </header>
+  <section id="experience" aria-labelledby="experience-heading">
+   <p class="section-marker">Experience</p><h2 id="experience-heading">Where I’ve worked.</h2>
+   {roles.map(role=><article class="resume-role"><p class="role-dates">{role.dates}</p><div class="role-content"><h3>{role.title}</h3><p class="organization">{role.organization}</p><ul>{role.bullets.map(bullet=><li>{bullet}</li>)}</ul></div><dl class="role-metrics">{role.metrics.map(([value,label])=><div><dt>{label}</dt><dd>{value}</dd></div>)}</dl></article>)}
+  </section>
+  <section id="skills" aria-labelledby="skills-heading">
+   <p class="section-marker">Skills</p><h2 id="skills-heading">What I work with.</h2>
+   <div class="skill-grid">{skills.map(([category,items])=><div><h3>{category}</h3><ul>{items.map(item=><li>{item}</li>)}</ul></div>)}</div>
+  </section>
+  <section id="education" aria-labelledby="education-heading">
+   <p class="section-marker">Education</p><h2 id="education-heading">Interdisciplinary by design</h2>
+   <div class="education-intro"><p>My background in <strong>International Studies</strong> shaped how I approach digital work: through an interdisciplinary lens that considers people, systems, and context. It grounds my work in the needs of <strong>users and communities</strong> while helping me connect ideas across content, design, technology, and strategy.</p>
+   <p class="education-flow"><strong>Liberal Arts <span aria-hidden="true">→</span> Systems Thinking <span aria-hidden="true">→</span> Human-Centered Digital Strategy</strong></p></div>
+   <div class="education-row"><p class="role-dates">September 2026</p><div><h3>University of Chicago</h3><p>Digital Marketing Certificate</p><a class="text-link" href="/work/#selected-projects">View marketing projects <span aria-hidden="true">›</span></a></div></div>
+   <div class="education-row"><div class="education-detail"><h3>Vassar College</h3><p>Bachelor of Arts in International Studies</p><p class="minor">Minor: Latin American Studies</p></div></div>
+  </section>
+  <aside class="resume-close" aria-labelledby="resume-download-heading"><div><p class="section-marker">Take it with you</p><h2 id="resume-download-heading">Want the one-page version?</h2></div><ResumeDownload /></aside>
+ </article>
+</SiteLayout>
+<style>
+ .resume-page { padding-bottom:var(--section-space); }
+ .resume-hero { padding-block:clamp(3rem,6vw,5rem); }
+ h1 { max-width:23ch; font-size:clamp(2.4rem,5vw,4.6rem); line-height:1.08; margin:0 0 var(--space-8); }
+ .hero-detail { display:flex; align-items:center; justify-content:space-between; gap:var(--space-12); }
+ .hero-detail >p { max-width:65ch; margin:0; }
+ .hero-detail > :global(div) { flex-shrink:0; }
+ nav { display:flex; gap:var(--space-6); margin-top:var(--space-8); font-size:.8rem; text-transform:uppercase; letter-spacing:.08em; }
+ nav a { color:var(--color-plum); text-underline-offset:.3em; }
+ section { padding-block:clamp(2.5rem,5vw,4rem); border-top:var(--border-default); scroll-margin-top:2rem; }
+ h2 { font-size:clamp(2rem,4vw,3.25rem); margin:0 0 var(--space-8); }
+ .resume-role { display:grid; grid-template-columns:10rem minmax(0,1fr) 11rem; gap:var(--space-8); padding-block:var(--space-8); border-top:var(--border-default); }
+ .role-dates { font-size:.85rem; color:var(--color-muted); margin:0; padding-top:.3rem; }
+ h3 { font-family:var(--font-family-body); font-size:1.25rem; margin:0 0 .5rem; }
+ .organization { color:var(--color-plum); margin:0 0 var(--space-5); }
+ .role-content ul { margin:0; padding-left:1.15rem; }
+ .role-content li+li { margin-top:.85rem; }
+ .role-metrics { margin:0; display:flex; flex-direction:column; gap:var(--space-6); }
+ .role-metrics >div { display:flex; flex-direction:column-reverse; gap:.35rem; border-left:2px solid var(--color-lilac); padding-left:var(--space-4); }
+ .role-metrics dt { font-size:.7rem; letter-spacing:.07em; text-transform:uppercase; }
+ .role-metrics dd { margin:0; color:var(--color-plum); font-family:var(--font-family-heading); font-size:2.6rem; line-height:1.1; }
+ .skill-grid { display:grid; grid-template-columns:1.3fr 1.2fr 1.2fr .6fr; gap:var(--space-8); }
+ .skill-grid >div { border-top:var(--border-default); padding-top:var(--space-5); }
+ .skill-grid h3 { font-size:.85rem; color:var(--color-plum); text-transform:uppercase; letter-spacing:.04em; }
+ .skill-grid ul { padding:0; list-style:none; margin:var(--space-5) 0 0; }
+ .skill-grid li+li { margin-top:.5rem; }
+ .education-intro { max-width:72ch; margin-bottom:var(--space-8); }
+ .education-flow { color:var(--color-plum); line-height:1.7; }
+ .education-flow span { padding-inline:.3em; }
+ .education-row { display:grid; grid-template-columns:10rem minmax(0,1fr); gap:var(--space-8); border-top:var(--border-default); padding-block:var(--space-6); }
+ .education-row p:not(.role-dates) { margin:0 0 .5rem; }
+ .education-detail { grid-column:2; }
+ .minor { color:var(--color-muted); }
+ .resume-close { display:flex; align-items:center; justify-content:space-between; gap:var(--space-8); padding:clamp(1.5rem,4vw,3rem); background:var(--color-pale-lilac); }
+ .resume-close h2 { font-size:clamp(1.7rem,3vw,2.5rem); margin:0; }
+ @media(max-width:64rem) { .resume-role { grid-template-columns:8rem minmax(0,1fr); } .role-metrics { grid-column:2; flex-direction:row; flex-wrap:wrap; } .hero-detail { align-items:flex-start; flex-direction:column; gap:var(--space-6); } .skill-grid { grid-template-columns:1fr 1fr; } }
+ @media(max-width:40rem) { .resume-role,.education-row { grid-template-columns:1fr; gap:var(--space-5); } .role-metrics,.education-detail { grid-column:auto; } .role-metrics { gap:var(--space-5); } .role-metrics >div { flex:1 1 8rem; } .role-metrics dd { font-size:2.2rem; } .skill-grid { grid-template-columns:1fr; gap:var(--space-6); } .resume-close { flex-direction:column; align-items:flex-start; } }
+</style>

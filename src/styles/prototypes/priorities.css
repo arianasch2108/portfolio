@@ -1,0 +1,50 @@
+.priorities-prototype-intro { margin-top: var(--space-10); max-width: 65ch; }
+.priorities-prototype-intro h3 { font-size: clamp(1.5rem,3vw,2.25rem); }
+.lsc-prototype { --lsc-blue:#193f5d; --lsc-red:#c82026; font-family: var(--font-family-body); color:#262b30; font-size: 1rem; line-height: 1.6; background:#fff; }
+.lsc-prototype * { box-sizing:border-box; }
+.lsc-prototype [hidden] { display:none !important; }
+.lsc-prototype h4,.lsc-prototype h5 { font-family:var(--font-family-body); font-weight:600; letter-spacing:normal; line-height:1.2; max-width:none; margin:0 0 1rem; text-wrap:balance; }
+.lsc-prototype h4 { font-size:clamp(1.8rem,3vw,2.8rem); }
+.lsc-prototype h5 { font-size:clamp(1.3rem,2.2vw,1.9rem); color:var(--lsc-blue); }
+.lsc-prototype p { margin:0 0 1rem; }
+.lsc-prototype button,.lsc-prototype a { font-family:inherit; font-size:1rem; font-weight:600; color:var(--lsc-blue); }
+.lsc-prototype button { cursor:pointer; background:transparent; border:0; text-align:left; padding:.65rem 0; }
+.lsc-prototype a { text-underline-offset:.2em; }
+.lsc-prototype :is(button,a):focus-visible { outline:3px solid var(--lsc-red); outline-offset:4px; }
+.lsc-prototype-masthead { padding:1rem 1.5rem; display:flex; align-items:center; gap:1rem; border-top:5px solid var(--lsc-blue); }
+.lsc-prototype-masthead strong { font:2rem Georgia,serif; color:var(--lsc-blue); border-right:1px solid var(--lsc-red); padding-right:1rem; }
+.lsc-prototype-masthead span { font-size:.85rem; color:var(--lsc-blue); }
+.lsc-prototype-masthead small { margin-left:auto; font-size:.7rem; color:#58636c; }
+.lsc-prototype-hero { text-align:center; padding:3rem 1.5rem; background:var(--lsc-blue); color:white; }
+.lsc-prototype-hero p { max-width:50ch; margin:auto; font-size:1.2rem; }
+.lsc-prototype-intro { padding:1.5rem 2rem; background:#edf3f7; }
+.lsc-priority-row { display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:center; padding:2rem; border-bottom:1px solid #d9e1e6; }
+.lsc-priority-row:nth-child(even) { background:#f4f7f9; }
+.lsc-priority-row:nth-child(even) .lsc-photo { order:2; }
+.lsc-priority-row button,.lsc-priority-row a,.lsc-prototype-story a { display:inline-block; background:var(--lsc-red); color:white; padding:.7rem 1rem; text-decoration:none; }
+.lsc-priority-row button:hover,.lsc-priority-row a:hover { background:#a31920; }
+.lsc-photo { aspect-ratio: 4/3; background:#e6ebee; display:grid; place-items:center; color:#596974; text-align:center; padding:1rem; font-size:.8rem; }
+.lsc-photo img { width:100%; height:100%; object-fit:cover; }
+.lsc-prototype .lsc-back { padding:1rem 2rem; }
+.lsc-prototype-context,.lsc-prototype-data,.lsc-prototype-resources { padding:2.5rem 2rem; }
+.lsc-prototype-context ul { display:flex; flex-wrap:wrap; gap:.5rem 2rem; padding-left:1.25rem; }
+.lsc-prototype-story { display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:center; background:#eef3f7; padding:2rem; }
+.lsc-prototype-data { text-align:center; }
+.lsc-prototype-data dl { display:flex; justify-content:center; gap:2rem; margin:2rem 0; }
+.lsc-prototype-data dl > div { display:flex; flex-direction:column; flex:1; max-width:24rem; }
+.lsc-prototype-data dd { order:-1; margin:0; font-size:2.5rem; font-weight:700; color:var(--lsc-blue); }
+.lsc-prototype .lsc-source { font-size:.75rem; color:#58636c; }
+.lsc-source a { font-size:inherit; }
+.lsc-prototype-resources { background:var(--lsc-blue); color:white; }
+.lsc-prototype-resources h5 { color:white; }
+.lsc-prototype-resources a { color:white; display:block; border-top:1px solid #ffffff50; padding:1rem 0; text-decoration:none; }
+.lsc-prototype-resources a:hover span { text-decoration:underline; }
+.lsc-prototype-resources small { display:block; font-size:.75rem; text-transform:uppercase; font-weight:400; }
+@media(max-width:48rem) {
+ .lsc-priority-row,.lsc-prototype-story { grid-template-columns:minmax(0,1fr); gap:1rem; padding:1.25rem; }
+ .lsc-priority-row:nth-child(even) .lsc-photo { order:0; }
+ .lsc-prototype-masthead small { display:none; }
+ .lsc-prototype-context,.lsc-prototype-data,.lsc-prototype-resources { padding:1.5rem 1.25rem; }
+ .lsc-prototype-data dl { flex-direction:column; align-items:center; }
+ .lsc-photo { aspect-ratio:16/9; }
+}

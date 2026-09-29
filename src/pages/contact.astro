@@ -1,0 +1,9 @@
+---
+import ContentPage from '../components/ContentPage.astro';
+import site from '../data/site.json';
+const socialLinks: { label: string; url: string }[] = site.socialLinks;
+---
+<ContentPage id="contact">
+  {site.email ? <p><a href={`mailto:${site.email}`}>{site.email}</a></p> : <p class="placeholder-note">Email address placeholder — contact details not provided yet.</p>}
+  {socialLinks.length > 0 && <ul>{socialLinks.map((link) => <li><a href={link.url}>{link.label}</a></li>)}</ul>}
+</ContentPage>

@@ -1,0 +1,64 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { getEntry } from 'astro:content';
+const page = await getEntry('pages', 'about');
+---
+<SiteLayout title={page!.data.title} description={page!.data.description} fullWidth>
+ <article class="about-page container">
+  <header class="about-hero">
+   <p class="section-marker">About</p>
+   <h1>I’ve always been interested in <span>translation.</span></h1>
+   <p class="intro">I speak English and Spanish, but the kind of translation I do every day goes beyond language. I move between people, disciplines, and ways of thinking, helping technical teams, communicators, organizational leaders, and users understand one another and move toward a shared goal.</p>
+  </header>
+  <section class="foundation" aria-labelledby="foundation-heading">
+   <div><p class="section-marker">People + Purpose</p><h2 id="foundation-heading">An interdisciplinary foundation.</h2></div>
+   <div class="prose"><p>My liberal arts background in International Studies taught me to approach problems from multiple perspectives. I learned to consider the systems surrounding an issue, the people affected by it, and the cultural, institutional, and historical context that shapes how it is understood.</p><p>That perspective continues to ground my digital work. I start with people and purpose, then bring together content, design, technology, data, and organizational priorities to create experiences that are useful, accessible, and connected to the communities they are meant to serve.</p></div>
+   <p class="progression">International Studies <span aria-hidden="true">›</span> Systems Thinking <span aria-hidden="true">›</span> Human-Centered Digital Strategy</p>
+  </section>
+  <section class="translation" aria-labelledby="translation-heading">
+   <p class="section-marker">Translation</p><h2 id="translation-heading">Fluent across more than languages.</h2>
+   <div class="translation-layout"><div class="connections" aria-label="Connecting disciplines">{[['Technology','Content'],['Strategy','Creative'],['Organization','Audience']].map(([a,b])=><p><span>{a}</span><span class="connector" aria-label="and">↔</span><span>{b}</span></p>)}</div>
+   <div class="prose"><p>A lot of my work happens between disciplines. I translate technical requirements into clear digital experiences, organizational priorities into content strategy, complex information into accessible language, and creative ideas into systems that teams can actually use.</p><p>Working across stakeholders has taught me how to listen closely, ask the right questions, and understand what different people need from the same project. That ability to move between perspectives is one of the skills I rely on most.</p></div></div>
+  </section>
+  <section class="experience" aria-labelledby="experience-heading">
+   <div><p class="section-marker">Experience</p><h2 id="experience-heading">Building digital experiences across organizations and communities.</h2></div>
+   <div class="prose"><p>Over the past several years, I’ve worked with organizations from New York to Washington, DC, helping translate ideas, missions, and organizational needs into digital experiences people can connect with.</p><p>My work has taken me across websites, content systems, campaigns, brands, events, analytics, and marketing. Moving between those different kinds of projects has made me comfortable working at the intersection of disciplines and finding the right approach for the problem in front of me.</p></div>
+  </section>
+  <section class="creativity" aria-labelledby="creativity-heading">
+   <p class="section-marker">Creativity</p><h2 id="creativity-heading">Creativity is part of how I move through the world.</h2>
+   <div class="creative-prose"><p>I’m drawn to work that leaves room for curiosity, experimentation, and a little unexpected thinking. That might mean finding a more compelling way to structure a website, developing the concept behind a campaign, building a visual system, or figuring out how to make complex information feel intuitive.</p><p>That instinct extends well beyond my laptop. I’m also a dedicated salsa dancer, and I love the same things about dancing that I love about creative work: rhythm, connection, confidence, responsiveness, and knowing when to improvise.</p></div>
+   <p class="creative-close">Whether I’m designing an experience or owning the dance floor, I like understanding the structure well enough to know when I can play with it.</p>
+  </section>
+  <section class="about-close" aria-labelledby="closing-heading"><h2 id="closing-heading">People. Purpose. Possibility.</h2><p>The common thread across my work is connection. I want to understand who I’m designing for, what matters to them, and how strategy, creativity, and technology can come together to create something meaningful.</p><div class="languages"><span class="section-marker">I speak:</span><p>English · Spanish · Strategy · Content · Design · Tech · Salsa</p></div></section>
+ </article>
+</SiteLayout>
+<style>
+ .about-page { padding-bottom:var(--section-space); }
+ .about-hero { padding-block:clamp(3rem,7vw,6rem); }
+ h1 { max-width:17ch; font-size:clamp(2.8rem,7vw,6.5rem); line-height:1.03; margin:0 0 var(--space-8); }
+ h1 span { color:var(--color-plum); }
+ .intro { max-width:65ch; margin:0 0 0 auto; font-size:clamp(1.05rem,1.6vw,1.25rem); }
+ section { border-top:var(--border-default); padding-block:clamp(2.5rem,5vw,4.5rem); }
+ h2 { font-size:clamp(2rem,3.5vw,3.5rem); line-height:1.12; margin:0 0 var(--space-6); text-wrap:balance; }
+ .foundation,.experience { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-8) var(--space-12); }
+ .prose { max-width:65ch; }
+ .prose p:first-child { margin-top:0; }
+ .prose p:last-child { margin-bottom:0; }
+ .progression { grid-column:1/-1; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:.6rem 1rem; margin:var(--space-4) 0 0; color:var(--color-plum); text-transform:uppercase; font-size:.8rem; letter-spacing:.06em; }
+ .translation >h2 { max-width:23ch; }
+ .translation-layout { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-12); align-items:center; margin-top:var(--space-8); }
+ .connections p { display:grid; grid-template-columns:1fr auto 1fr; gap:var(--space-4); align-items:center; border-bottom:var(--border-default); padding-block:var(--space-5); margin:0; font-size:clamp(.9rem,1.8vw,1.4rem); color:var(--color-plum); }
+ .connections p:first-child { border-top:var(--border-default); }
+ .connections p>span:last-child { text-align:right; }
+ .connector { color:var(--color-muted); }
+ .creativity { padding:clamp(1.5rem,4vw,3rem); background:var(--color-pale-lilac); border-top:0; }
+ .creativity h2 { max-width:26ch; }
+ .creative-prose { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-12); }
+ .creative-prose p { margin:0; }
+ .creative-close { max-width:55ch; margin:var(--space-8) 0 0; font-size:clamp(1.25rem,2vw,1.7rem); color:var(--color-plum); }
+ .about-close { border:0; padding-bottom:0; }
+ .about-close >p { max-width:65ch; }
+ .languages { border-top:var(--border-default); margin-top:var(--space-8); padding-top:var(--space-6); }
+ .languages p { font-size:clamp(1.05rem,2vw,1.5rem); color:var(--color-plum); margin:.7rem 0 0; }
+ @media(max-width:48rem) { .foundation,.experience,.translation-layout,.creative-prose { grid-template-columns:1fr; gap:var(--space-6); } .intro { margin-left:0; } .progression { justify-content:flex-start; line-height:1.8; } .connections { order:2; } }
+</style>

@@ -1,0 +1,31 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import { render } from 'astro:content';
+import { getPublishedProjects } from '../../lib/projects';
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import ProjectBrief from '../../components/ProjectBrief.astro';
+import Conference from '../../components/case-study/Conference.astro';
+import BrandRefresh from '../../components/case-study/BrandRefresh.astro';
+import PrioritiesHub from '../../components/case-study/PrioritiesHub.astro';
+import ClientStories from '../../components/case-study/ClientStories.astro';
+
+export const getStaticPaths = (async () => {
+  const projects = await getPublishedProjects();
+  return projects.map((project) => ({ params: { slug: project.data.slug }, props: { project } }));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+{project.data.slug === 'client-centered-brand-refresh' && project.data.caseStudy
+  ? <BrandRefresh project={project} />
+  : project.data.slug === 'grantee-client-stories' && project.data.caseStudy
+  ? <ClientStories project={project} />
+  : project.data.slug === 'legal-priorities-hub' && project.data.caseStudy
+  ? <PrioritiesHub project={project} />
+  : project.data.slug === 'innovations-in-technology-conference' && project.data.caseStudy
+  ? <Conference project={project} />
+  : project.data.format === 'brief' && project.data.brief
+  ? <ProjectBrief project={project} />
+  : <ProjectLayout project={project}><Content /></ProjectLayout>}

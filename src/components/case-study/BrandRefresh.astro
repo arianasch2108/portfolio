@@ -1,0 +1,136 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ProjectMetadata from './ProjectMetadata.astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import ArtifactFrame from './BrandArtifact.astro';
+import LaptopArtifact from './ArtifactFrame.astro';
+import ProjectContinuation from './ProjectContinuation.astro';
+import SectionTracker from '../SectionTracker.astro';
+import ClientStoriesCover from '../ClientStoriesCover.astro';
+import { Image } from 'astro:assets';
+import socialNick from '../../assets/projects/brand-refresh/social-nick.png';
+import socialKrystal from '../../assets/projects/brand-refresh/social-krystal.png';
+import socialFaith from '../../assets/projects/brand-refresh/social-faith.png';
+import iconographyImpact from '../../assets/projects/brand-refresh/iconography-impact.png';
+import brandKitHub from '../../assets/projects/brand-refresh/brand-kit-hub.png';
+import ExplodedLaptopArtifact from './ExplodedLaptopArtifact.astro';
+import districtResources from '../../assets/projects/brand-refresh/district-resources.png';
+import { getPublishedProjects } from '../../lib/projects';
+import '../../styles/case-study.css';
+interface Props { project: CollectionEntry<'projects'>; }
+const { project } = Astro.props;
+const { data } = project;
+const study = data.caseStudy!;
+const related = (await getPublishedProjects()).find(p => p.data.slug === study.relatedSlug);
+const assets = study.assets;
+const impactIcons = [
+  'M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0',
+  'M3 4h18l-7 8v6l-4 3v-9L3 4Z',
+  'M5 7h12l-3-3m3 3-3 3M19 17H7l3 3m-3-3 3-3M4 11v5M20 8v5',
+  'M3 3h6v6H3ZM15 3h6v6h-6ZM3 15h6v6H3ZM15 15h6v6h-6ZM9 6h6M6 9v6M18 9v6M9 18h6',
+  'M3 13h8v8H3ZM13 13h8v8h-8ZM3 3h8v8H3ZM14 10l7-7M15 3h6v6',
+  'M3 3h18v4H3ZM3 11h4v4H3ZM11 12h10M11 15h7M3 19h4v2H3ZM11 20h10',
+];
+---
+<SiteLayout title={data.title} description={study.subtitle} fullWidth>
+ <article class="brand-study container">
+  <header class="case-hero">
+   <nav class="case-breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/work/">Work</a></li><li><span aria-current="page">{data.title}</span></li></ol></nav>
+   <p class="section-marker">{study.label}</p>
+   <h1>{data.title}</h1>
+   <p class="case-subtitle">{study.subtitle}</p>
+   <ul class="tags" aria-label="Project disciplines">{data.disciplines.map(d => <li>{d}</li>)}</ul>
+   <ProjectMetadata project={project} />
+   <div class="case-intro-layout">
+    <p class="case-intro">{study.intro}</p>
+    {assets.hero && <LaptopArtifact asset={{ ...assets.hero, presentation: 'laptop', crop: [0, 0, 2850, 1603] }} />}
+   </div>
+  </header>
+  <SectionTracker compact sections={study.sections.map(section => ({ id: section.id, label: section.eyebrow.replace(/^THE /, '').toLowerCase().replace(/^./, c => c.toUpperCase()) }))} />
+  {study.sections.map(section => <section id={section.id} class:list={['case-section', `case-${section.id}`]} aria-labelledby={`heading-${section.id}`}>
+   <p class="section-marker">{section.eyebrow}</p>
+   <div class="case-section-copy">
+    <div><h2 id={`heading-${section.id}`}>{section.heading}</h2>{section.id === 'photography' && <figure class="brand-social-group"><div class="brand-social-grid">
+     <Image src={socialNick} alt="Meet Nick: LSC social graphic featuring Nick and his father, Tim, and their story of help securing disability benefits." widths={[360,720,1080]} sizes="(max-width: 48rem) 28vw, 15vw" loading="lazy" />
+     <Image src={socialKrystal} alt="Meet Krystal: LSC social graphic featuring Krystal and her children and their story of legal help when facing eviction." widths={[360,720,1080]} sizes="(max-width: 48rem) 28vw, 15vw" loading="lazy" />
+     <Image src={socialFaith} alt="Faith Connections: LSC social graphic showing a community conversation and promoting the faith toolkit." widths={[360,720,1080]} sizes="(max-width: 48rem) 28vw, 15vw" loading="lazy" />
+    </div><figcaption class="project-caption">Designed templates for people-centered social media posts.</figcaption></figure>}{(section.id === 'constraint' || section.id === 'challenge') && section.statement && <p class="case-statement constraint-statement">{section.statement}</p>}</div>
+    {section.id !== 'application' && <div class="case-body">{section.paragraphs.map(p => <p>{p.split(/(\*\*[^*]+\*\*)/g).map(part => part.startsWith('**') && part.endsWith('**') ? <strong>{part.slice(2, -2)}</strong> : part)}</p>)}</div>}
+    {section.id === 'governance' && <><div class="governance-laptop"><ExplodedLaptopArtifact background={brandKitHub} alt="LSC branding hub with navigation and brand guidance expanded from the screen." primary={{src:brandKitHub,crop:[565,739,1110,514],alt:'LSC Branding Guidelines introduction and downloadable brand style guide',position:{left:24,top:57,width:73}}} secondary={[{src:brandKitHub,crop:[230,750,315,625],alt:'Brand hub navigation for logos, colors, typography, images, templates, and accessibility',position:{left:3,top:40,width:28}},{src:brandKitHub,crop:[22,267,2190,341],alt:'Colorful Legal Services Corporation Brand Style Guide banner in blue, red, and yellow',position:{left:24,top:12,width:73}}]} /></div></>}
+   </div>
+   {section.statement && section.id !== 'governance' && section.id !== 'constraint' && section.id !== 'challenge' && <p class="case-statement">{section.statement}</p>}
+   {section.id === 'challenge' && <div class="case-comparison">
+    <figure><figcaption class="project-caption project-caption--above">Evolved / people-centered visual language</figcaption><ArtifactFrame assetKey="after" asset={assets.after} treatment="paper" /></figure>
+    <figure class="comparison-before"><figcaption class="project-caption project-caption--above">Existing / institution-focused visual language</figcaption><ArtifactFrame assetKey="before" asset={assets.before} treatment="paper" /></figure>
+   </div>}
+   {section.id === 'strategy' && <ol class="case-principles">{section.items?.map((item,i) => <li><span aria-hidden="true">0{i+1}</span><div><h3>{item.title}</h3><p>{item.body}</p></div></li>)}</ol>}
+   {section.id === 'photography' && <>
+    <div class="photo-direction">{[['Look for',section.lookFor],['Avoid',section.avoid]].map(([label,items]) => <div><h3>{label}</h3><ul>{(items as string[]).map(item => <li><svg class="direction-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">{label === 'Look for' ? <path d="m5 12 4 4L19 6" /> : <path d="m6 6 12 12M18 6 6 18" />}</svg><span>{item}</span></li>)}</ul></div>)}</div>
+
+    <figure class="brand-report-group">
+     <figcaption class="project-caption project-caption--above">Designed the 2024 Annual Report: People who benefited from LSC's funding and programs are now at the forefront</figcaption>
+     <div class="brand-report-grid">{['report-impact','report-task-forces'].map(key => <ArtifactFrame assetKey={key} asset={assets[key]} treatment="paper" />)}</div>
+    </figure>
+   </>}
+   {section.id === 'constraint' && <ArtifactFrame assetKey="content-hierarchy" asset={assets['content-hierarchy']} />}
+   {section.id === 'content-design' && <>
+
+    <div class="brand-thinking"><div>{section.items?.map(item => <div><div class="thinking-description"><h3>{item.title}</h3><p>{item.body}</p></div>{item.title === 'Content hierarchy' && <Image class="hierarchy-screenshot" src={districtResources} alt="Civil Legal Aid in Your District page with its photographic hero, resource cards, and explanatory content." loading="lazy" />}{item.title === 'Iconography' && <Image class="hierarchy-screenshot" src={iconographyImpact} alt="Four LSC impact cards using icons for Americans served, families helped with housing, cases resolved, and return on investment in legal aid." loading="lazy" />}{item.title === 'Photography' && <figure class="thinking-photo"><ArtifactFrame assetKey="impact-stories" asset={assets['impact-stories']} /></figure>}</div>)}</div></div>
+   </>}
+   {section.id === 'governance' && <>
+    <div class="governance-process-column"><ol class="governance-process" aria-label="Collaborative brand governance process">
+     {section.items?.map((item, index) => <li>
+      <span class="governance-step" aria-hidden="true">0{index + 1}</span>
+      <h3>{item.label}</h3>
+      <p>{item.body}</p>
+     </li>)}
+    </ol><p class="case-statement governance-quote">{section.statement}</p></div>
+    <div class="governance-artifacts">
+    <ArtifactFrame assetKey="governance-box-hubs" asset={assets['governance-box-hubs']} />
+    <ArtifactFrame assetKey="governance-canva" asset={assets['governance-canva']} />
+   </div></>}
+   {section.id === 'application' && related && <div class="case-related"><ClientStoriesCover /><ProjectContinuation title={related.data.title} slug={related.data.slug} description={section.paragraphs} /></div>}
+   {section.outcomes && <ul class="case-outcomes">{section.outcomes.map(item => <li>{item}</li>)}</ul>}
+   {section.id === 'impact' && <ul class="strategic-impact">{section.items?.map((item, index) => <li>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d={impactIcons[index]} /></svg>
+    <h3>{item.title}</h3>
+    <p>{item.body}</p>
+   </li>)}</ul>}
+   {section.id === 'reflection' && <p class="case-closing">People <span aria-hidden="true">→</span> Content <span aria-hidden="true">→</span> Experience <span aria-hidden="true">→</span> Trust</p>}
+  </section>)}
+  {related && <ProjectContinuation title={related.data.title} slug={related.data.slug} next />}
+ </article>
+</SiteLayout>
+
+<style>
+ .governance-laptop { margin-top:var(--space-8); }
+ .governance-process-column { grid-column:2; grid-row:2; }
+ @media(max-width:48rem) { .governance-process-column { grid-column:1; grid-row:auto; } }
+ .governance-quote { margin:var(--space-8) 0 0; font-size:clamp(1.5rem, 2.2vw, 2rem); }
+ .brand-study { --artifact-gap:clamp(1rem, 3vw, 3rem); }
+ .brand-social-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(.5rem, 1.2vw, 1rem); margin-top:var(--space-6); max-width:36rem; align-items:start; }
+ .brand-social-grid img { display:block; width:100%; height:auto; box-shadow:0 4px 10px #14151e08,0 12px 28px #14151e12; }
+ .brand-social-grid img:last-child { aspect-ratio:3 / 4; height:auto; object-fit:fill; }
+
+ .case-intro-layout { grid-template-columns:minmax(0, 1fr) minmax(0, 1.4fr); align-items:center; }
+ .case-intro-layout .case-intro { max-width:65ch; }
+ .case-comparison { grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:var(--space-12); align-items:start; width:100%; margin-inline:0; }
+ .case-comparison figure { margin:0; }
+ .case-comparison .comparison-before { width:65%; min-width:0; justify-self:start; }
+ .brand-thinking > div { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--artifact-gap); align-items:start; }
+ .thinking-description { border-top:var(--border-default); padding-block:1rem; }
+ .hierarchy-screenshot { display:block; width:100%; height:auto; margin-bottom:var(--space-4); box-shadow:0 4px 10px #14151e08,0 12px 28px #14151e12; }
+ .thinking-description h3 { color:var(--color-plum); font-size:1rem; font-weight:600; margin:0 0 1rem; }
+ .thinking-photo { margin:0; }
+ @media(max-width:48rem) { .case-intro-layout,.case-comparison,.brand-thinking > div { grid-template-columns:1fr; } }
+
+ .constraint-statement { margin: var(--space-8) 0 0; font-size: clamp(1.5rem, 2.2vw, 2rem); }
+ .brand-screenshot-grid, .brand-report-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--space-8); margin-top:var(--space-10); }
+ .brand-screenshot-grid figure:last-child { grid-column:1/-1; }
+ .brand-screenshot-grid figure, .brand-report-grid figure { margin:0; }
+ .brand-report-group, .brand-social-group { margin:0; }
+ .brand-report-group { margin-top:var(--space-10); }
+ .brand-report-group .brand-report-grid { margin-top:0; }
+ figcaption { padding-top:.75rem; font-size:var(--font-size-small); color:var(--color-muted); }
+ @media(max-width:48rem) { .brand-screenshot-grid,.brand-report-grid { grid-template-columns:1fr; } }
+</style>

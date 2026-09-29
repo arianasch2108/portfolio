@@ -1,0 +1,49 @@
+---
+import type { CollectionEntry } from 'astro:content';
+type Section = NonNullable<CollectionEntry<'projects'>['data']['brief']>['sections'][number];
+interface Props { positioning?: Section['positioning']; copyArtifact?: Section['copyArtifact']; }
+const { positioning, copyArtifact } = Astro.props;
+---
+{positioning && <div class="positioning-artifact">
+ <div class="brand-idea"><div><p class="artifact-label">Project brand idea</p><h3>{positioning.idea}</h3></div><p>{positioning.body}</p></div>
+ <div class="positioning-system" aria-label="Four ideas behind the product positioning">
+  <ul>{positioning.anchors.map(anchor=><li><h4>{anchor.title}</h4><p>{anchor.body}</p></li>)}</ul>
+  <p class="positioning-result">{positioning.result}</p>
+ </div>
+</div>}
+{copyArtifact && <div class="copy-artifacts">
+ <figure class="launch-copy">
+  <figcaption class="artifact-label">Selected project messaging</figcaption>
+  <blockquote>
+   <p class="campaign-headline">{copyArtifact.headline}</p>
+   <div class="campaign-product"><p><strong>{copyArtifact.product}</strong><br />{copyArtifact.description}</p><p class="campaign-closing">{copyArtifact.closing}</p></div>
+   <p class="campaign-signature">{copyArtifact.signature}</p>
+  </blockquote>
+ </figure>
+ <details class="product-story"><summary>Read the full product-launch copy</summary><blockquote><p>{copyArtifact.story}</p></blockquote></details>
+</div>}
+<style>
+ .positioning-artifact,.copy-artifacts { margin-top:var(--space-8); }
+ .artifact-label { font-family:var(--font-family-label); font-size:var(--font-size-small); letter-spacing:var(--letter-spacing-label); text-transform:uppercase; }
+ .brand-idea { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-12); align-items:center; padding-block:var(--space-6); }
+ .brand-idea h3 { font-size:clamp(2rem,4.5vw,4rem); color:var(--color-plum); margin:0; }
+ .brand-idea p { margin:0; } .brand-idea .artifact-label { margin-bottom:1rem; }
+ .positioning-system { margin-top:var(--space-6); }
+ ul { list-style:none; padding:0; margin:0; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); }
+ li { position:relative; border-top:var(--border-default); padding:1.25rem 1rem 1.75rem; text-align:center; }
+ li::after { content:''; position:absolute; bottom:0; left:50%; height:.75rem; border-left:1px solid var(--color-plum); }
+ h4 { font-family:var(--font-family-body); color:var(--color-plum); font-size:.85rem; letter-spacing:.08em; margin:0 0 .5rem; }
+ li p { font-size:.95rem; margin:0; }
+ .positioning-result { border-top:1px solid var(--color-plum); text-align:center; padding-top:1rem; font-weight:600; letter-spacing:.06em; margin:0; }
+ figure,blockquote { margin:0; }
+ .launch-copy { background:var(--color-pale-lilac); padding:clamp(1.5rem,4vw,3.5rem); border-block:var(--border-default); }
+ .campaign-headline { font-family:var(--font-family-heading); font-size:clamp(2.5rem,6vw,6rem); line-height:1.03; letter-spacing:-.045em; max-width:17ch; color:var(--color-plum); margin:var(--space-8) 0; }
+ .campaign-product { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-10); align-items:end; }
+ .campaign-product p { margin:0; } .campaign-product strong { display:inline-block; margin-bottom:.65rem; }
+ .campaign-closing { font-family:var(--font-family-heading); font-size:clamp(1.8rem,3.5vw,3.5rem); line-height:1.1; color:var(--color-plum); }
+ .campaign-signature { white-space:pre-line; border-top:1px solid #66345d40; padding-top:var(--space-6); margin:var(--space-8) 0 0; font-weight:600; }
+ .product-story { border-bottom:var(--border-default); padding-block:var(--space-6); }
+ summary { cursor:pointer; color:var(--color-plum); font-weight:600; }
+ .product-story blockquote { max-width:75ch; margin-top:var(--space-6); }
+ @media(max-width:48rem) { .brand-idea,.campaign-product { grid-template-columns:1fr; gap:var(--space-6); } ul { grid-template-columns:1fr 1fr; } }
+</style>

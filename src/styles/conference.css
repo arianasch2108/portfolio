@@ -1,0 +1,126 @@
+/* ITC artifacts retain their own colors within neutral editorial frames. */
+.conference-study .case-hero h1 { max-width: 23ch; font-size: clamp(2.5rem, 5.6vw, 5.6rem); }
+.conference-study .case-subtitle { max-width: 42ch; }
+.conference-study .case-intro-text { max-width: 85ch; }
+.conference-study .case-intro { margin-bottom: 0; }
+.conference-study .case-metadata { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: var(--space-6) var(--space-8); }
+.conference-study .case-section { padding-block: clamp(2.75rem,5vw,5rem); }
+.conference-study .case-section-copy { margin-bottom: var(--space-8); }
+.conference-study h3, .conference-study h4, .conference-study dt { font-family: var(--font-family-body); font-size: .95rem; line-height: 1.4; letter-spacing: .025em; font-weight: 700; color: var(--color-plum); margin: 0 0 .75rem; }
+.conference-study p:last-child { margin-bottom: 0; }
+.conference-brand-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: var(--space-8) var(--space-6); }
+.conference-callout { display: grid; grid-template-columns: 1fr 2fr; gap: var(--space-8); background: var(--color-pale-lilac); padding: var(--space-6); margin-top: var(--space-8); }
+.conference-callout p { margin: 0; }
+.conference-journey { display: grid; grid-template-columns: repeat(7,minmax(0,1fr)); gap: 2rem; list-style: none; padding: 0; margin: 0; }
+.conference-journey li { position: relative; padding-top: 1.25rem; border-top: 2px solid var(--color-lilac); }
+.conference-journey li:not(:last-child)::after { content: '→'; position: absolute; right: -1rem; top: -.9rem; transform: translateX(50%); color: var(--color-plum); }
+.conference-journey p { font-size: .9rem; margin: 0; }
+.conference-study .conference-subheading { font-size: 1.25rem; text-transform: uppercase; margin: var(--space-8) 0 var(--space-6); }
+.conference-digital { display: grid; grid-template-columns: 1fr 1.6fr .8fr; gap: var(--space-6); align-items: start; }
+.conference-annotation { padding-top: var(--space-6); }
+.conference-annotation p { margin: 0; }
+.conference-physical { display: grid; grid-template-columns: 1.5fr 1fr; gap: var(--space-6); }
+.conference-environment { max-width: 80ch; }
+.conference-outcomes { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: var(--space-8); margin: 0; }
+.conference-outcomes > div { border-top: var(--border-default); padding-top: var(--space-6); }
+.conference-outcomes dd { margin: 0; }
+.conference-reflection { color: var(--color-plum); font-size: clamp(1.2rem,2vw,1.65rem); border-left: 3px solid var(--color-lilac); padding-left: var(--space-6); margin-top: var(--space-10); }
+.conference-back { display: flex; flex-direction: column; gap: 1rem; background: var(--color-plum); color: var(--color-on-dark); padding-block: var(--space-12); box-shadow: 0 0 0 100vmax var(--color-plum); clip-path: inset(0 -100vmax); text-decoration: none; }
+.conference-back .section-marker { color: var(--color-pale-lilac); margin: 0; }
+.conference-back > span:last-child { font-family: var(--font-family-heading); font-size: clamp(2rem,4vw,3.5rem); }
+.conference-back:hover > span:last-child { text-decoration: underline; }
+.conference-back:focus-visible { outline: 3px solid var(--color-lilac); outline-offset: -3px; }
+@media(max-width:64rem) {
+ .conference-journey { display: block; }
+ .conference-journey li { border-top: 0; border-left: 2px solid var(--color-lilac); margin-left: .5rem; padding: 0 0 1.75rem 1.75rem; display: grid; grid-template-columns: 9rem 1fr; gap: 1rem; }
+ .conference-journey li:not(:last-child)::after { content: '↓'; top: auto; bottom: .35rem; left: 1.75rem; right: auto; transform: none; }
+ .conference-journey li:last-child { padding-bottom: 0; }
+ .conference-brand-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:48rem) {
+ .conference-study .case-metadata { grid-template-columns: repeat(2,minmax(0,1fr)); }
+ .conference-digital, .conference-physical, .conference-callout, .conference-outcomes { grid-template-columns: minmax(0,1fr); }
+ .conference-digital { gap: var(--space-8); }
+ .conference-callout { gap: .5rem; }
+ .conference-brand-grid { gap: var(--space-6); }
+ .conference-journey li { grid-template-columns: 1fr; gap: 0; }
+}
+
+/* Campaign and app artifacts stay readable at their original proportions. */
+.conference-digital { grid-template-columns: minmax(0, 1fr) minmax(0, 1.65fr); gap: var(--space-8); }
+.conference-channel-campaign { grid-column: 1; grid-row: 1; }
+.conference-channel-app { grid-column: 2; grid-row: 1 / span 2; }
+.conference-channel-website { grid-column: 1; grid-row: 2; }
+.conference-channel .conference-annotation { padding-top: 0; margin-bottom: var(--space-6); }
+.conference-app-screens { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); }
+.conference-study .conference-digital .case-artifact,
+.conference-study .conference-physical .case-artifact { padding: 0; background: transparent; }
+.conference-physical { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 48rem) {
+ .conference-digital { grid-template-columns: minmax(0, 1fr); }
+ .conference-channel { grid-column: auto; grid-row: auto; }
+ .conference-app-screens, .conference-physical { grid-template-columns: minmax(0, 1fr); }
+ .conference-app-screens { max-width: 24rem; margin-inline: auto; gap: var(--space-8); }
+}
+
+/* Device frames live here so every conference render loads their styles. */
+.conference-study .phone-frame { position: relative; box-sizing: border-box; margin-inline: auto; width: calc(100% - 10px); max-width: 22rem; padding: 22px 9px 12px; border: 2px solid #666570; border-radius: 36px; background: #22212a; box-shadow: 0 10px 24px #14151e25, inset 0 0 0 2px #393841; }
+.conference-study .phone-frame::before, .conference-study .phone-frame::after { content: ''; position: absolute; width: 3px; background: #55545e; border-radius: 2px; }
+.conference-study .phone-frame::before { left: -4px; top: 17%; height: 12%; }
+.conference-study .phone-frame::after { right: -4px; top: 24%; height: 8%; }
+.conference-study .phone-speaker { position: absolute; top: 9px; left: calc(50% - 20px); width: 40px; height: 4px; border-radius: 8px; background: #090910; }
+.conference-study .phone-speaker::after { content: ''; position: absolute; left: 47px; top: -1px; width: 6px; height: 6px; border-radius: 50%; background: #141721; box-shadow: inset 0 0 0 1px #454956; }
+.conference-study .phone-frame .case-artifact { padding: 0; background: transparent; border-radius: 23px; overflow: hidden; }
+.conference-study .phone-frame a { box-shadow: none; }
+
+.conference-study .case-intro-layout > .case-artifact,
+.conference-experience-photos .case-artifact { padding: 0; background: transparent; }
+.conference-experience-photos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-8); margin-top: var(--space-10); }
+@media (max-width: 48rem) { .conference-experience-photos { grid-template-columns: minmax(0, 1fr); } }
+
+.conference-kiosks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-8); max-width: 100%; margin-inline: auto; }
+.conference-kiosk { margin: 0; min-width: 0; }
+.conference-kiosk a { display: grid; align-items: center; height: clamp(12rem, 26vw, 21rem); }
+.conference-kiosk svg { display: block; width: 100%; max-height: 100%; }
+@media (max-width: 48rem) { .conference-kiosks { grid-template-columns: minmax(0, 1fr); } .conference-kiosk a { height: auto; } }
+
+.conference-kiosks { grid-template-columns: minmax(0, 1fr) 2rem minmax(0, 1.65fr); gap: var(--space-5); }
+.conference-kiosk-arrow { display: grid; place-items: center; height: clamp(12rem, 26vw, 21rem); color: var(--color-plum); font-size: 2rem; }
+@media (max-width: 48rem) {
+ .conference-kiosks { grid-template-columns: minmax(0, 1fr); }
+ .conference-kiosk-arrow { height: 2rem; transform: rotate(90deg); }
+}
+
+@media (min-width: 48.01rem) {
+ .conference-kiosk a, .conference-kiosk-arrow { height: clamp(17rem, 35vw, 31rem); }
+}
+
+@media (min-width: 64rem) {
+ .conference-study .case-metadata { grid-template-columns: 1.15fr 1.15fr 1.85fr .65fr; gap: var(--space-6); }
+}
+
+/* Campaign, mobile, and web share the desktop row. */
+@media (min-width: 48.01rem) {
+ .conference-digital { grid-template-columns: minmax(0, 1fr) minmax(0, 1.55fr) minmax(0, 1.2fr); gap: var(--space-6); }
+ .conference-channel-campaign { grid-column: 1; grid-row: 1; }
+ .conference-channel-app { grid-column: 2; grid-row: 1; }
+ .conference-channel-website { grid-column: 3; grid-row: 1; }
+}
+
+/* Leave room for the website laptop base within its column. */
+.conference-study .conference-channel-website .case-artifact.laptop { padding: 0.75rem 0.5rem 1.75rem; }
+.conference-channel-website .case-artifact.laptop a { border-width: 5px; border-top-width: 10px; border-bottom-width: 8px; border-radius: 9px 9px 2px 2px; }
+.conference-channel-website .case-artifact.laptop a::before { top: -7px; width: 3px; height: 3px; }
+.conference-channel-website .case-artifact.laptop a::after { bottom: -17px; height: 9px; }
+
+.conference-study .instagram-post { overflow: hidden; border: 1px solid #dedee3; border-radius: 12px; background: #fff; box-shadow: 0 5px 18px #14151e0c; }
+.instagram-post-header { display: flex; align-items: center; gap: .6rem; padding: .75rem; color: #202027; }
+.instagram-avatar { display: grid; place-items: center; flex: 0 0 30px; height: 30px; border-radius: 50%; background: #24437c; color: white; font: 15px Georgia, serif; }
+.instagram-account { font: 600 .75rem/1.3 var(--font-family-body); }
+.instagram-menu { margin-left: auto; font-size: .75rem; letter-spacing: .05em; }
+.conference-study .instagram-post .case-artifact { padding: 0; }
+.conference-study .instagram-post a { box-shadow: none; }
+
+.instagram-post-actions { display: flex; gap: .85rem; align-items: center; padding: .85rem .75rem; color: #202027; }
+.instagram-post-actions svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.instagram-post-actions .instagram-save { margin-left: auto; }

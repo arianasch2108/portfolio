@@ -1,0 +1,23 @@
+---
+import ProjectArtifact from './ProjectArtifact.astro';
+import BrandRefreshCover from './BrandRefreshCover.astro';
+import ClientStoriesCover from './ClientStoriesCover.astro';
+import ConferenceCover from './ConferenceCover.astro';
+import PrioritiesCover from './PrioritiesCover.astro';
+import type { CollectionEntry } from 'astro:content';
+interface Props { project: CollectionEntry<'projects'>; presentation?: 'feature' | 'compact'; }
+const { project, presentation = 'compact' } = Astro.props;
+const { title, slug, summary, cover, format, disciplines, sample, client, context, year } = project.data;
+const projectContext = [context, client, year].filter(Boolean).join(' · ');
+---
+<article class:list={['project-card', `project-card--${presentation}`]} data-project-format={format} data-project-slug={slug}>
+  {slug === 'client-centered-brand-refresh' ? <div class="project-artifact"><BrandRefreshCover /></div> : slug === 'grantee-client-stories' ? <div class="project-artifact"><ClientStoriesCover /></div> : slug === 'legal-priorities-hub' ? <div class="project-artifact"><PrioritiesCover /></div> : slug === 'innovations-in-technology-conference' ? <div class="project-artifact"><ConferenceCover /></div> : <ProjectArtifact cover={cover} large={presentation === 'feature'} />}
+  <div class="card-content">
+    <p class="eyebrow">{sample && 'Sample · '}{format === 'case-study' ? 'Case study' : 'Project brief'}</p>
+    <h3>{title}</h3>
+    <ul class="tags" aria-label="Project disciplines">{disciplines.map((discipline) => <li>{discipline}</li>)}</ul>
+    {projectContext && <p class="project-context">{projectContext}</p>}
+    <p>{summary}</p>
+    <a class="button project-link" href={`/work/${slug}/`} aria-label={`${format === 'case-study' ? 'View case study' : 'View project'}: ${title}`}>{format === 'case-study' ? 'View case study' : 'View project'} <span aria-hidden="true">›</span></a>
+  </div>
+</article>

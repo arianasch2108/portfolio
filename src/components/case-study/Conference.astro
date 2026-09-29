@@ -1,0 +1,57 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import CaseStudyHero from './CaseStudyHero.astro';
+import ConferenceDiagram from './ConferenceDiagram.astro';
+import KioskCutout from './KioskCutout.astro';
+import ConferenceArtifact from './ConferenceArtifact.astro';
+import SectionTracker from '../SectionTracker.astro';
+import '../../styles/case-study.css';
+import '../../styles/conference.css';
+interface Props { project: CollectionEntry<'projects'>; }
+const { project } = Astro.props;
+const study = project.data.caseStudy!;
+const groups = study.artifactGroups ?? {};
+const visibleSections = study.sections.filter(section => section.id !== 'experience-design');
+---
+<SiteLayout title={project.data.title} description={study.subtitle} fullWidth>
+ <article class="brand-study conference-study container">
+  <CaseStudyHero project={project} />
+  <SectionTracker compact sections={visibleSections.map(s=>({id:s.id,label:s.eyebrow.replace(/^THE /,'').toLowerCase().replace(/\b\w/g,c=>c.toUpperCase())}))} />
+  {visibleSections.map(section=><section class:list={['case-section',`conference-${section.id}`]} id={section.id} aria-labelledby={`heading-${section.id}`}>
+   <p class="section-marker">{section.eyebrow}</p>
+   <div class="case-section-copy"><h2 id={`heading-${section.id}`}>{section.heading}</h2>{section.paragraphs.length > 0 && <div class="case-body">{section.paragraphs.map(p=><p>{p}</p>)}</div>}</div>
+   {section.id === 'challenge' && groups.overview?.map(a=><ConferenceArtifact asset={study.assets[a.key]} {...a} />)}
+   {section.id === 'challenge' && <ConferenceDiagram />}
+   {section.id === 'brand-system' && <div class="conference-kiosks">
+    <KioskCutout asset={study.assets.materials} year="2025" />
+    <span class="conference-kiosk-arrow" aria-hidden="true">→</span>
+    <KioskCutout asset={study.assets.environment} year="2026" />
+   </div>}
+   {section.id === 'brand-system' && <div class="conference-brand-grid">{groups.brand?.map(a=><ConferenceArtifact asset={study.assets[a.key]} {...a} />)}</div>}
+   {section.id === 'experience' && <ol class="conference-journey" aria-label="Attendee journey">{study.sections.find(s => s.id === 'experience-design')?.workflow?.map(step=><li><h3>{step.title}</h3><p>{step.body}</p></li>)}</ol>}
+   {section.id === 'experience' && <>
+    <h3 class="conference-subheading">Digital</h3>
+    <div class="conference-digital">{groups.digital?.map((a,i)=><div class:list={['conference-channel', `conference-channel-${a.key}`]}>
+     <div class="conference-annotation"><h4>{section.items?.[i].title}</h4><p>{section.items?.[i].body}</p></div>
+     <div class:list={{ 'conference-app-screens': a.key === 'app' }}>
+      <ConferenceArtifact asset={study.assets[a.key]} {...a} phone={a.key === 'app'} instagram={a.key === 'campaign'} />
+      {a.key === 'app' && <ConferenceArtifact asset={study.assets.schedule} label="Mobile agenda" shape="portrait" phone />}
+     </div>
+    </div>)}</div>
+
+   </>}
+   {section.constraint && <aside class="conference-callout" aria-label={section.constraint.label}><h3>{section.constraint.label}</h3>{section.constraint.paragraphs.map(p=><p>{p}</p>)}</aside>}
+   {section.id === 'experience' && <section aria-labelledby="heading-experience-design" id="experience-design">
+    <h3 class="conference-subheading" id="heading-experience-design">Experience Design</h3>
+    <div class="conference-experience-photos">
+     <ConferenceArtifact asset={study.assets.panel} label="Conference stage" />
+     <ConferenceArtifact asset={study.assets.attendee} label="Attendee touchpoints" />
+     <ConferenceArtifact asset={study.assets.photoFrame} label="Branded attendee photo frame" />
+    </div>
+   </section>}
+   {section.id === 'iteration' && <><dl class="conference-outcomes">{section.items?.map(item=><div><dt>{item.title}</dt><dd>{item.body}</dd></div>)}</dl><p class="conference-reflection">{section.statement}</p></>}
+  </section>)}
+  <a class="conference-back" href="/work/"><span class="section-marker">Explore more</span><span>Back to work <span aria-hidden="true">›</span></span></a>
+ </article>
+</SiteLayout>

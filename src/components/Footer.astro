@@ -1,0 +1,41 @@
+---
+import CosmicDetail from './CosmicDetail.astro';
+import site from '../data/site.json';
+const socialLinks: { label: string; url: string }[] = site.socialLinks;
+---
+<footer id="contact" class="site-footer">
+ <CosmicDetail footer />
+ <div class="container">
+  <div class="footer-top">
+    <div>
+      <p class="section-marker">CONTACT</p>
+      {site.closingIsPlaceholder && <p class="draft-label">Closing statement / placeholder</p>}
+      <h2 class="footer-statement">{site.closingStatement}</h2>
+    </div>
+    <div class="footer-contact">
+      <p class="eyebrow">Based in</p><p>{site.location}</p>
+      {site.email && <a href={`mailto:${site.email}`}>{site.email}</a>}
+      {socialLinks.map((link) => <a href={link.url}>{link.label} <span aria-hidden="true">›</span></a>)}
+      <a class="button footer-cta" href={`mailto:${site.email}`}>Get in touch <span aria-hidden="true">›</span></a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <a class="site-name" href="/">{site.name}</a>
+    <nav aria-label="Footer navigation"><ul class="nav-list">{[...site.navigation, { label: 'Resume', href: '/resume/' }].map(({ label, href }) => <li><a href={href}>{label}</a></li>)}</ul></nav>
+    <p>© {new Date().getFullYear()}</p>
+  </div>
+ </div>
+</footer>
+
+<style>
+ @supports (background-clip: text) {
+  .footer-statement { background: var(--gradient-pearl); background-size: 160% 100%; background-clip: text; -webkit-background-clip: text; color: transparent; }
+ }
+ @media (forced-colors: active) { .footer-statement { background: none; color: CanvasText; } }
+
+ .site-footer .footer-cta { margin-top:var(--space-8); width:100%; max-width:24rem; min-height:72px; padding:1.25rem 2rem; gap:2.5rem; background:var(--color-pale-lilac); color:var(--color-plum); border:2px solid var(--color-lilac); border-radius:1rem 0 1rem 0; font-size:1.3rem; font-weight:700; box-shadow:0 6px 0 var(--color-plum),0 12px 24px #00000030; }
+ .site-footer .footer-cta:hover { background:#fff; border-color:#fff; }
+ .footer-cta span { font-size:2rem; line-height:1; }
+ .footer-cta:focus-visible { outline:3px solid var(--color-on-dark); outline-offset:5px; }
+ @media(prefers-reduced-motion:no-preference) { .footer-cta { transition:background 180ms ease,border-color 180ms ease; } }
+</style>

@@ -1,0 +1,28 @@
+---
+import ArtifactFrame from './ArtifactFrame.astro';
+import type { ComponentProps } from 'astro/types';
+interface Props { asset?: ComponentProps<typeof ArtifactFrame>['asset'] & { caption?: string }; label: string; shape?: 'wide' | 'square' | 'portrait'; phone?: boolean; instagram?: boolean; }
+const { asset, label, shape = 'wide', phone = false, instagram = false } = Astro.props;
+---
+{asset && <figure class="conference-artifact">
+ <div class:list={{ 'phone-frame': phone, 'instagram-post': instagram }}>
+  {instagram && <div class="instagram-post-header" aria-label="Instagram post mockup for Legal Services Corporation">
+   <span class="instagram-avatar" aria-hidden="true">LSC</span>
+   <span class="instagram-account">Legal Services Corporation</span>
+   <span class="instagram-menu" aria-hidden="true">•••</span>
+  </div>}
+ {phone && <span class="phone-speaker" aria-hidden="true"></span>}<ArtifactFrame asset={asset} shape={shape} />
+ {instagram && <div class="instagram-post-actions" aria-hidden="true">
+  <svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z" /></svg>
+  <svg viewBox="0 0 24 24"><path d="M21 11.5a9 9 0 1 1-4.2-7.6A9 9 0 0 1 21 11.5Z"/><path d="m5 19-2 3 6-2"/></svg>
+  <svg viewBox="0 0 24 24"><path d="m22 2-7 20-4-9L2 9Z M22 2 11 13" /></svg>
+  <svg class="instagram-save" viewBox="0 0 24 24"><path d="M5 3h14v19l-7-5-7 5Z" /></svg>
+ </div>}
+ </div>
+ <figcaption class="project-caption">{asset?.caption ?? label}{!asset && <span> — artifact to be supplied</span>}</figcaption>
+</figure>}
+<style>
+ figure { margin: 0; min-width: 0; }
+ figcaption { padding-top: .75rem; font-size: var(--font-size-small); }
+ figcaption span { color: var(--color-muted); }
+</style>

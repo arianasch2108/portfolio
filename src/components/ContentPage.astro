@@ -1,0 +1,17 @@
+---
+import { getEntry, render } from 'astro:content';
+import SiteLayout from '../layouts/SiteLayout.astro';
+interface Props { id: string; introduction?: boolean; }
+const { introduction = false } = Astro.props;
+const entry = await getEntry('pages', Astro.props.id);
+if (!entry) throw new Error(`Missing page content: ${Astro.props.id}`);
+const { Content } = await render(entry);
+---
+<SiteLayout title={entry.data.title} description={entry.data.description}>
+  <header class="page-heading">
+    <h1>{entry.data.title}</h1>
+    {introduction && <div class="lead"><Content /></div>}
+  </header>
+  {!introduction && <div class="prose"><Content /></div>}
+  <slot />
+</SiteLayout>

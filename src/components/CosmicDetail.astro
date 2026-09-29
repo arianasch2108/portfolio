@@ -1,0 +1,37 @@
+---
+interface Props { footer?: boolean; }
+const { footer = false } = Astro.props;
+---
+<div class="star-reveal" aria-hidden="true"></div>
+<svg class:list={['orbital-detail', { 'orbital-footer': footer }]} viewBox="0 0 220 120" fill="none" aria-hidden="true" focusable="false">
+ <g transform="rotate(-18 110 60)">
+ <ellipse cx="110" cy="60" rx="100" ry="35" stroke="currentColor" stroke-width=".7" />
+ <circle class="orbital-point" cx="10" cy="60" r="2" fill="currentColor" />
+ </g>
+ <path d="M104 60h12m-6-6v12" stroke="currentColor" stroke-width=".7" />
+</svg>
+<script>
+ for (const layer of document.querySelectorAll<HTMLElement>('.star-reveal')) {
+  const section = layer.parentElement;
+  if (!section) continue;
+  const enabled = window.matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)');
+  let frame = 0;
+  let x = 0;
+  let y = 0;
+  const hide = () => { cancelAnimationFrame(frame); frame = 0; layer.classList.remove('is-revealed'); };
+  section.addEventListener('pointermove', event => {
+   if (!enabled.matches || event.pointerType !== 'mouse') return;
+   const bounds = section.getBoundingClientRect();
+   x = event.clientX - bounds.left;
+   y = event.clientY - bounds.top;
+   if (!frame) frame = requestAnimationFrame(() => {
+    layer.style.setProperty('--star-x', `${x}px`);
+    layer.style.setProperty('--star-y', `${y}px`);
+    layer.classList.add('is-revealed');
+    frame = 0;
+   });
+  }, { passive: true });
+  section.addEventListener('pointerleave', hide);
+  enabled.addEventListener('change', hide);
+ }
+</script>

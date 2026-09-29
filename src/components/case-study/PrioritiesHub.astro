@@ -1,0 +1,59 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import CaseStudyHero from './CaseStudyHero.astro';
+import ArtifactFrame from './ArtifactFrame.astro';
+import ProjectContinuation from './ProjectContinuation.astro';
+import SectionTracker from '../SectionTracker.astro';
+import { getPublishedProjects } from '../../lib/projects';
+import '../../styles/case-study.css';
+import '../../styles/priorities-hub.css';
+interface Props { project: CollectionEntry<'projects'>; }
+const { project } = Astro.props;
+const study = project.data.caseStudy!;
+const next = (await getPublishedProjects()).find(p => p.data.slug === study.nextSlug);
+const priorities = project.data.links.slice(1);
+
+---
+<SiteLayout title={project.data.title} description={study.subtitle} fullWidth>
+ <article class="brand-study priorities-study container">
+  <CaseStudyHero project={project} />
+  <SectionTracker compact sections={study.sections.map(s => ({id:s.id,label:s.eyebrow.replace(/^THE /,'').toLowerCase().replace(/\b\w/g,c=>c.toUpperCase())}))} />
+  {study.sections.map(section => <section id={section.id} class:list={['case-section',`priorities-${section.id}`]} aria-labelledby={`heading-${section.id}`}>
+   <p class="section-marker">{section.eyebrow}</p>
+   <div class="case-section-copy"><h2 id={`heading-${section.id}`}>{section.heading}</h2><div class="case-body">{section.paragraphs.map(p=><p>{p}</p>)}</div></div>
+   {section.id === 'opportunity' && <>
+    <div class="priorities-opportunity-visual"><div><ArtifactFrame asset={study.assets.hub} /><a class="priorities-live" href={project.data.links[0].url}>View live priorities hub <span aria-hidden="true">›</span></a></div><ol class="priorities-flow" aria-label="Before and after content architecture">{section.workflow?.map(step=><li>{step.title && <span class="section-marker">{step.title}</span>}<strong>{step.body}</strong></li>)}</ol></div>
+    <p class="priorities-status">{section.status}</p>
+   </>}
+   {section.id === 'strategy' && <>
+    <ul class="priorities-index" aria-label="Seven priority areas">{priorities.map(p=><li><a href={p.url}>{p.label}</a></li>)}</ul>
+    <div class="priorities-strategy-detail"><dl class="priorities-model" aria-label="Priority page content model">{section.items?.map(item=><div><dt>{item.title}</dt><dd>{item.body}</dd></div>)}</dl><aside class="priorities-search"><h3>{section.constraint?.label}</h3>{section.constraint?.paragraphs.map(p=><p>{p}</p>)}</aside></div>
+   </>}
+   {section.id === 'content-design' && <>
+    <figure class="priority-captioned-image">
+     <ArtifactFrame asset={study.assets.representative} />
+     <figcaption class="priority-image-captions">{section.items?.slice(0,2).map(item=><div class="project-caption attached-note"><h3>{item.title}</h3><p>{item.body}</p></div>)}</figcaption>
+    </figure>
+    <div class="priorities-screenshots">{[['technology'],['partnerships'],['data','ISSUE DATA AND SUPPORTING RESOURCES','Pair key statistics with a supporting fact sheet to clarify the issue’s scale and invite deeper exploration.'],['workforce','CONNECTING THE ISSUE TO LSC’S WORK','Use people-centered imagery and program links to show how LSC supports workforce development.']].map(([key,label,body],i)=><figure><ArtifactFrame asset={study.assets[key]} />{i >= 2 && <figcaption class="project-caption attached-note screenshot-note"><h3>{label}</h3><p>{body}</p></figcaption>}{i < 2 && section.items?.[i+2] && <aside class="project-caption attached-note screenshot-note"><h3>{section.items[i+2].title}</h3><p>{section.items[i+2].body}</p></aside>}</figure>)}</div>
+   </>}
+   {section.id === 'campaign' && <div class="priorities-campaign-detail"><ol class="priorities-flow" aria-label="Campaign to web connection">{section.outcomes?.map(text=><li><strong>{text}</strong></li>)}</ol><p class="priorities-takeaway">{section.statement}</p></div>}
+   {section.id === 'impact' && <dl class="priorities-outcomes">{section.items?.map(item=><div><dt>{item.title}</dt><dd>{item.body}</dd></div>)}</dl>}
+  </section>)}
+  {next && <ProjectContinuation title={next.data.title} slug={next.data.slug} next />}
+ </article>
+</SiteLayout>
+
+<style>
+ .priority-captioned-image { margin:0; }
+ .priority-image-captions { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-8); padding-top:var(--space-5); }
+ .priority-image-captions h3 { font-family:var(--font-family-body); font-size:1rem; color:var(--color-plum); margin:0 0 .65rem; }
+ .priority-image-captions p { margin:0; font-size:.95rem; }
+ @media(max-width:48rem) { .priority-image-captions { grid-template-columns:1fr; } }
+
+ .priorities-screenshots { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--space-8); margin-top:var(--space-10); align-items:start; }
+ .priorities-screenshots figure { margin:0; }
+ .priorities-screenshots figcaption:not(.attached-note) { padding-top:.75rem; color:var(--color-muted); font-size:var(--font-size-small); }
+ .priorities-study :global(.case-artifact.has-artifact:not(.laptop):not(.tablet)) { padding:0; background:transparent; }
+ @media(max-width:48rem) { .priorities-screenshots { grid-template-columns:1fr; } }
+</style>

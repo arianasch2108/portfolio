@@ -1,0 +1,13 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props { project: CollectionEntry<'projects'>; }
+const { project } = Astro.props;
+const data = project.data;
+const fields = [
+ ['Organization', data.client || (data.brief ? data.context : undefined)],
+ ['Role', data.role || data.brief?.roles.join(' · ')],
+ ['Year', data.year || data.caseStudy?.timeline],
+ ['Tools', data.tools || data.caseStudy?.tools || data.caseStudy?.platforms],
+].filter(([, value]) => value);
+---
+<dl class="case-metadata">{fields.map(([label, value]) => <div><dt>{label}</dt><dd>{value}</dd></div>)}</dl>

@@ -1,0 +1,47 @@
+/* Atmospheric details stay confined to the existing dark hero and footer. */
+.hero, .site-footer { position: relative; isolation: isolate; }
+.star-reveal { position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0; transition: opacity 650ms ease; background-image: radial-gradient(circle at 17px 28px, #dce7ec99 .7px, transparent 1.2px), radial-gradient(circle at 89px 64px, #eee7f37a 1px, transparent 1.5px), radial-gradient(circle at 133px 121px, #f5f3f766 .6px, transparent 1.1px); background-size: 173px 149px, 251px 227px, 307px 193px; mask-image: radial-gradient(circle 180px at var(--star-x, 50%) var(--star-y, 50%), #000 10%, transparent 100%); }
+.star-reveal.is-revealed { opacity: .65; }
+.orbital-detail { position: absolute; width: clamp(8rem, 17vw, 15rem); right: 2%; top: 2rem; color: var(--color-lilac); opacity: .3; z-index: -1; pointer-events: none; }
+.orbital-footer { top: auto; bottom: 10rem; right: 5%; width: 11rem; transform: rotate(25deg); opacity: .2; }
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+ .hero-first-name { background: var(--gradient-pearl); background-size: 160% 100%; background-position: 0% 50%; background-clip: text; -webkit-background-clip: text; color: transparent; transition: background-position 1.8s ease; }
+}
+@media (hover: hover) and (pointer: fine) {
+ .hero-name:hover .hero-first-name { background-position: 100% 50%; }
+ .button-light { position: relative; }
+ .button-light::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--gradient-pearl); opacity: 0; transition: opacity 250ms ease; pointer-events: none; }
+ .button-light:hover::after { opacity: 1; }
+ .project-link:hover span, .resume-link:hover > span, .project-continuation:hover > span:last-child > span { transform: translateX(4px); }
+}
+.project-link span, .resume-link > span, .project-continuation > span:last-child > span { display: inline-block; transition: transform 220ms ease; }
+@media (hover: none), (pointer: coarse) { .star-reveal, .orbital-detail { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+ .star-reveal { display: none; }
+ .hero-first-name { transition: none; }
+ .hero-name:hover .hero-first-name { background-position: 0% 50%; }
+ .project-link:hover span, .resume-link:hover > span, .project-continuation:hover > span:last-child > span { transform: none; }
+}
+@media (forced-colors: active) {
+ .hero-first-name { background: none; color: CanvasText; }
+ .star-reveal, .orbital-detail { display: none; }
+}
+
+@supports (offset-path: path('M0 0 L1 1')) {
+ @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .hero .orbital-point { cx: 0; cy: 0; offset-path: path('M10 60 A100 35 0 1 1 210 60 A100 35 0 1 1 10 60'); animation: orbital-pass 32s linear infinite; animation-play-state: paused; }
+  .hero:hover .orbital-point { animation-play-state: running; }
+ }
+}
+@keyframes orbital-pass { to { offset-distance: 100%; } }
+
+/* Soft hero-only cloud, drifting behind the transparent portrait and copy. */
+.hero { overflow: clip; }
+.hero-nebula { position: absolute; inset: -25%; pointer-events: none; z-index: -2; background: radial-gradient(ellipse at 72% 50%, #8c72a166, transparent 38%), radial-gradient(ellipse at 35% 70%, #66345d75, transparent 35%), radial-gradient(ellipse at 56% 28%, #cbb9e126, transparent 32%); filter: blur(35px); animation: nebula-drift 36s ease-in-out infinite alternate; }
+@keyframes nebula-drift { from { transform: translate(-9%, 5%) rotate(-8deg) scale(1); } to { transform: translate(10%, -6%) rotate(9deg) scale(1.12); } }
+.hero .portrait-frame::before, .hero .portrait-frame::after { display: none; }
+.hero .portrait-frame img { background: transparent; border: 0; border-radius: 0; object-fit: contain; object-position: center bottom; }
+.nebula-toggle { position: absolute; bottom: .75rem; right: var(--page-gutter); background: transparent; border: 0; color: var(--color-muted-on-dark); font: inherit; font-size: .75rem; padding: .5rem; cursor: pointer; }
+.nebula-toggle:hover { color: var(--color-on-dark); }
+.nebula-paused .hero-nebula { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .hero-nebula { animation: none; } .nebula-toggle { display: none; } }

@@ -1,0 +1,102 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import CaseStudyHero from './CaseStudyHero.astro';
+import collection from '../../assets/projects/client-stories/collection.png';
+import ArtifactFrame from './ArtifactFrame.astro';
+import StoryArchitecture from './StoryArchitecture.astro';
+import StoryMedia from './StoryMedia.astro';
+import ProjectContinuation from './ProjectContinuation.astro';
+import SectionTracker from '../SectionTracker.astro';
+import { getPublishedProjects } from '../../lib/projects';
+import '../../styles/case-study.css';
+import '../../styles/client-stories.css';
+interface Props { project: CollectionEntry<'projects'>; }
+const { project } = Astro.props;
+const study = project.data.caseStudy!;
+const assets = study.assets;
+const projects = await getPublishedProjects();
+const related = projects.find(p => p.data.slug === study.relatedSlug);
+const next = projects.find(p => p.data.slug === study.nextSlug);
+---
+<SiteLayout title={project.data.title} description={study.subtitle} fullWidth>
+ <article class="brand-study stories-study container">
+  <CaseStudyHero project={project}>
+   <div slot="artifact" class="stories-hero-cards" aria-label="Client story cards">
+    {[
+     { x: 417, width: 648, alt: 'Wes: Fair Chance for a Firefighter story card' },
+     { x: 1091, width: 648, alt: 'Ray: Dignity for Senior Veteran story card' },
+     { x: 1764, width: 649, alt: 'Maryruth: Building a Safer Future story card' }
+    ].map(card => <svg viewBox={`${card.x} 830 ${card.width} 970`} role="img" aria-label={card.alt}>
+     <image href={collection.src} width={collection.width} height={collection.height} />
+    </svg>)}
+   </div>
+  </CaseStudyHero>
+  <SectionTracker compact sections={study.sections.map(section => ({ id: section.id, label: section.eyebrow.replace(/^THE /, '').toLowerCase().replace(/\b\w/g, c => c.toUpperCase()) }))} />
+  {study.sections.map(section => <section id={section.id} class:list={['case-section', `stories-${section.id}`]} aria-labelledby={`heading-${section.id}`}>
+   <p class="section-marker">{section.eyebrow}</p>
+   <div class="case-section-copy">
+    <div><h2 id={`heading-${section.id}`}>{section.heading}</h2></div>
+    {section.paragraphs.length > 0 && <div class="case-body">{section.paragraphs.map(p => <p>{p}</p>)}</div>}
+   </div>
+   {section.id === 'opportunity' && <>
+    <p class="case-statement">{section.statement}</p>
+    <p class="story-transition"><span>Individual stories</span><span aria-hidden="true">→</span><span>Connected story system</span></p>
+   </>}
+   {section.id === 'architecture' && section.architecture && <StoryArchitecture content={section.architecture} />}
+   {section.id === 'content-design' && <>
+    <div class="story-design-artifact">
+     <div class="story-page-screenshots"><ArtifactFrame asset={assets['story-page']} /><ArtifactFrame asset={assets['story-context']} /></div>
+     <ol class="story-design-notes" aria-label="Story anatomy">
+      {section.items?.map((item, index) => <li><span aria-hidden="true">0{index + 1}</span><div><h3>{item.title}</h3><p>{item.body}</p></div></li>)}
+     </ol>
+    </div>
+    <div class="story-design-principles">
+     {section.principles?.map(item => <div><span class="principle-arrow" aria-hidden="true">›</span><h3>{item.title}</h3><p class="principle-lead">{item.label}</p><p>{item.body}</p></div>)}
+     {section.supportingArtifact && <div><span class="principle-arrow" aria-hidden="true">›</span><h3>{section.supportingArtifact.title}</h3><p class="principle-lead">{section.supportingArtifact.label}</p><p>{section.supportingArtifact.body}</p></div>}
+    </div>
+   </>}
+   {section.id === 'imagery' && <>
+    <StoryMedia assets={assets} video={study.video} />
+    {section.constraint && <aside class="imagery-constraint" aria-labelledby="imagery-constraint-title">
+     <p class="section-marker">{section.constraint.label}</p>
+     <h3 id="imagery-constraint-title">{section.constraint.heading}</h3>
+     {section.constraint.paragraphs.map(text => <p>{text}</p>)}
+    </aside>}
+    <ol class="imagery-principles">{section.items?.map(item => <li><span class="principle-arrow" aria-hidden="true">›</span><h3>{item.title}</h3><p>{item.body}</p></li>)}</ol>
+   </>}
+   {section.id === 'exploration' && <div class="map-prototype">
+    <p class="prototype-status">{section.status}</p>
+    <iframe title="Grantee Client Stories" aria-label="Symbol map" id="datawrapper-chart-9yAXQ" src="https://datawrapper.dwcdn.net/9yAXQ/18/" scrolling="no" frameborder="0" height="632" data-external="1"></iframe>
+    <ol class="map-benefits">{section.items?.map((item, index) => <li><span aria-hidden="true">0{index + 1}</span><h3>{item.title}</h3><p>{item.body}</p></li>)}</ol>
+   </div>}
+   {section.id === 'implementation' && <>
+    <ol class="cms-workflow" aria-label="Content publishing workflow">{section.workflow?.map(step => <li><strong>{step.title}</strong><p>{step.body}</p></li>)}</ol>
+    <dl class="cms-principles">{section.items?.map(item => <div><dt>{item.title}</dt><dd>{item.body}</dd></div>)}</dl>
+   </>}
+   {section.id === 'reflection' && <p class="case-closing">People <span aria-hidden="true">→</span> Stories <span aria-hidden="true">→</span> Emotional connection <span aria-hidden="true">→</span> Understanding</p>}
+  </section>)}
+  {related && <aside class="stories-related" aria-label="Related work"><p class="section-marker">Related</p><a href={`/work/${related.data.slug}/`}>{related.data.title} <span aria-hidden="true">›</span></a><p>{study.relatedText}</p></aside>}
+  {next && <ProjectContinuation title={next.data.title} slug={next.data.slug} next />}
+ </article>
+</SiteLayout>
+
+<style>
+ .story-page-screenshots { display:grid; gap:0; min-width:0; box-shadow:0 4px 10px #14151e08,0 12px 28px #14151e12; }
+ .stories-study :global(.case-artifact.has-artifact:not(.laptop)) { padding:0; background:transparent; }
+ .stories-study :global(.case-artifact.has-artifact:not(.laptop) a) { box-shadow:0 4px 10px #14151e08,0 12px 28px #14151e12; }
+ .stories-study .story-page-screenshots :global(.case-artifact.has-artifact a) { box-shadow:none; }
+</style>
+
+<script>
+ window.addEventListener('message', event => {
+  const frame = document.querySelector<HTMLIFrameElement>('#datawrapper-chart-9yAXQ');
+  if (!frame || event.source !== frame.contentWindow || event.origin !== 'https://datawrapper.dwcdn.net') return;
+  const heights = event.data?.['datawrapper-height'];
+  if (!heights || typeof heights !== 'object') return;
+  for (const value of Object.values(heights)) {
+   const height = Number(value);
+   if (Number.isFinite(height) && height > 0) frame.style.height = `${height}px`;
+  }
+ });
+</script>

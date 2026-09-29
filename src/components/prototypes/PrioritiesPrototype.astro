@@ -1,0 +1,66 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import InteractivePrototype from '../InteractivePrototype.astro';
+import { priorities, journeys, introduction } from '../../data/prototypes/priorities';
+import '../../styles/prototypes/priorities.css';
+interface Props { assets: NonNullable<CollectionEntry<'projects'>['data']['caseStudy']>['assets']; }
+const { assets } = Astro.props;
+---
+<div class="priorities-prototype-intro"><p class="section-marker">{introduction.eyebrow}</p><h3>{introduction.title}</h3><p>{introduction.body}</p></div>
+<InteractivePrototype title="LSC priorities interactive recreation" stages={['Discover','Choose','Understand','Explore']}>
+ <div class="lsc-prototype" data-priorities-prototype>
+  <div class="lsc-prototype-masthead"><strong>LSC</strong><span>Legal Services Corporation</span><small>Curated portfolio recreation</small></div>
+  <div data-screen="priorities">
+   <header class="lsc-prototype-hero"><h4 tabindex="-1">LSC’s Priorities</h4><p>Advancing Access to Justice Across America</p></header>
+   <p class="lsc-prototype-intro">Explore the issues and communities connected by civil legal aid. Three journeys are available here; the other priorities link to LSC.gov.</p>
+   <div class="lsc-priority-list">{priorities.map(priority=><article class="lsc-priority-row">
+    <div class="lsc-photo">{assets[`prototype-${priority.id}`] ? <img src={assets[`prototype-${priority.id}`].src.src} alt={assets[`prototype-${priority.id}`].alt} loading="lazy" /> : <span>Priority photography to be supplied</span>}</div>
+    <div><h5>{priority.title}</h5><p>{priority.description}</p>{priority.interactive ? <button type="button" data-priority={priority.id}>Explore {priority.title} <span aria-hidden="true">›</span></button> : <a href={priority.url} target="_blank" rel="noopener noreferrer" data-external>Explore on LSC.gov <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>}</div>
+   </article>)}</div>
+  </div>
+  {journeys.map(journey=>{const priority=priorities.find(p=>p.id===journey.id)!;return <div data-screen={journey.id} hidden>
+   <button type="button" class="lsc-back" data-back>← Back to priorities</button>
+   <header class="lsc-prototype-hero"><h4 tabindex="-1">{priority.title}</h4><p>{priority.description}</p></header>
+   <section class="lsc-prototype-context"><h5>{journey.contextTitle}</h5><p>{journey.context}</p><ul>{journey.needs.map(need=><li>{need}</li>)}</ul></section>
+   <section class="lsc-prototype-story" data-explore><div class="lsc-photo">{assets[journey.storyImage] ? <img src={assets[journey.storyImage].src.src} alt={assets[journey.storyImage].alt} loading="lazy" /> : <span>Client-story photography to be supplied</span>}</div><div><h5>{journey.storyTitle}</h5><p>{journey.story}</p><a href={journey.storyUrl} target="_blank" rel="noopener noreferrer">{journey.storyLabel} <span aria-hidden="true">↗</span><span class="sr-only"> (opens on LSC.gov in a new tab)</span></a></div></section>
+   <section class="lsc-prototype-data"><h5>{journey.dataTitle}</h5><dl>{journey.stats.map(stat=><div><dt>{stat.label}</dt><dd>{stat.value}</dd></div>)}</dl><p class="lsc-source">Figures presented on <a href={priority.url} target="_blank" rel="noopener noreferrer">LSC’s {priority.title} page</a> · reference reviewed September 2026.</p></section>
+   <section class="lsc-prototype-resources"><h5>Related resources</h5>{journey.resources.map(resource=><a href={resource.url} target="_blank" rel="noopener noreferrer"><small>{resource.type}</small><span>{resource.label} <span aria-hidden="true">↗</span></span><span class="sr-only"> (opens in a new tab)</span></a>)}</section>
+   <button type="button" class="lsc-back" data-back>← Explore another priority</button>
+  </div>})}
+  <noscript><p>This recreation requires JavaScript. <a href="https://www.lsc.gov/priorities">Explore the live priorities hub.</a></p></noscript>
+ </div>
+</InteractivePrototype>
+<script>
+ for(const root of document.querySelectorAll<HTMLElement>('[data-priorities-prototype]')) {
+  const frame=root.closest<HTMLElement>('[data-prototype-frame]')!;
+  const viewport=frame.querySelector<HTMLElement>('.prototype-viewport')!;
+  const screens=Array.from(root.querySelectorAll<HTMLElement>('[data-screen]'));
+  let screen='priorities', choice:HTMLButtonElement|null=null, pending=false;
+  const stage=(n:number)=>frame.dispatchEvent(new CustomEvent('prototype-stage',{detail:n}));
+  const show=(id:string,reset=false)=>{
+   screen=id;
+   screens.forEach(s=>{s.hidden=s.dataset.screen!==id;});
+   viewport.scrollTop=0;
+   stage(id==='priorities'?0:2);
+   if(id==='priorities' && choice && !reset) { choice.focus({preventScroll:true}); choice.scrollIntoView({block:'nearest'});stage(0); }
+   else root.querySelector<HTMLElement>(`[data-screen="${id}"] h4`)?.focus({preventScroll:true});
+  };
+  root.querySelectorAll<HTMLButtonElement>('[data-priority]').forEach(button=>{
+   button.addEventListener('click',()=>{choice=button;show(button.dataset.priority!);});
+  });
+  root.querySelectorAll<HTMLElement>('[data-priority],[data-external]').forEach(control=>{
+   control.addEventListener('pointerenter',()=>{if(screen==='priorities')stage(1);});
+   control.addEventListener('focus',()=>{if(screen==='priorities')stage(1);});
+  });
+  root.querySelectorAll('[data-back]').forEach(button=>button.addEventListener('click',()=>show('priorities')));
+  frame.addEventListener('prototype-reset',()=>{choice=null;show('priorities',true);});
+  viewport.addEventListener('scroll',()=>{
+   if(pending || screen==='priorities')return;
+   pending=true;requestAnimationFrame(()=>{
+    pending=false;
+    const target=root.querySelector<HTMLElement>(`[data-screen="${screen}"] [data-explore]`);
+    if(target)stage(target.getBoundingClientRect().top<viewport.getBoundingClientRect().top+viewport.clientHeight*.6?3:2);
+   });
+  },{passive:true});
+ }
+</script>

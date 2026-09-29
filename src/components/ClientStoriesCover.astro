@@ -1,0 +1,28 @@
+---
+import ExplodingMockup from './ExplodingMockup.astro';
+import portrait from '../assets/projects/client-stories/dave-photo.png';
+import family from '../assets/projects/client-stories/krystal-photo.png';
+import hub from '../assets/projects/client-stories/collection.png';
+import story from '../assets/projects/client-stories/wes-story.png';
+---
+<div class="stories-cover" role="img" aria-label="Client portraits connected with the Grantee Client Impact story hub and a detail of Wes’s individual story page.">
+ <ExplodingMockup background={hub}>
+ <img class="portrait" src={portrait.src} width={portrait.width} height={portrait.height} alt="" loading="lazy" draggable="false" aria-hidden="true" />
+ <img class="family" src={family.src} width={family.width} height={family.height} alt="" loading="lazy" draggable="false" aria-hidden="true" />
+ <div class="hub" aria-hidden="true">
+  <svg viewBox="1764 830 648 970"><image href={hub.src} width={hub.width} height={hub.height}/></svg>
+ </div>
+ <div class="story" aria-hidden="true"><svg viewBox="600 450 1800 1040"><image href={story.src} width={story.width} height={story.height}/></svg></div>
+ </ExplodingMockup>
+</div>
+<style>
+ .stories-cover { position:relative; isolation:isolate; width:100%; aspect-ratio:1.32; overflow:hidden; background:var(--color-artifact-canvas); border-radius:1.75rem 0 1.75rem 0; box-shadow:0 4px 10px #14151e08,0 12px 28px #14151e12; }
+ .portrait { border-radius:1rem; position:absolute; left:2%; top:23%; width:30%; height:auto; object-fit:contain; }
+ .family { border-radius:1rem; position:absolute; right:2%; top:29%; width:30%; height:auto; object-fit:contain; }
+ .hub { position:absolute; left:35%; top:20%; width:30%; z-index:5; background:transparent; }
+ .hub svg { border-radius:.45rem; overflow:hidden; filter:drop-shadow(0 4px 6px #14151e20); }
+ .story { border-radius:1rem; overflow:hidden; position:absolute; left:2%; bottom:8%; width:30%; border:1px solid #14151e18; box-shadow:0 4px 12px #14151e15; }
+ .hub svg,.story svg { display:block; width:100%; height:auto; }
+ @media(hover:hover) and (prefers-reduced-motion:no-preference) { .hub,.family { transition:transform 240ms ease; } .stories-cover:hover .hub { transform:translate(-3px,-3px); } .stories-cover:hover .family { transform:translate(2px,-2px); } }
+ @media(max-width:40rem) { .stories-cover { aspect-ratio:1.05; } }
+</style>

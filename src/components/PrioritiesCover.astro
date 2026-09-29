@@ -1,0 +1,34 @@
+---
+import ExplodingMockup from './ExplodingMockup.astro';
+import hub from '../assets/projects/priorities/hub.png';
+import innovation from '../assets/projects/priorities/representative.png';
+import workforce from '../assets/projects/priorities/workforce.png';
+import data from '../assets/projects/priorities/data.png';
+---
+<div class="priorities-cover" role="img" aria-label="One hub, seven priorities: the real LSC Priorities landing page connects to technology and innovation, workforce development, and issue data. Priority areas include workers, innovation, disasters, veterans, families, rural communities, and seniors.">
+ <ExplodingMockup background={hub}>
+ <div class="fragment innovation" aria-hidden="true"><svg viewBox="520 710 1640 725"><image href={innovation.src} width={innovation.width} height={innovation.height}/></svg></div>
+ <div class="fragment workforce" aria-hidden="true"><svg viewBox="0 420 2850 1255"><image href={workforce.src} width={workforce.width} height={workforce.height}/></svg></div>
+ <div class="fragment data" aria-hidden="true"><svg viewBox="370 635 2110 920"><image href={data.src} width={data.width} height={data.height}/></svg></div>
+ <div class="hub" aria-hidden="true"><div class="browser-edge"><span></span><span></span><span></span></div><img src={hub.src} width={hub.width} height={hub.height} alt="" loading="lazy" draggable="false" /></div>
+ </ExplodingMockup>
+</div>
+<style>
+ .priorities-cover { position:relative; isolation:isolate; width:100%; aspect-ratio:1.32; overflow:hidden; background:var(--color-surface, #eeedef); border-radius:1.75rem 0 1.75rem 0; box-shadow:0 4px 10px #14151e08,0 12px 28px #14151e12; }
+ .fragment,.hub { position:absolute; border:1px solid #14151e18; border-radius:1rem; overflow:hidden; box-shadow:0 4px 14px #14151e16; }
+ .fragment svg { display:block; width:100%; height:auto; }
+ .innovation { width:42%; top:25%; right:2%; }
+ .workforce { width:36%; right:2%; top:53%; z-index:3; }
+ .data { width:40%; right:4%; bottom:3%; z-index:3; }
+ .hub { width:39%; left:2%; top:23%; z-index:2; background:white; }
+ .hub img { display:block; width:100%; height:auto; }
+ .browser-edge { display:flex; align-items:center; gap:3px; padding:5px 9px; background:#fafafa; border-bottom:1px solid #14151e12; }
+ .browser-edge span { width:3px; height:3px; border-radius:50%; background:#b9b7bd; }
+ @media(hover:hover) and (prefers-reduced-motion:no-preference) {
+  .fragment { transition:transform 250ms ease; }
+  .priorities-cover:hover .innovation { transform:translate(3px,-3px); }
+  .priorities-cover:hover .workforce { transform:translateX(4px); }
+  .priorities-cover:hover .data { transform:translate(3px,3px); }
+ }
+ @media(max-width:40rem) { .priorities-cover { aspect-ratio:1.05; } }
+</style>

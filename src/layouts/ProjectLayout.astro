@@ -1,0 +1,25 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import SiteLayout from './SiteLayout.astro';
+interface Props { project: CollectionEntry<'projects'>; }
+const { data } = Astro.props.project;
+const details = [['Role', data.role], ['Client / organization', data.client], ['Context', data.context], ['Year', data.year]].filter(([, value]) => value);
+---
+<SiteLayout title={data.title} description={data.summary}>
+  <a class="back-link" href="/work/">Back to all work</a>
+  <article class:list={['project-detail', data.format]} data-project-format={data.format}>
+    <header class="page-heading">
+      <p class="eyebrow">{data.format === 'case-study' ? 'Case study' : 'Project brief'}</p>
+      <h1>{data.title}</h1>
+      <ul class="tags" aria-label="Project disciplines">{data.disciplines.map((discipline) => <li>{discipline}</li>)}</ul>
+      <p class="lead">{data.summary}</p>
+      {data.sample && <p class="placeholder-note">Sample project — all content is a placeholder.</p>}
+    </header>
+    {details.length > 0 && <dl class="project-meta">{details.map(([label, value]) => <div><dt>{label}</dt><dd>{value}</dd></div>)}</dl>}
+    {data.cover ? <Image class="project-cover" src={data.cover.src} alt={data.cover.alt} widths={[640, 960, 1440]} sizes="(max-width: 72rem) 100vw, 72rem" loading="eager" /> : <div class="image-placeholder project-cover" aria-hidden="true"></div>}
+    <div class="prose project-body"><slot /></div>
+    {data.results.length > 0 && <section class="prose" aria-labelledby="project-results"><h2 id="project-results">Results</h2><dl class="results-list">{data.results.map((result) => <div><dt>{result.label}</dt><dd>{result.detail}</dd></div>)}</dl></section>}
+    {data.links.length > 0 && <section class="prose" aria-labelledby="project-links"><h2 id="project-links">Project links</h2><ul>{data.links.map((link) => <li><a href={link.url}>{link.label}</a></li>)}</ul></section>}
+  </article>
+</SiteLayout>

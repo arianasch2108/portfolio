@@ -1,0 +1,8 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ProjectCard from './ProjectCard.astro';
+import ProjectBriefCard from './ProjectBriefCard.astro';
+interface Props { projects: CollectionEntry<'projects'>[]; presentation?: 'features' | 'grid' | 'reveals'; }
+const { projects, presentation = 'grid' } = Astro.props;
+---
+{projects.length ? <ul class:list={['project-grid', presentation === 'features' && 'project-grid--features', presentation === 'reveals' && 'project-grid--reveals']}>{projects.map((project) => <li>{presentation === 'reveals' ? <ProjectBriefCard project={project} /> : <ProjectCard project={project} presentation={presentation === 'features' ? 'feature' : 'compact'} />}</li>)}</ul> : <p>No projects to display yet.</p>}

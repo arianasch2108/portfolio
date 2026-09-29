@@ -1,0 +1,24 @@
+{
+  "name": "Ariana Sierra-Chacón",
+  "location": "Washington, DC",
+  "title": "Portfolio",
+  "email": "arianasch2108@gmail.com",
+  "resumeUrl": "/documents/Sierra-Chacon_Ariana_Resume_Web.pdf",
+  "socialLinks": [],
+  "closingStatement": "Let’s make something worth sharing",
+  "closingIsPlaceholder": false,
+  "navigation": [
+    {
+      "label": "Work",
+      "href": "/work/"
+    },
+    {
+      "label": "About",
+      "href": "/about/"
+    },
+    {
+      "label": "Contact",
+      "href": "mailto:arianasch2108@gmail.com"
+    }
+  ]
+}

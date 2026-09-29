@@ -1,0 +1,56 @@
+---
+import HomeHero from '../components/HomeHero.astro';
+import { getEntry, render } from 'astro:content';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import ProjectGrid from '../components/ProjectGrid.astro';
+import SectionTracker from '../components/SectionTracker.astro';
+import { getPublishedProjects } from '../lib/projects';
+import site from '../data/site.json';
+const entry = await getEntry('pages', 'home');
+if (!entry?.data.homepage) throw new Error('Home content needs homepage metadata.');
+const home = entry.data.homepage;
+const { Content } = await render(entry);
+const projects = await getPublishedProjects();
+const caseStudies = projects.filter(({ data }) => data.format === 'case-study' && data.featured);
+const selectedProjects = projects.filter(({ data }) => data.format === 'brief');
+---
+<SiteLayout title={entry.data.title} description={entry.data.description} fullWidth>
+  <HomeHero home={home}><Content /></HomeHero>
+  <SectionTracker compact />
+
+  <section id="impact" class="editorial-section impact-section" aria-labelledby="impact-title">
+   <div class="container">
+    <p class="section-marker">ACHIEVEMENTS</p>
+    <h2 id="impact-title">{home.impactHeading}</h2>
+    <dl class="achievement-list">{home.achievements.map((achievement) => <div class="achievement"><dt>{achievement.label}</dt><dd class="achievement-value">{achievement.value}</dd>{achievement.placeholder && <dd class="draft-label">Metric placeholder · awaiting verified result</dd>}</div>)}</dl>
+   </div>
+  </section>
+
+  <section id="featured-work" class="container editorial-section" aria-labelledby="featured-title" data-project-format="case-study">
+    <p class="section-marker">CASE STUDIES</p>
+    <div class="editorial-heading"><div><h2 id="featured-title">{home.caseStudyHeading}</h2></div><p class="section-intro">{home.caseStudyIntro}</p></div>
+    <ProjectGrid projects={caseStudies} presentation="features" />
+  </section>
+
+  <section id="project-briefs" class="editorial-section selected-section" aria-labelledby="selected-title" data-project-format="brief">
+   <div class="container">
+    <p class="section-marker">PROJECT BRIEFS</p>
+    <div class="editorial-heading"><div><h2 id="selected-title">{home.selectedHeading}</h2></div><p class="section-intro">{home.selectedIntro}</p></div>
+    <ProjectGrid projects={selectedProjects} presentation="reveals" />
+    <a class="text-link all-work-link" href="/work/">View all work <span aria-hidden="true">›</span></a>
+   </div>
+  </section>
+
+  <section id="resume" class="resume-section" aria-labelledby="resume-title"><div class="container resume-inner">
+    <div><p class="section-marker">RESUME</p><h2 id="resume-title">{home.resumeHeading}</h2>{home.resumeSupporting && <p class="resume-note">{home.resumeSupporting}</p>}</div>
+    <a class="resume-link" href={site.resumeUrl || '/resume/'} download={site.resumeUrl ? true : undefined}>View resume<span aria-hidden="true">›</span></a>
+  </div></section>
+</SiteLayout>
+
+<style>
+ .achievement-value { transform-origin:left center; }
+ @media (hover:hover) and (prefers-reduced-motion:no-preference) {
+  .achievement-value { transition:transform 220ms ease; }
+  .achievement:hover .achievement-value { transform:scale(1.05); }
+ }
+</style>

@@ -1,0 +1,52 @@
+---
+import type { CollectionEntry } from 'astro:content';
+type Study = NonNullable<CollectionEntry<'projects'>['data']['caseStudy']>;
+interface Props { content: NonNullable<Study['sections'][number]['architecture']>; }
+const { content } = Astro.props;
+---
+<figure class="compact-journey" aria-label="Story hub discovery paths converge on individual stories, then lead to issue and local context">
+ <figcaption>Discover <span aria-hidden="true">→</span> Connect <span aria-hidden="true">→</span> Understand</figcaption>
+ <div class="journey-hub"><strong>{content.hub}</strong></div>
+ <p class="mobile-label">Discover via:</p>
+ <ul class="journey-options discovery" aria-label="Parallel discovery methods">
+  {content.discovery.map(node => <li><strong>{node.title}</strong><p>{node.body}</p>{node.detail && <p class="node-detail">{node.detail}</p>}{node.status && <p class="map-status">{node.status}</p>}</li>)}
+ </ul>
+ <div class="journey-story"><strong>{content.story}</strong></div>
+ <p class="mobile-label">Understand more:</p>
+ <ul class="journey-options destinations" aria-label="Explore beyond the individual story">
+  {content.destinations.map(node => <li><strong>{node.title}</strong><p>{node.body}</p></li>)}
+ </ul>
+</figure>
+<style>
+ .compact-journey { max-width: 48rem; margin-inline: auto; padding: 1.5rem clamp(.75rem,2vw,2rem); border-block: var(--border-default); text-align: center; }
+ figcaption { text-transform: uppercase; letter-spacing: .06em; font-size: .75rem; color: var(--color-muted); margin-bottom: 1.5rem; }
+ figcaption span { margin-inline: .5rem; }
+ strong { display: block; font-size: 1rem; line-height: 1.3; letter-spacing: .025em; }
+ p { margin: .4rem 0 0; font-size: .9rem; }
+ .journey-hub { position: relative; padding-bottom: 1.5rem; }
+ .journey-hub::after { content: ''; position: absolute; bottom: 0; left: 50%; height: 1rem; width: 1px; background: var(--color-plum); }
+ .journey-options { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); list-style: none; margin: 0; padding: 0; }
+ .journey-options li { position: relative; padding: 1.25rem .75rem; }
+ .journey-options li::before { content: ''; position: absolute; top: 0; height: .75rem; width: 50%; border-top: 1px solid var(--color-plum); }
+ .journey-options li:first-child::before { left: 50%; border-left: 1px solid var(--color-plum); }
+ .journey-options li:last-child::before { right: 50%; border-right: 1px solid var(--color-plum); }
+ .discovery li::after { content: ''; position: absolute; bottom: 0; width: 50%; height: .75rem; border-bottom: 1px solid var(--color-plum); }
+ .discovery li:first-child::after { left: 50%; border-left: 1px solid var(--color-plum); }
+ .discovery li:last-child::after { right: 50%; border-right: 1px solid var(--color-plum); }
+ .node-detail { color: var(--color-muted); font-size: .8rem; }
+ .map-status { color: var(--color-plum); font-size: .8rem; font-weight: 700; margin-bottom: .25rem; }
+ .journey-story { position: relative; padding-block: 1.5rem; }
+ .journey-story strong { color: var(--color-plum); font-size: 1.3rem; }
+ .journey-story::before, .journey-story::after { content: ''; position: absolute; left: 50%; width: 1px; height: 1rem; background: var(--color-plum); }
+ .journey-story::before { top: 0; }
+ .journey-story::after { bottom: 0; }
+ .mobile-label { display: none; }
+ @media(max-width:40rem) {
+  .compact-journey { padding-inline: .5rem; }
+  .journey-options { grid-template-columns: 1fr; }
+  .journey-options li { padding: .75rem .5rem; }
+  .journey-options li::before, .journey-options li::after { display: none; }
+  .discovery li + li::before { content: 'or'; display: block; position: static; border: 0; width: auto; height: auto; margin: 0 0 .75rem; color: var(--color-muted); font-size: .8rem; text-transform: uppercase; }
+  .mobile-label { display: block; margin: .5rem 0; color: var(--color-muted); font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; }
+ }
+</style>

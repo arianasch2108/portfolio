@@ -1,0 +1,14 @@
+---
+interface Props { items: { title: string; body: string }[]; label: string; }
+const { items, label } = Astro.props;
+---
+<ol class="narrative-flow" aria-label={label}>
+ {items.map((item,index) => <li><span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><div><h3>{item.title}</h3><p>{item.body}</p></div></li>)}
+</ol>
+<style>
+ .narrative-flow { list-style: none; padding: 0; margin: 0; }
+ li { display: grid; grid-template-columns: 3rem 1fr; gap: var(--space-6); border-top: var(--border-default); padding-block: var(--space-6); }
+ li > span { color: var(--color-plum); font-size: 2rem; line-height: 1.2; }
+ h3 { font-family: var(--font-family-body); font-size: 1.1rem; letter-spacing: 0; margin: 0 0 .75rem; }
+ p { margin: 0; }
+</style>

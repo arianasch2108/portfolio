@@ -1,0 +1,11 @@
+---
+import type { ImageMetadata } from 'astro';
+interface Props { cover?: { src: ImageMetadata; alt: string }; large?: boolean; thinking?: string; }
+const { cover, thinking } = Astro.props;
+---
+<div class="project-artifact">
+  <div class="artifact-surface">
+    {cover ? <img src={cover.src.src} width={cover.src.width} height={cover.src.height} alt={cover.alt} loading="lazy" /> : <div class="artifact-placeholder" aria-hidden="true"></div>}
+  </div>
+  {thinking && <details class="artifact-thinking"><summary>The thinking</summary><p>{thinking}</p></details>}
+</div>

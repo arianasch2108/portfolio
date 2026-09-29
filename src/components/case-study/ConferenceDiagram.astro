@@ -1,0 +1,21 @@
+---
+interface Props { cover?:boolean; }
+const {cover=false}=Astro.props;
+---
+<figure class:list={['conference-system',{cover}]}>
+ <figcaption>Conference touchpoints</figcaption>
+ <p class="system-center">Designing a connected experience.</p>
+ <div class="channels"><div><h3>Digital</h3><p>Social campaigns</p><p>Cvent website</p><p>Attendee Hub App</p></div><div><h3>Physical</h3><p>Registration + badges</p><p>Signage + environment</p><p>Merchandise</p></div></div>
+</figure>
+<style>
+ .conference-system { margin:var(--space-8) 0 0; padding:clamp(1.25rem,3vw,2.5rem); background:var(--color-artifact-canvas); }
+ figcaption { display:flex; flex-wrap:wrap; justify-content:space-between; gap:.5rem; font-size:.7rem; text-transform:uppercase; letter-spacing:.08em; color:var(--color-plum); }
+ figcaption span { color:var(--color-muted); }
+ .system-center { font-family:var(--font-family-heading); font-size:clamp(1.7rem,3vw,3rem); line-height:1.12; color:var(--color-plum); margin:var(--space-8) 0; }
+ .channels { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-6); }
+ .channels>div { border-top:2px solid var(--color-lilac); padding-top:var(--space-4); }
+ h3 { font:700 .8rem var(--font-family-body); text-transform:uppercase; color:var(--color-plum); margin:0 0 1rem; }
+ .channels p { margin:.35rem 0; font-size:.9rem; }
+ .cover { margin:0; width:100%; border-radius:1.75rem 0 1.75rem 0; }
+ @media(max-width:40rem) { .channels { grid-template-columns:1fr; } }
+</style>

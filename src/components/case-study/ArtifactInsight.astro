@@ -1,0 +1,17 @@
+---
+import ArtifactFrame from './ArtifactFrame.astro';
+import type { ComponentProps } from 'astro/types';
+interface Props { asset?: ComponentProps<typeof ArtifactFrame>['asset']; insights: { title: string; body: string }[]; }
+const { asset, insights } = Astro.props;
+---
+<div class="artifact-insight">
+  <ArtifactFrame asset={asset} />
+  <div>{insights.map(item => <details><summary>{item.title}</summary><p>{item.body}</p></details>)}</div>
+</div>
+<style>
+  .artifact-insight { display: grid; grid-template-columns: 1.6fr 1fr; gap: var(--space-10); align-items: start; }
+  details { border-top: var(--border-default); padding-block: 1.25rem; }
+  summary { cursor: pointer; font-weight: 600; color: var(--color-plum); padding-block: .5rem; }
+  p { margin: 1rem 0 0; }
+  @media(max-width:48rem) { .artifact-insight { grid-template-columns: 1fr; } }
+</style>

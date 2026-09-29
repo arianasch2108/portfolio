@@ -1,0 +1,29 @@
+---
+import ExplodingMockup from './ExplodingMockup.astro';
+import website from '../assets/projects/conference/website-2027.png';
+import app from '../assets/projects/conference/app-home.png';
+import selfie from '../assets/projects/conference/attendee-photo-frame.jpg';
+import speakers from '../assets/projects/conference/panel-stage.jpg';
+---
+<div class="conference-cover" role="img" aria-label="ITC conference website on a faded laptop, with the Attendee Hub App, attendees holding a branded selfie frame, and conference speakers floating in front.">
+ <ExplodingMockup background={website} backgroundCrop={[349,182,1536,864]}>
+  <div class="app" aria-hidden="true"><img src={app.src} width={app.width} height={app.height} alt="" loading="lazy" /></div>
+  <div class="selfie" aria-hidden="true"><svg viewBox={`0 0 ${Math.floor(selfie.width * 0.93)} ${selfie.height}`}><image href={selfie.src} width={selfie.width} height={selfie.height} /></svg></div>
+  <div class="speakers" aria-hidden="true"><img src={speakers.src} width={speakers.width} height={speakers.height} alt="" loading="lazy" /></div>
+ </ExplodingMockup>
+</div>
+<style>
+ .conference-cover { position:relative; isolation:isolate; width:100%; aspect-ratio:1.32; overflow:hidden; background:var(--color-artifact-canvas); border-radius:1.75rem 0 1.75rem 0; box-shadow:0 4px 10px #14151e08,0 12px 28px #14151e12; }
+ .app,.selfie,.speakers { position:absolute; overflow:hidden; border-radius:1rem; box-shadow:0 6px 18px #14151e20; }
+ .app { left:3%; top:23%; width:23%; border:5px solid #292832; border-radius:1.2rem; z-index:3; }
+ .selfie { right:2%; top:4%; width:43%; z-index:5; }
+ .speakers { left:30%; bottom:4%; width:55%; z-index:4; }
+ img, .selfie svg { display:block; width:100%; height:auto; }
+ @media(hover:hover) and (prefers-reduced-motion:no-preference) {
+  .app,.selfie,.speakers { transition:transform 240ms ease; }
+  .conference-cover:hover .app { transform:translate(-3px,-2px); }
+  .conference-cover:hover .selfie { transform:translate(3px,-3px); }
+  .conference-cover:hover .speakers { transform:translate(2px,3px); }
+ }
+ @media(max-width:40rem) { .conference-cover { aspect-ratio:1.1; } .app { width:29%; top:24%; } .selfie { width:51%; top:6%; } .speakers { width:62%; left:35%; bottom:5%; } }
+</style>
