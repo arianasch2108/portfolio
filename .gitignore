@@ -1,0 +1,15 @@
+node_modules/
+.pnpm-store/
+dist/
+.astro/
+.DS_Store
+.env
+.env.*
+!.env.example
+
+# Local deployment state, credentials, and logs
+.vercel/
+*.log
+*.pem
+*.key
+.env.local
