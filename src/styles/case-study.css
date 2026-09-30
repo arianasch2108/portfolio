@@ -1,6 +1,7 @@
 /* The brand-refresh composition is independent of other project layouts. */
 .brand-study { padding-top: var(--space-12); }
-.case-hero { padding-bottom: var(--section-space); }
+.case-hero { padding-bottom: var(--space-12); }
+.case-intro-text > :last-child { margin-bottom: 0; }
 .case-hero .section-marker { margin-top: var(--space-12); }
 .case-hero h1 { font-size: clamp(2.5rem, 6.5vw, 6.5rem); max-width: 14ch; }
 .case-subtitle { font-size: clamp(1.25rem, 2.6vw, 2rem); max-width: 36ch; color: var(--color-plum); margin-bottom: var(--space-6); }
@@ -18,7 +19,7 @@
 .case-comparison figcaption { padding-block: 1rem; font-size: var(--font-size-small); }
 .case-principles { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--space-12); }
 .case-principles li { display: grid; grid-template-columns: auto 1fr; gap: var(--space-6); padding-block: var(--space-8); border-top: var(--border-default); }
-.case-principles li > span { font-size: 2.5rem; line-height: 1.1; color: var(--color-plum); }
+.case-principles li > span { align-self: start; font-size: 2.5rem; line-height: 1; color: var(--color-plum); }
 .case-principles h3, .photo-direction h3 { font-size: 1.1rem; letter-spacing: 0; margin-top: 0; }
 .photo-direction { margin-bottom: var(--space-12); }
 .photo-direction > div { border-top: var(--border-default); padding-top: var(--space-6); }
@@ -100,3 +101,15 @@
 .case-intro-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: var(--space-10); align-items: start; }
 .case-intro-layout .case-intro { margin: 0; }
 @media (max-width: 48rem) { .case-intro-layout { grid-template-columns: minmax(0, 1fr); gap: var(--space-6); } }
+
+/* Shared opening composition across case studies. */
+.case-hero-layout { display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 1.2fr); gap:var(--space-10); align-items:center; margin-top:var(--space-12); }
+.case-hero-layout .section-marker { margin-top:0; }
+.case-hero .case-hero-layout .case-hero-copy h1 { font-size:clamp(2.25rem, 4vw, 4.5rem); max-width:none; }
+.case-hero-layout .case-subtitle { font-size:clamp(1.2rem, 1.8vw, 1.75rem); }
+.case-hero-layout .tags { margin-bottom:0; }
+.case-hero-visual { min-width:0; }
+.case-hero-layout--text-only { grid-template-columns:1fr; }
+@media (max-width:58rem) {
+ .case-hero-layout { grid-template-columns:minmax(0, 1fr); gap:var(--space-8); }
+}

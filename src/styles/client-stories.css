@@ -25,7 +25,7 @@
 .prototype-note { max-width: 65ch; margin: var(--space-6) 0 0; }
 .cms-workflow { list-style: none; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); padding: 0; margin: var(--space-10) 0; border-block: var(--border-default); }
 .cms-workflow li { position: relative; padding: var(--space-8) var(--space-6); color: var(--color-plum); font-size: clamp(1rem,1.8vw,1.5rem); font-weight: 700; }
-.cms-workflow li:not(:last-child)::after { content: '→'; position: absolute; right: 0; }
+.cms-workflow li:not(:last-child)::after { content: '›'; position: absolute; right: 0; }
 .cms-principles { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: var(--space-8); }
 .cms-principles dt { font-weight: 700; margin-bottom: var(--space-4); }
 .cms-principles dd { margin: 0; }
@@ -61,7 +61,7 @@
 .story-design-notes { list-style: none; padding: 0; margin: 0; }
 .story-design-notes li { display: grid; grid-template-columns: 2rem 1fr; gap: var(--space-3); border-top: var(--border-default); padding-block: var(--space-4); }
 .story-design-notes li:first-child { padding-top: 0; border-top: 0; }
-.story-design-notes li > span { color: var(--color-plum); font-size: 1.2rem; }
+.story-design-notes li > span { align-self: start; color: var(--color-plum); font-size: 1.2rem; line-height: 1; }
 .story-design-notes h3, .story-design-principles h3, .story-card-support h3 { font-family: var(--font-family-body); font-size: 1rem; letter-spacing: 0; margin: 0 0 .5rem; }
 .story-design-notes p { margin: 0; font-size: var(--font-size-small); }
 .story-design-principles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-8); margin-top: var(--space-8); }
@@ -111,7 +111,7 @@
 .imagery-principles p { grid-column: 2; margin: 0; }
 @media(max-width:40rem) { .imagery-principles { grid-template-columns: 1fr; gap: var(--space-6); } }
 
-.stories-hero-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; gap: clamp(.5rem, 1vw, 1rem); padding: clamp(1rem, 2vw, 2rem); background: #eeedef; border-radius: 2rem 0 2rem 0; min-width: 0; }
+.stories-hero-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; gap: clamp(.5rem, 1vw, 1rem); padding: clamp(1rem, 2vw, 2rem); background: #eeedef; border-radius: 1rem; min-width: 0; }
 .stories-hero-cards svg { display: block; width: 100%; height: auto; overflow: hidden; border-radius: .6rem; box-shadow: 0 8px 20px #14151e12; }
 .map-prototype iframe { display: block; width: 100%; min-width: 100%; border: none; }
 
