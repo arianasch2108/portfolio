@@ -19,11 +19,11 @@ homepage:
     - value: "+19%"
       label: "Growth in newsletter signups"
       placeholder: false
-  caseStudyHeading: "Digital content management"
+  caseStudyHeading: "Dive Deep"
   caseStudyIntro: "A deep dive into how I approach complex digital challenges. I shape strategy and content systems to design and implement the final experience."
-  selectedHeading: "Marketing projects"
+  selectedHeading: "Marketing Projects"
   selectedIntro: "Smaller explorations in marketing, creative strategy, analytics, and design that show how I approach different kinds of problems."
   resumeHeading: "Want the short version?"
   resumeSupporting: "Experience, skills, tools, and everything else that fits better on one page."
 ---
-I’m a multidisciplinary digital strategist and creative problem solver working across content, design, marketing, and technology to help organizations connect with their intended communities.
+Digital strategist with 3+ years of experience working across content, design, marketing, and technology to connect organizations with their intended communities.
