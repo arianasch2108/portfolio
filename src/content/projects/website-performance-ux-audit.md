@@ -1,6 +1,6 @@
 ---
 title: "Website Performance & UX Audit"
-tools: "Lighthouse"
+tools: "Google Lighthouse"
 year: "2026"
 slug: "website-performance-ux-audit"
 summary: "Using technical performance data and qualitative UX analysis to identify friction and turn website findings into practical recommendations."
@@ -36,7 +36,6 @@ brief: {
     },
     {
       "id": "findings",
-      "artifact": {"src":"../../assets/projects/briefs/audit-excerpt.png","alt":"Original Airbnb audit excerpt documenting task completion, popup friction, accessibility, calls to action, and recommendations to remove the popup and optimize media.","label":"Original audit excerpt: Airbnb findings and recommendations","details":[]},
       "eyebrow": "FINDINGS",
       "heading": "Turning diagnostics into evidence.",
       "paragraphs": [

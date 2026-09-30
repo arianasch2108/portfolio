@@ -1,6 +1,7 @@
 ---
 title: "RadiantSkin Social Ad"
 year: "2026"
+tools: "Canva"
 slug: "radiantskin-social-ad"
 summary: "Turning audience insights into social creative designed around the language, visual culture, and behaviors of a younger skincare consumer."
 format: "brief"
@@ -87,7 +88,7 @@ brief: {
     {
       "id": "takeaway",
       "eyebrow": "REFLECTION",
-      "heading": "Start with the audience, not the ad.",
+      "heading": "Refine the audience, then the ad.",
       "paragraphs": [
         "This project reinforced that effective social creative begins before the design stage. Defining the audience and platform first made it possible to develop a message and visual concept that felt more specific to how that audience discovers, talks about, and shares skincare products."
       ]

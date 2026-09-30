@@ -1,6 +1,7 @@
 ---
 title: "Black Friday Email Campaign"
 year: "2026"
+tools: "Klaviyo · Canva"
 slug: "pre-black-friday-email-campaign"
 summary: "Designing an urgency-driven email campaign around one clear goal: converting subscribers before Black Friday."
 format: "brief"
@@ -21,7 +22,7 @@ brief: {
   "focus": "Conversion · Personalization · Promotional Strategy",
   "intro": [
     "The goal was to sell through a limited quantity of Ringer Tees before Black Friday by giving subscribers a compelling reason to purchase before the main holiday sale.",
-    "I developed the campaign around a focused conversion strategy—using scarcity, personalization, promotional incentives, and clear calls to action to move subscribers from attention to purchase."
+    "I developed the campaign around a focused conversion strategy by using scarcity, personalization, promotional incentives, and clear calls to action to move subscribers from attention to purchase."
   ],
   "nextSlug": "rose-cardamom-product-launch",
   "sections": [

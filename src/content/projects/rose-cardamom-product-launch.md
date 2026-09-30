@@ -21,7 +21,7 @@ brief: {
     "focus": "Brand Positioning · Product Launch · Messaging",
     "intro": [
       "The goal was to introduce a new Rose Cardamom Creamer while making the product feel naturally connected to Califia Farms’ existing identity.",
-      "I developed the launch around the intersection of plant-based ingredients, adventurous flavor, personal wellness, and everyday ritual—positioning the product as something playful and unexpected without losing the values already associated with the brand."
+      "I developed the launch around the intersection of plant-based ingredients, adventurous flavor, personal wellness, and everyday ritual by positioning the product as something playful and unexpected without losing the values already associated with the brand."
     ],
     "nextSlug": "radiantskin-social-ad",
     "sections": [
@@ -35,7 +35,7 @@ brief: {
         ],
         "positioning": {
           "idea": "BREAK THE MOLD.",
-          "body": "The positioning builds on Califia Farms as a brand that challenges expectations around plant-based products—combining simple ingredients with distinctive flavors and a more playful approach to everyday routines.",
+          "body": "The positioning builds on Califia Farms as a brand that challenges expectations around plant-based products by combining simple ingredients with distinctive flavors and a more playful approach to everyday routines.",
           "anchors": [
             {
               "title": "PLANT-BASED",
@@ -59,7 +59,7 @@ brief: {
       },
       {
         "id": "launch",
-        "eyebrow": "CONTENT DESIGN",
+        "eyebrow": "PRODUCT MARKETING",
         "heading": "A flavor that will make you blush.",
         "paragraphs": [
           "I built the launch language around the sensory qualities of rose and cardamom while connecting the product to familiar morning rituals. The messaging balances indulgence and wellness—positioning the creamer as a way to make coffee or matcha feel more interesting without abandoning simple, plant-based ingredients."
@@ -68,8 +68,8 @@ brief: {
           "headline": "A FLAVOR THAT WILL MAKE YOU BLUSH.",
           "product": "NEW ORGANIC ROSE CARDAMOM CREAMER",
           "description": "makes florals last through fall with a subtle bite and spice.",
-          "closing": "START YOUR DAY ROSY.",
-          "signature": "BE THE CHANGE YOU WANT TO DRINK.\nCHOOSE CALIFIA.",
+          "closing": "START YOUR DAY ROSY",
+          "signature": "Always made with real plant-based ingredients that protect our planet. Be the change you want to sip.",
           "story": "A flavor that will make you blush. New Organic Rose Cardamom Creamer makes florals last through fall with a subtle bite and spice. Always made with real plant-based ingredients that protect our planet. Mix with your coffee or matcha, and take on your morning foliage walk. Start your day rosy with clean ingredients and exceptional taste."
         },
         "decisions": [
@@ -92,7 +92,7 @@ brief: {
         "eyebrow": "REFLECTION",
         "heading": "New products still need to feel familiar.",
         "paragraphs": [
-          "This project reinforced that product marketing is not only about making something new feel exciting. The strongest launch ideas create novelty within an existing brand system—giving audiences something unexpected while preserving the values, voice, and emotional territory they already recognize."
+          "This project reinforced that product marketing is not only about making something new feel exciting. The strongest launch ideas create novelty within an existing brand system by giving audiences something unexpected while preserving the values, voice, and emotional territory they already recognize."
         ]
       }
     ]

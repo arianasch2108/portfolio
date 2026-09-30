@@ -14,11 +14,12 @@ year: "2026"
 tools: "Drupal"
 cover: {"src": "../../assets/projects/priorities/hub.png", "alt": "LSC priorities hub introducing the issues and communities served by civil legal aid"}
 caseStudy: {
+  "tools": "Drupal",
   "label": "CASE STUDY",
   "subtitle": "Turning organizational priorities into a connected digital content system.",
   "scope": "Priorities Hub · Landing Pages · Campaign Content · Information Architecture",
   "myRole": "Content Strategy · Content Design · SEO/AEO · Web Design · CMS Implementation",
-  "intro": "LSC communicates about civil legal aid across a wide range of issues and audiences, but those priorities did not have a centralized digital home.\n\nI proposed and implemented a new priorities hub that brings those issues together in one web experience—giving audiences clearer paths into LSC’s work while creating stronger destinations for search, social campaigns, stories, data, and resources.",
+  "intro": "LSC communicates about civil legal aid across a wide range of issues and audiences, but those priorities did not have a centralized digital home.\n\nI proposed and implemented a new priorities hub that brings those issues together in one web experience by giving audiences clearer paths into LSC’s work while creating stronger destinations for search, social campaigns, stories, data, and resources.",
   "nextSlug": "innovations-in-technology-conference",
   "assets": {"hub": {"src": "../../assets/projects/priorities/hub.png", "alt": "LSC priorities hub introducing the issues and communities served by civil legal aid"}, "hero": {"src": "../../assets/projects/priorities/hub.png", "alt": "LSC priorities hub introducing the issues and communities served by civil legal aid", "presentation": "tablet"}, "representative": {"src": "../../assets/projects/priorities/representative.png", "alt": "Technology and Innovation priority overview pairing introductory content with photography", "crop": [22, 607, 2805, 1001]}, "technology": {"src": "../../assets/projects/priorities/technology.png", "alt": "Technology page connecting the Innovations in Technology Conference and Technology Initiative Grants", "crop": [745, 519, 1359, 1028]}, "partnerships": {"src": "../../assets/projects/priorities/partnerships.png", "alt": "Technology page explaining medical-legal partnerships and justice workers", "crop": [745, 472, 1359, 1154]}, "data": {"src": "../../assets/projects/priorities/data.png", "alt": "Workforce priority page presenting expungement data and a fact-sheet call to action", "crop": [368, 633, 2112, 922]}, "workforce": {"src": "../../assets/projects/priorities/workforce.png", "alt": "Workforce development page connecting human-centered photography with LSC programs", "crop": [0, 418, 2850, 1382]}},
   "sections": [
@@ -84,7 +85,7 @@ caseStudy: {
         "label": "SEARCH + ANSWERABILITY",
         "heading": "",
         "paragraphs": [
-          "The pages were structured to create clearer topical destinations for search engines and emerging answer-driven discovery—using descriptive headings, focused page topics, structured content, and connections to relevant LSC resources."
+          "The pages were structured to create clearer topical destinations for search engines and emerging answer-driven discovery by using descriptive headings, focused page topics, structured content, and connections to relevant LSC resources."
         ]
       }
     },
