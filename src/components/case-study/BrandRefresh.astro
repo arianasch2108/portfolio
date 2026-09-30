@@ -1,17 +1,19 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import ProjectMetadata from './ProjectMetadata.astro';
+import CaseStudyHero from './CaseStudyHero.astro';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import ArtifactFrame from './BrandArtifact.astro';
 import LaptopArtifact from './ArtifactFrame.astro';
 import ProjectContinuation from './ProjectContinuation.astro';
 import SectionTracker from '../SectionTracker.astro';
-import ClientStoriesCover from '../ClientStoriesCover.astro';
 import { Image } from 'astro:assets';
+import contentHierarchyPlain from '../../assets/projects/brand-refresh/content-hierarchy-transparent.png';
 import socialNick from '../../assets/projects/brand-refresh/social-nick.png';
 import socialKrystal from '../../assets/projects/brand-refresh/social-krystal.png';
 import socialFaith from '../../assets/projects/brand-refresh/social-faith.png';
 import iconographyImpact from '../../assets/projects/brand-refresh/iconography-impact.png';
+import brandStyleGuideHeading from '../../assets/projects/brand-refresh/brand-style-guide-heading.png';
+import brandStyleGuide from '../../assets/projects/brand-refresh/brand-style-guide.png';
 import brandKitHub from '../../assets/projects/brand-refresh/brand-kit-hub.png';
 import ExplodedLaptopArtifact from './ExplodedLaptopArtifact.astro';
 import districtResources from '../../assets/projects/brand-refresh/district-resources.png';
@@ -34,18 +36,11 @@ const impactIcons = [
 ---
 <SiteLayout title={data.title} description={study.subtitle} fullWidth>
  <article class="brand-study container">
-  <header class="case-hero">
-   <nav class="case-breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/work/">Work</a></li><li><span aria-current="page">{data.title}</span></li></ol></nav>
-   <p class="section-marker">{study.label}</p>
-   <h1>{data.title}</h1>
-   <p class="case-subtitle">{study.subtitle}</p>
-   <ul class="tags" aria-label="Project disciplines">{data.disciplines.map(d => <li>{d}</li>)}</ul>
-   <ProjectMetadata project={project} />
-   <div class="case-intro-layout">
-    <p class="case-intro">{study.intro}</p>
+  <CaseStudyHero project={project}>
+   <div slot="artifact">
     {assets.hero && <LaptopArtifact asset={{ ...assets.hero, presentation: 'laptop', crop: [0, 0, 2850, 1603] }} />}
    </div>
-  </header>
+  </CaseStudyHero>
   <SectionTracker compact sections={study.sections.map(section => ({ id: section.id, label: section.eyebrow.replace(/^THE /, '').toLowerCase().replace(/^./, c => c.toUpperCase()) }))} />
   {study.sections.map(section => <section id={section.id} class:list={['case-section', `case-${section.id}`]} aria-labelledby={`heading-${section.id}`}>
    <p class="section-marker">{section.eyebrow}</p>
@@ -55,8 +50,8 @@ const impactIcons = [
      <Image src={socialKrystal} alt="Meet Krystal: LSC social graphic featuring Krystal and her children and their story of legal help when facing eviction." widths={[360,720,1080]} sizes="(max-width: 48rem) 28vw, 15vw" loading="lazy" />
      <Image src={socialFaith} alt="Faith Connections: LSC social graphic showing a community conversation and promoting the faith toolkit." widths={[360,720,1080]} sizes="(max-width: 48rem) 28vw, 15vw" loading="lazy" />
     </div><figcaption class="project-caption">Designed templates for people-centered social media posts.</figcaption></figure>}{(section.id === 'constraint' || section.id === 'challenge') && section.statement && <p class="case-statement constraint-statement">{section.statement}</p>}</div>
-    {section.id !== 'application' && <div class="case-body">{section.paragraphs.map(p => <p>{p.split(/(\*\*[^*]+\*\*)/g).map(part => part.startsWith('**') && part.endsWith('**') ? <strong>{part.slice(2, -2)}</strong> : part)}</p>)}</div>}
-    {section.id === 'governance' && <><div class="governance-laptop"><ExplodedLaptopArtifact background={brandKitHub} alt="LSC branding hub with navigation and brand guidance expanded from the screen." primary={{src:brandKitHub,crop:[565,739,1110,514],alt:'LSC Branding Guidelines introduction and downloadable brand style guide',position:{left:24,top:57,width:73}}} secondary={[{src:brandKitHub,crop:[230,750,315,625],alt:'Brand hub navigation for logos, colors, typography, images, templates, and accessibility',position:{left:3,top:40,width:28}},{src:brandKitHub,crop:[22,267,2190,341],alt:'Colorful Legal Services Corporation Brand Style Guide banner in blue, red, and yellow',position:{left:24,top:12,width:73}}]} /></div></>}
+    <div class="case-body">{section.paragraphs.map(p => <p>{p.split(/(\*\*[^*]+\*\*)/g).map(part => part.startsWith('**') && part.endsWith('**') ? <strong>{part.slice(2, -2)}</strong> : part)}</p>)}</div>
+    {section.id === 'governance' && <div class="governance-laptop"><ExplodedLaptopArtifact background={brandKitHub} alt="LSC brand guidance: primary and secondary logos, Raleway typography, and brand color palette expanded from the branding hub." primary={{src:brandStyleGuide,crop:[30,455,1640,265],alt:'LSC primary wide and secondary vertical logos in blue and reversed white',position:{left:5,top:10,width:90}}} secondary={[{src:brandStyleGuideHeading,crop:[0,0,brandStyleGuideHeading.width,brandStyleGuideHeading.height],alt:'Legal Services Corporation Brand Style Guide heading'},{src:brandStyleGuide,crop:[30,795,1640,305],alt:'Raleway typeface with uppercase and lowercase alphabet, numbers, and punctuation',position:{left:10,top:36,width:85}},{src:brandStyleGuide,crop:[0,1153,1701,200],alt:'LSC palette: dark blue #22418A, red #CC2127, light blue #5390C5, yellow #FFC926, and white #FFFFFF',position:{left:5,top:65,width:90}}]} /><p class="project-caption governance-caption">Brand guidelines and resources were built into a cohesive Box Hub that allowed content creators to find all assets, tools, and guidance in one place.</p></div>}
    </div>
    {section.statement && section.id !== 'governance' && section.id !== 'constraint' && section.id !== 'challenge' && <p class="case-statement">{section.statement}</p>}
    {section.id === 'challenge' && <div class="case-comparison">
@@ -72,10 +67,10 @@ const impactIcons = [
      <div class="brand-report-grid">{['report-impact','report-task-forces'].map(key => <ArtifactFrame assetKey={key} asset={assets[key]} treatment="paper" />)}</div>
     </figure>
    </>}
-   {section.id === 'constraint' && <ArtifactFrame assetKey="content-hierarchy" asset={assets['content-hierarchy']} />}
+   {section.id === 'constraint' && <ArtifactFrame transparent asset={{ src: contentHierarchyPlain, alt: assets['content-hierarchy'].alt }} />}
    {section.id === 'content-design' && <>
 
-    <div class="brand-thinking"><div>{section.items?.map(item => <div><div class="thinking-description"><h3>{item.title}</h3><p>{item.body}</p></div>{item.title === 'Content hierarchy' && <Image class="hierarchy-screenshot" src={districtResources} alt="Civil Legal Aid in Your District page with its photographic hero, resource cards, and explanatory content." loading="lazy" />}{item.title === 'Iconography' && <Image class="hierarchy-screenshot" src={iconographyImpact} alt="Four LSC impact cards using icons for Americans served, families helped with housing, cases resolved, and return on investment in legal aid." loading="lazy" />}{item.title === 'Photography' && <figure class="thinking-photo"><ArtifactFrame assetKey="impact-stories" asset={assets['impact-stories']} /></figure>}</div>)}</div></div>
+    <div class="brand-thinking"><div>{section.items?.map(item => <div><div class="thinking-description"><h3>{item.title}</h3><p>{item.body}</p></div>{item.title === 'Content hierarchy' && <Image class="hierarchy-screenshot" src={districtResources} alt="Civil Legal Aid in Your District page with its photographic hero, resource cards, and explanatory content." loading="lazy" />}{item.title === 'Iconography' && <div class="icon-card-extracts">{[45,645,1245,1845].map((x,i) => <svg viewBox={`${x} 66 536 812`} role="img" aria-label={['6.4 million Americans served annually','600,000+ families and individuals helped with housing','82% of cases resolved outside full court proceedings','$7 return for every $1 invested in legal aid'][i]}><image href={iconographyImpact.src} width={iconographyImpact.width} height={iconographyImpact.height} /></svg>)}</div>}{item.title === 'Photography' && <figure class="thinking-photo"><ArtifactFrame assetKey="impact-stories" asset={assets['impact-stories']} /></figure>}</div>)}</div></div>
    </>}
    {section.id === 'governance' && <>
     <div class="governance-process-column"><ol class="governance-process" aria-label="Collaborative brand governance process">
@@ -89,20 +84,22 @@ const impactIcons = [
     <ArtifactFrame assetKey="governance-box-hubs" asset={assets['governance-box-hubs']} />
     <ArtifactFrame assetKey="governance-canva" asset={assets['governance-canva']} />
    </div></>}
-   {section.id === 'application' && related && <div class="case-related"><ClientStoriesCover /><ProjectContinuation title={related.data.title} slug={related.data.slug} description={section.paragraphs} /></div>}
    {section.outcomes && <ul class="case-outcomes">{section.outcomes.map(item => <li>{item}</li>)}</ul>}
    {section.id === 'impact' && <ul class="strategic-impact">{section.items?.map((item, index) => <li>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d={impactIcons[index]} /></svg>
     <h3>{item.title}</h3>
     <p>{item.body}</p>
    </li>)}</ul>}
-   {section.id === 'reflection' && <p class="case-closing">People <span aria-hidden="true">→</span> Content <span aria-hidden="true">→</span> Experience <span aria-hidden="true">→</span> Trust</p>}
+   {section.id === 'reflection' && <p class="case-closing">People <span aria-hidden="true">›</span> Content <span aria-hidden="true">›</span> Experience <span aria-hidden="true">›</span> Trust</p>}
   </section>)}
-  {related && <ProjectContinuation title={related.data.title} slug={related.data.slug} next />}
+  {related && <ProjectContinuation title="Digital Client Storytelling" label="Related Project" description={["Learn how this content strategy became a foundation for creating a dedicated storytelling system for client narratives."]} slug={related.data.slug} next />}
  </article>
 </SiteLayout>
 
 <style>
+ .brand-thinking .icon-card-extracts { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:.5rem; }
+ .icon-card-extracts svg { display:block; width:100%; height:auto; border-radius:8%; overflow:hidden; box-shadow:0 4px 12px #14151e12; }
+ .governance-caption { margin-top:var(--space-5); }
  .governance-laptop { margin-top:var(--space-8); }
  .governance-process-column { grid-column:2; grid-row:2; }
  @media(max-width:48rem) { .governance-process-column { grid-column:1; grid-row:auto; } }

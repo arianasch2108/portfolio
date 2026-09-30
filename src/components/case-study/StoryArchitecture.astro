@@ -5,7 +5,7 @@ interface Props { content: NonNullable<Study['sections'][number]['architecture']
 const { content } = Astro.props;
 ---
 <figure class="compact-journey" aria-label="Story hub discovery paths converge on individual stories, then lead to issue and local context">
- <figcaption>Discover <span aria-hidden="true">→</span> Connect <span aria-hidden="true">→</span> Understand</figcaption>
+ <figcaption>Discover <span aria-hidden="true">›</span> Connect <span aria-hidden="true">›</span> Understand</figcaption>
  <div class="journey-hub"><strong>{content.hub}</strong></div>
  <p class="mobile-label">Discover via:</p>
  <ul class="journey-options discovery" aria-label="Parallel discovery methods">

@@ -1,0 +1,51 @@
+---
+import shot1 from '../../assets/projects/priorities/families-stack/families-1.png';
+import shot2 from '../../assets/projects/priorities/families-stack/families-2.png';
+import shot3 from '../../assets/projects/priorities/families-stack/families-3.png';
+import shot4 from '../../assets/projects/priorities/families-stack/families-4.png';
+import shot5 from '../../assets/projects/priorities/families-stack/families-5.png';
+import shot6 from '../../assets/projects/priorities/families-stack/families-6.png';
+// Crop repeated sticky navigation, scrollbars, and overlapping page sections.
+// Coordinates use a common 1996 × 1248 reference frame.
+const slices = [
+ {src:shot1, top:155, bottom:1100},
+ {src:shot2, top:370, bottom:1148},
+ {src:shot3, top:370, bottom:1148},
+ {src:shot4, top:395, bottom:1032},
+ {src:shot5, top:370, bottom:866},
+ {src:shot6, top:434, bottom:1148},
+];
+let offset = 0;
+const parts = slices.map(slice => {
+ const y = offset;
+ offset += slice.bottom - slice.top;
+ return {...slice, y};
+});
+---
+<figure class="priorities-laptop">
+ <div class="laptop-canvas">
+  <div class="laptop-display">
+   <div class="laptop-scroll" tabindex="0" role="region" aria-label="Explore the Families and Children page" aria-describedby="families-scroll-hint">
+<svg class="priorities-full-screenshot" viewBox={`315 0 1345 ${offset}`} role="img" aria-label="Families and Children page: introduction, legal issues, stronger families, Monica’s story, legal aid statistics, housing advocacy, and housing resources.">
+ {parts.map(part => <svg x="0" y={part.y} width="1900" height={part.bottom-part.top} viewBox={`0 ${part.top} 1900 ${part.bottom-part.top}`} overflow="hidden">
+  <image href={part.src.src} width="1996" height="1248" preserveAspectRatio="none" />
+ </svg>)}
+</svg>
+   </div>
+  </div>
+  <div class="laptop-base" aria-hidden="true"></div>
+ </div>
+ <figcaption id="families-scroll-hint">Scroll within the laptop to explore the Families and Children priority page</figcaption>
+</figure>
+<style>
+.priorities-laptop { margin:0; min-width:0; }
+.laptop-canvas { padding:5% 6% 6%; border-radius:1rem; background:var(--color-artifact-canvas); }
+.laptop-display { position:relative; aspect-ratio:16 / 10; border:clamp(5px,.7vw,10px) solid #24252d; border-top-width:clamp(10px,1.2vw,16px); border-radius:12px 12px 3px 3px; background:#24252d; }
+.laptop-display::before { content:''; position:absolute; width:4px; height:4px; border-radius:50%; background:#666976; top:-10px; left:calc(50% - 2px); }
+.laptop-scroll { position:absolute; inset:0; overflow-y:auto; overflow-x:hidden; overscroll-behavior-y:contain; scrollbar-width:thin; scrollbar-color:var(--color-plum) #e8e6eb; }
+.laptop-scroll:focus-visible { outline:3px solid var(--color-lilac); outline-offset:2px; }
+.laptop-base { height:clamp(9px,1.4vw,18px); margin:0 -5%; background:linear-gradient(#dbdce1,#a6a8b1 65%,#777a86); border-radius:2px 2px 50% 50% / 2px 2px 85% 85%; box-shadow:0 8px 12px #14151e20; }
+figcaption { margin-top:.75rem; color:var(--color-muted); font-size:var(--font-size-small); text-align:center; }
+.priorities-full-screenshot { display:block; width:100%; height:auto; border-radius:0; overflow:hidden; }
+.priorities-full-screenshot > svg { border-radius:0; }
+</style>

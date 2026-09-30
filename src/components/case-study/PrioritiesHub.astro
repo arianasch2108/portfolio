@@ -3,6 +3,8 @@ import type { CollectionEntry } from 'astro:content';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import CaseStudyHero from './CaseStudyHero.astro';
 import ArtifactFrame from './ArtifactFrame.astro';
+import PrioritiesScreenshot from './PrioritiesScreenshot.astro';
+import FamiliesScreenshot from './FamiliesScreenshot.astro';
 import ProjectContinuation from './ProjectContinuation.astro';
 import SectionTracker from '../SectionTracker.astro';
 import { getPublishedProjects } from '../../lib/projects';
@@ -23,12 +25,12 @@ const priorities = project.data.links.slice(1);
    <p class="section-marker">{section.eyebrow}</p>
    <div class="case-section-copy"><h2 id={`heading-${section.id}`}>{section.heading}</h2><div class="case-body">{section.paragraphs.map(p=><p>{p}</p>)}</div></div>
    {section.id === 'opportunity' && <>
-    <div class="priorities-opportunity-visual"><div><ArtifactFrame asset={study.assets.hub} /><a class="priorities-live" href={project.data.links[0].url}>View live priorities hub <span aria-hidden="true">›</span></a></div><ol class="priorities-flow" aria-label="Before and after content architecture">{section.workflow?.map(step=><li>{step.title && <span class="section-marker">{step.title}</span>}<strong>{step.body}</strong></li>)}</ol></div>
+    <div class="priorities-opportunity-visual"><div><PrioritiesScreenshot /><a class="priorities-live" href={project.data.links[0].url}>View live priorities hub <span aria-hidden="true">›</span></a></div><ol class="priorities-flow" aria-label="Before and after content architecture">{section.workflow?.map(step=><li>{step.title && <span class="section-marker">{step.title}</span>}<strong>{step.body}</strong></li>)}</ol></div>
     <p class="priorities-status">{section.status}</p>
    </>}
    {section.id === 'strategy' && <>
     <ul class="priorities-index" aria-label="Seven priority areas">{priorities.map(p=><li><a href={p.url}>{p.label}</a></li>)}</ul>
-    <div class="priorities-strategy-detail"><dl class="priorities-model" aria-label="Priority page content model">{section.items?.map(item=><div><dt>{item.title}</dt><dd>{item.body}</dd></div>)}</dl><aside class="priorities-search"><h3>{section.constraint?.label}</h3>{section.constraint?.paragraphs.map(p=><p>{p}</p>)}</aside></div>
+    <div class="priorities-strategy-detail"><div class="priorities-strategy-left"><dl class="priorities-model" aria-label="Priority page content model">{section.items?.map(item=><div><dt>{item.title}</dt><dd>{item.body}</dd></div>)}</dl><aside class="priorities-search"><h3>{section.constraint?.label}</h3>{section.constraint?.paragraphs.map(p=><p>{p}</p>)}</aside></div><div class="priorities-strategy-right"><div class="strategy-scrollable-mockup"><FamiliesScreenshot /></div></div></div>
    </>}
    {section.id === 'content-design' && <>
     <figure class="priority-captioned-image">

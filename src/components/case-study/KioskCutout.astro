@@ -9,11 +9,11 @@ const cutout = year === '2025'
 const id = `kiosk-cutout-${year}`;
 ---
 <figure class="conference-kiosk">
- <a href={asset.src.src} target="_blank" rel="noopener noreferrer" aria-label={`View original photo: ${asset.alt}`}>
+ <div class="artifact-image">
   <svg viewBox={cutout.box} role="img" aria-label={asset.alt}>
    <defs><clipPath id={id}><path d={cutout.path} /></clipPath></defs>
    <image href={asset.src.src} width="3024" height="4032" clip-path={`url(#${id})`} />
   </svg>
- </a>
+ </div>
  <figcaption class="project-caption">{asset.caption}</figcaption>
 </figure>

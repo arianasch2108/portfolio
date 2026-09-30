@@ -1,9 +1,9 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import WesScreenshot from './WesScreenshot.astro';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import CaseStudyHero from './CaseStudyHero.astro';
 import collection from '../../assets/projects/client-stories/collection.png';
-import ArtifactFrame from './ArtifactFrame.astro';
 import StoryArchitecture from './StoryArchitecture.astro';
 import StoryMedia from './StoryMedia.astro';
 import ProjectContinuation from './ProjectContinuation.astro';
@@ -41,12 +41,12 @@ const next = projects.find(p => p.data.slug === study.nextSlug);
    </div>
    {section.id === 'opportunity' && <>
     <p class="case-statement">{section.statement}</p>
-    <p class="story-transition"><span>Individual stories</span><span aria-hidden="true">→</span><span>Connected story system</span></p>
+    <p class="story-transition"><span>Individual stories</span><span aria-hidden="true">›</span><span>Connected story system</span></p>
    </>}
    {section.id === 'architecture' && section.architecture && <StoryArchitecture content={section.architecture} />}
    {section.id === 'content-design' && <>
     <div class="story-design-artifact">
-     <div class="story-page-screenshots"><ArtifactFrame asset={assets['story-page']} /><ArtifactFrame asset={assets['story-context']} /></div>
+     <WesScreenshot />
      <ol class="story-design-notes" aria-label="Story anatomy">
       {section.items?.map((item, index) => <li><span aria-hidden="true">0{index + 1}</span><div><h3>{item.title}</h3><p>{item.body}</p></div></li>)}
      </ol>
@@ -74,7 +74,7 @@ const next = projects.find(p => p.data.slug === study.nextSlug);
     <ol class="cms-workflow" aria-label="Content publishing workflow">{section.workflow?.map(step => <li><strong>{step.title}</strong><p>{step.body}</p></li>)}</ol>
     <dl class="cms-principles">{section.items?.map(item => <div><dt>{item.title}</dt><dd>{item.body}</dd></div>)}</dl>
    </>}
-   {section.id === 'reflection' && <p class="case-closing">People <span aria-hidden="true">→</span> Stories <span aria-hidden="true">→</span> Emotional connection <span aria-hidden="true">→</span> Understanding</p>}
+   {section.id === 'reflection' && <p class="case-closing">People <span aria-hidden="true">›</span> Stories <span aria-hidden="true">›</span> Emotional connection <span aria-hidden="true">›</span> Understanding</p>}
   </section>)}
   {related && <aside class="stories-related" aria-label="Related work"><p class="section-marker">Related</p><a href={`/work/${related.data.slug}/`}>{related.data.title} <span aria-hidden="true">›</span></a><p>{study.relatedText}</p></aside>}
   {next && <ProjectContinuation title={next.data.title} slug={next.data.slug} next />}

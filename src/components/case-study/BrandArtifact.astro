@@ -2,27 +2,24 @@
 import type { ImageMetadata } from 'astro';
 import type { ComponentProps } from 'astro/types';
 import ArtifactFrame from './ArtifactFrame.astro';
-interface Props { assetKey?: string; asset?: ComponentProps<typeof ArtifactFrame>['asset']; shape?: string; treatment?: 'full' | 'laptop' | 'detail' | 'paper'; }
-const { asset, assetKey, treatment = 'full' } = Astro.props;
+interface Props { assetKey?: string; asset?: ComponentProps<typeof ArtifactFrame>['asset']; shape?: string; transparent?: boolean; treatment?: 'full' | 'laptop' | 'detail' | 'paper'; }
+const { asset, assetKey, treatment = 'full', transparent = false } = Astro.props;
 const images = import.meta.glob<{default:ImageMetadata}>('../../assets/projects/brand-refresh/presentation/*.png', { eager:true });
 const small = images[`../../assets/projects/brand-refresh/presentation/${assetKey}-800.png`]?.default;
 const large = images[`../../assets/projects/brand-refresh/presentation/${assetKey}-1600.png`]?.default;
 ---
-{asset && <div class:list={['brand-artifact', treatment]}>
- <a href={asset.src.src} target="_blank" rel="noopener noreferrer" aria-label={`View full size: ${asset.alt} (opens in a new tab)`}>
+{asset && <div class:list={['brand-artifact', treatment, { transparent }]}>
+ <div class="artifact-image">
   {large && small ? <img src={large.src} srcset={`${small.src} ${small.width}w, ${large.src} ${large.width}w`} sizes="(max-width: 48rem) 100vw, 80vw" width={large.width} height={large.height} alt={asset.alt} loading={assetKey === 'hero' ? 'eager' : 'lazy'} decoding="async" /> : asset.crop ? <svg viewBox={asset.crop.join(' ')} role="img" aria-label={asset.alt}><image href={asset.src.src} width={asset.src.width} height={asset.src.height} /></svg> : <img src={asset.src.src} width={asset.src.width} height={asset.src.height} alt={asset.alt} loading="lazy" decoding="async" />}
- </a>
- <span class="inspect" aria-hidden="true">View full size ↗</span>
+ </div>
 </div>}
 <style>
  .brand-artifact { min-width:0; position:relative; }
- a { display:block; background:white; border:1px solid #14151e18; box-shadow:0 4px 10px #14151e08, 0 12px 28px #14151e12; transition:transform .2s ease; }
+ .artifact-image { display:block; background:white; border:1px solid #14151e18; box-shadow:0 4px 10px #14151e08, 0 12px 28px #14151e12; }
+ .transparent .artifact-image { background:transparent; border:0; box-shadow:none; }
  img,svg { display:block; width:100%; height:auto; } svg { overflow:hidden; }
  .laptop { background:var(--color-artifact-canvas); padding:1rem 3% 1.75rem; }
- .laptop a { position:relative; border:6px solid #292a32; border-top-width:12px; border-radius:9px 9px 2px 2px; }
- .laptop a::after { content:''; position:absolute; width:108%; left:-4%; height:10px; bottom:-15px; background:linear-gradient(#dbdce1,#9699a3); border-radius:1px 1px 50% 50%; }
- .inspect { display:block; font-size:.7rem; color:var(--color-muted); text-align:right; margin-top:.5rem; }
- .laptop .inspect { margin-top:1.25rem; }
- @media(hover:hover) and (prefers-reduced-motion:no-preference) { a:hover { transform:translateY(-2px); } }
- @media(max-width:48rem) { .laptop { background:var(--color-artifact-canvas); padding:0; } .laptop a { border:1px solid #14151e18; border-radius:0; } .laptop a::after { display:none; } .laptop .inspect { margin-top:.5rem; } }
+ .laptop .artifact-image { position:relative; border:6px solid #292a32; border-top-width:12px; border-radius:9px 9px 2px 2px; }
+ .laptop .artifact-image::after { content:''; position:absolute; width:108%; left:-4%; height:10px; bottom:-15px; background:linear-gradient(#dbdce1,#9699a3); border-radius:1px 1px 50% 50%; }
+ @media(max-width:48rem) { .laptop { background:var(--color-artifact-canvas); padding:0; } .laptop .artifact-image { border:1px solid #14151e18; border-radius:0; } .laptop .artifact-image::after { display:none; } }
 </style>

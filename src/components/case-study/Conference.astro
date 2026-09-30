@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import AllWorkLink from './AllWorkLink.astro';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import CaseStudyHero from './CaseStudyHero.astro';
 import ConferenceDiagram from './ConferenceDiagram.astro';
@@ -25,7 +26,7 @@ const visibleSections = study.sections.filter(section => section.id !== 'experie
    {section.id === 'challenge' && <ConferenceDiagram />}
    {section.id === 'brand-system' && <div class="conference-kiosks">
     <KioskCutout asset={study.assets.materials} year="2025" />
-    <span class="conference-kiosk-arrow" aria-hidden="true">→</span>
+    <span class="conference-kiosk-arrow" aria-hidden="true">›</span>
     <KioskCutout asset={study.assets.environment} year="2026" />
    </div>}
    {section.id === 'brand-system' && <div class="conference-brand-grid">{groups.brand?.map(a=><ConferenceArtifact asset={study.assets[a.key]} {...a} />)}</div>}
@@ -52,6 +53,6 @@ const visibleSections = study.sections.filter(section => section.id !== 'experie
    </section>}
    {section.id === 'iteration' && <><dl class="conference-outcomes">{section.items?.map(item=><div><dt>{item.title}</dt><dd>{item.body}</dd></div>)}</dl><p class="conference-reflection">{section.statement}</p></>}
   </section>)}
-  <a class="conference-back" href="/work/"><span class="section-marker">Explore more</span><span>Back to work <span aria-hidden="true">›</span></span></a>
+  <AllWorkLink />
  </article>
 </SiteLayout>

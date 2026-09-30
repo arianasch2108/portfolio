@@ -9,10 +9,15 @@ const study = data.caseStudy!;
 ---
 <header class="case-hero">
  <nav class="case-breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/work/">Work</a></li><li><span aria-current="page">{data.title}</span></li></ol></nav>
- <p class="section-marker">{study.label}</p>
- <h1>{data.title}</h1>
- <p class="case-subtitle">{study.subtitle}</p>
- <ul class="tags" aria-label="My role">{(study.myRole ? study.myRole.split('·').map(role => role.trim()) : data.disciplines).map(role => <li>{role}</li>)}</ul>
+ <div class:list={['case-hero-layout', textOnly && 'case-hero-layout--text-only']}>
+  <div class="case-hero-copy">
+   <p class="section-marker">{study.label}</p>
+   <h1>{data.title}</h1>
+   <p class="case-subtitle">{study.subtitle}</p>
+   <ul class="tags" aria-label="My role">{(study.myRole ? study.myRole.split('·').map(role => role.trim()) : data.disciplines).map(role => <li>{role}</li>)}</ul>
+  </div>
+  {!textOnly && <div class="case-hero-visual"><slot name="artifact"><ArtifactFrame asset={study.assets.hero} /></slot></div>}
+ </div>
  <ProjectMetadata project={project} />
- {textOnly ? <div class="case-intro-text">{study.intro.split(/\n\n/).map(p => <p class="case-intro">{p}</p>)}</div> : <div class="case-intro-layout">{study.intro.includes("\n\n") ? <div>{study.intro.split(/\n\n/).map(p => <p class="case-intro">{p}</p>)}</div> : <p class="case-intro">{study.intro}</p>}<slot name="artifact"><ArtifactFrame asset={study.assets.hero} /></slot></div>}
+ <div class="case-intro-text">{study.intro.split(/\n\n/).map(p => <p class="case-intro">{p}</p>)}</div>
 </header>
