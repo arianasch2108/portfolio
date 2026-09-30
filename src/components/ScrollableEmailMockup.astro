@@ -1,0 +1,62 @@
+---
+import panel1 from '../assets/projects/briefs/krishna-newsletter/1.png';
+import panel2 from '../assets/projects/briefs/krishna-newsletter/2.png';
+import panel3 from '../assets/projects/briefs/krishna-newsletter/3.png';
+import panel4 from '../assets/projects/briefs/krishna-newsletter/4.png';
+import panel5 from '../assets/projects/briefs/krishna-newsletter/5.png';
+const panels = [
+ {src:panel1, x:0, y:0, width:1073, height:1920, alt:'Krishna Park pre-Black Friday sale: 20% off T-shirts. Emily, shop the ringer tee.'},
+ {src:panel2, x:0, y:18, width:1080, height:1415, alt:'Only 100 left. Black Friday countdown and 20% off tees offer.'},
+ {src:panel3, x:0, y:45, width:1080, height:1040, alt:'Green and Black Ringer Tees, reduced from $30 to $24.'},
+ {src:panel4, x:3, y:18, width:1077, height:1795, alt:'Make a $150 purchase and get a free designer bag, plus a surprise offer.'},
+ {src:panel5, x:0, y:373, width:1080, height:732, alt:'Krishna Park social links, company information, website, and unsubscribe footer.'},
+];
+---
+<figure class="email-mockup">
+ <div class="phone-canvas">
+  <div class="phone-frame">
+   <div class="phone-camera" aria-hidden="true"></div>
+   <div class="phone-screen"><div class="phone-scroll" role="region" tabindex="0" aria-label="Explore the Black Friday email campaign" aria-describedby="email-scroll-hint">
+    <header class="email-header">
+     <div class="email-sender"><span class="sender-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10v11h16V10M3 5h18l-2 5H5L3 5ZM8 21v-7h8v7M4 2h16"/></svg></span><div><strong>Krishna Park</strong><span>To: <span class="recipient">Emily Roberts ›</span></span></div><time>12:31 PM</time></div>
+     <h3>Emily, your Black Friday deals are waiting</h3>
+    </header>
+    <div class="newsletter-panels">{panels.map(panel => <svg viewBox={`${panel.x} ${panel.y} ${panel.width} ${panel.height}`} role="img" aria-label={panel.alt}><image href={panel.src.src} width={panel.src.width} height={panel.src.height} /></svg>)}</div>
+   </div>
+   <div class="mail-bottom" aria-hidden="true"><div class="mail-actions"><svg viewBox="0 0 24 24"><path d="M4 7h16v14H4ZM3 3h18v4H3ZM9 11h6"/></svg><svg viewBox="0 0 24 24"><path d="M3 6h7l2 3h9v12H3ZM3 6V3h7l2 3h7v3"/></svg><svg viewBox="0 0 24 24"><path d="m10 4-8 7 8 6v-5c7 0 10 2 12 7-1-9-4-12-12-12Z"/></svg></div><span class="mail-compose"><svg viewBox="0 0 24 24"><path d="M13 4H3v17h17V11M9 15l1-5L19 1l4 4-9 9-5 1Z"/></svg></span></div>
+   </div>
+  </div>
+ </div>
+ <figcaption id="email-scroll-hint">Scroll within the phone to explore the Black Friday email campaign</figcaption>
+</figure>
+<style>
+.email-mockup { width:100%; max-width:24rem; margin:0 auto; }
+.phone-canvas { padding:1.5rem clamp(1rem,3vw,2rem); background:var(--color-artifact-canvas); border-radius:1rem; }
+.phone-frame { position:relative;  width:100%; max-width:16rem; padding:0; margin:auto; border:9px solid #24252d; border-top-width:30px; border-bottom-width:20px; border-radius:38px; background:#24252d; box-shadow:0 12px 24px #14151e22; }
+.phone-camera { position:absolute; top:-20px; left:calc(50% - 18px); width:36px; height:5px; border-radius:8px; background:#555762; }
+.phone-screen { position:relative; aspect-ratio:1179 / 2556; border-radius:24px; overflow:hidden; background:white; }
+.phone-scroll { position:absolute; inset:0; overflow-y:auto; overflow-x:hidden; overscroll-behavior-y:contain; border-radius:0; background:white; }
+.phone-scroll:focus-visible { outline:3px solid var(--color-lilac); outline-offset:2px; }
+.phone-scroll img { display:block; width:100%; height:auto; border-radius:0; margin:0; }
+figcaption { margin-top:.75rem; text-align:center; font-size:var(--font-size-small); color:var(--color-muted); }
+
+.phone-frame { isolation:isolate; }
+.phone-screen::before { display:none; content:''; position:absolute; z-index:2; top:7px; left:50%; transform:translateX(-50%); width:27%; height:15px; border-radius:20px; background:#111217; box-shadow:inset 0 0 0 1px #ffffff12; pointer-events:none; }
+.phone-screen::after { content:''; position:absolute; z-index:2; bottom:6px; left:34%; width:32%; height:3px; border-radius:3px; background:#202128; pointer-events:none; }
+ .email-header { padding:12px 12px 14px; background:#fff; color:#111; font-family:Arial,sans-serif; }
+ .email-sender { display:flex; align-items:center; gap:6px; font-size:10px; padding-bottom:12px; border-bottom:1px solid #eee; }
+ .sender-avatar { display:grid; place-items:center; flex:0 0 27px; height:27px; border-radius:7px; background:#a076f9; color:white; }
+ .email-sender strong,.email-sender div > span { display:block; }
+ .email-sender strong { font-size:11px; }
+ .email-sender div > span { margin-top:3px; }
+ .recipient,.email-sender time { color:#929292; }
+ .email-sender time { margin-left:auto; align-self:flex-start; font-size:8px; white-space:nowrap; }
+ .email-header h3 { margin:10px 0 0; font-family:Arial,sans-serif; font-size:14px; line-height:1.25; letter-spacing:0; font-weight:700; }
+ .mail-bottom { position:absolute; z-index:3; bottom:16px; left:12px; right:12px; display:flex; justify-content:space-between; pointer-events:none; }
+ .mail-actions,.mail-compose { display:flex; align-items:center; justify-content:space-around; height:32px; border-radius:24px; background:#ffffffb8; backdrop-filter:blur(12px); border:1px solid #ffffffb0; box-shadow:0 3px 12px #00000018; }
+ .mail-actions { width:108px; } .mail-compose { width:32px; }
+ .mail-bottom svg { width:17px; height:17px; fill:none; stroke:#222; stroke-width:1.6; stroke-linejoin:round; }
+ .phone-scroll { padding-bottom:58px; }
+.newsletter-panels { line-height:0; }
+ .email-mockup .phone-screen .newsletter-panels svg { display:block; width:100%; height:auto; border-radius:0; margin:0; overflow:hidden; }
+</style>

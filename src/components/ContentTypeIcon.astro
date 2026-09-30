@@ -1,0 +1,12 @@
+---
+interface Props { variant: 'case-study' | 'project-brief'; }
+const { variant } = Astro.props;
+---
+<svg class="content-type-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  {variant === 'case-study'
+    ? <path d="M8 1 10 6 14.5 8 10 10 8 15 6 10 1.5 8 6 6Z" />
+    : <><circle cx="8" cy="8" r="6.5" /><circle cx="8" cy="8" r="3.8" /><circle cx="8" cy="8" r="1" fill="currentColor" stroke="none" /></>}
+</svg>
+<style>
+.content-type-icon { display:inline-block; width:14px; height:14px; flex-shrink:0; vertical-align:-.1em; margin-right:7px; }
+</style>

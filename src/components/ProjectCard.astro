@@ -1,23 +1,34 @@
 ---
+import ContentTypeIcon from './ContentTypeIcon.astro';
 import ProjectArtifact from './ProjectArtifact.astro';
 import BrandRefreshCover from './BrandRefreshCover.astro';
 import ClientStoriesCover from './ClientStoriesCover.astro';
 import ConferenceCover from './ConferenceCover.astro';
 import PrioritiesCover from './PrioritiesCover.astro';
 import type { CollectionEntry } from 'astro:content';
-interface Props { project: CollectionEntry<'projects'>; presentation?: 'feature' | 'compact'; }
-const { project, presentation = 'compact' } = Astro.props;
+interface Props { project: CollectionEntry<'projects'>; presentation?: 'feature' | 'compact'; showChildProject?: boolean; }
+const { project, presentation = 'compact', showChildProject = false } = Astro.props;
 const { title, slug, summary, cover, format, disciplines, sample, client, context, year } = project.data;
 const projectContext = [context, client, year].filter(Boolean).join(' · ');
 ---
 <article class:list={['project-card', `project-card--${presentation}`]} data-project-format={format} data-project-slug={slug}>
-  {slug === 'client-centered-brand-refresh' ? <div class="project-artifact"><BrandRefreshCover /></div> : slug === 'grantee-client-stories' ? <div class="project-artifact"><ClientStoriesCover /></div> : slug === 'legal-priorities-hub' ? <div class="project-artifact"><PrioritiesCover /></div> : slug === 'innovations-in-technology-conference' ? <div class="project-artifact"><ConferenceCover /></div> : <ProjectArtifact cover={cover} large={presentation === 'feature'} />}
+  {slug === 'client-centered-brand-refresh' ? <a class="project-artifact" href={`/work/${slug}/`} aria-label={`View case study: ${title}`}><BrandRefreshCover /></a> : slug === 'grantee-client-stories' ? <a class="project-artifact" href={`/work/${slug}/`} aria-label={`View case study: ${title}`}><ClientStoriesCover /></a> : slug === 'legal-priorities-hub' ? <a class="project-artifact" href={`/work/${slug}/`} aria-label={`View case study: ${title}`}><PrioritiesCover /></a> : slug === 'innovations-in-technology-conference' ? <a class="project-artifact" href={`/work/${slug}/`} aria-label={`View case study: ${title}`}><ConferenceCover /></a> : <ProjectArtifact cover={cover} large={presentation === 'feature'} />}
   <div class="card-content">
-    <p class="eyebrow">{sample && 'Sample · '}{format === 'case-study' ? 'Case study' : 'Project brief'}</p>
-    <h3>{title}</h3>
+    <p class="eyebrow"><ContentTypeIcon variant={format === 'case-study' ? 'case-study' : 'project-brief'} />{sample && 'Sample · '}{format === 'case-study' ? 'Case study' : 'Project brief'}</p>
+    <h3 class="project-card-title">{format === 'case-study' ? <a href={`/work/${slug}/`}>{title}</a> : title}</h3>
     <ul class="tags" aria-label="Project disciplines">{disciplines.map((discipline) => <li>{discipline}</li>)}</ul>
     {projectContext && <p class="project-context">{projectContext}</p>}
     <p>{summary}</p>
     <a class="button project-link" href={`/work/${slug}/`} aria-label={`${format === 'case-study' ? 'View case study' : 'View project'}: ${title}`}>{format === 'case-study' ? 'View case study' : 'View project'} <span aria-hidden="true">›</span></a>
+    {showChildProject && slug === 'client-centered-brand-refresh' && <div class="child-project-link"><a href="/work/grantee-client-stories/">Explore Child Project: Client Storytelling <span aria-hidden="true">›</span></a></div>}
   </div>
 </article>
+
+<style>
+.project-card-title a { color: inherit; text-decoration: none; }
+.project-card-title a:hover { text-decoration: underline; text-underline-offset: .12em; }
+.project-card--feature .project-link { margin-top: 1rem; }
+.child-project-link { margin-top:1.25rem; }
+.child-project-link a { text-decoration:underline; text-underline-offset:.2em; }
+.child-project-link span { margin-left:.4rem; }
+</style>

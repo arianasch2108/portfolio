@@ -1,0 +1,33 @@
+---
+import ad from '../assets/projects/briefs/radiantskin-ad.png';
+---
+<figure class="tiktok-mockup">
+ <div class="mockup-canvas">
+  <div class="social-phone" aria-label="RadiantSkin ad in a TikTok-style mobile preview">
+   <div class="feed-header" aria-hidden="true"><span>Following</span><strong>For You</strong><span>⌕</span></div>
+   <img src={ad.src} width={ad.width} height={ad.height} alt="RadiantSkin creative: A ceramide moisturizer impossible to gatekeep. Try it today." loading="lazy" />
+   <div class="ad-details"><div><strong>RadiantSkin</strong><span class="sponsored">Sponsored</span><p>A ceramide moisturizer impossible to gatekeep.</p></div><div class="social-actions" aria-hidden="true"><span>♡</span><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11a9 9 0 0 1-9 9H4l-3 2 2-7a9 9 0 1 1 18-4Z" /></svg><span>↗</span></div></div>
+   <div class="ad-cta">Try it today <span aria-hidden="true">›</span></div>
+   <div class="feed-footer" aria-hidden="true"><span>⌂</span><span>⌕</span><span class="create">＋</span><span>▱</span><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/></svg></div>
+   <div class="home-indicator" aria-hidden="true"></div>
+  </div>
+ </div>
+ <figcaption>RadiantSkin · TikTok ad concept</figcaption>
+</figure>
+<style>
+ .tiktok-mockup { width:100%; max-width:32rem; margin:2rem auto 0; }
+ .mockup-canvas { padding:clamp(1rem,4vw,2.5rem); background:var(--color-surface); border-radius:1rem; }
+ .social-phone { max-width:23rem; margin:auto; background:#101010; color:white; border:8px solid #24242c; border-radius:36px; overflow:hidden; padding-top:1rem; box-shadow:0 15px 28px #14151e22; font-family:Arial,sans-serif; }
+ .feed-header { display:flex; justify-content:center; align-items:center; gap:1rem; padding:.5rem .75rem 1rem; font-size:.8rem; }
+ .feed-header strong { border-bottom:2px solid white; padding-bottom:.3rem; }
+ .social-phone img { display:block; width:100%; height:auto; border-radius:0; }
+ .ad-details { display:flex; justify-content:space-between; gap:1rem; padding:.85rem 1rem .5rem; font-size:.8rem; }
+ .sponsored { display:block; color:#ccc; font-size:.65rem; margin-top:.25rem; }
+ .ad-details p { margin:.4rem 0 0; line-height:1.4; }
+ .social-actions { display:flex; align-items:center; gap:.5rem; font-size:1.4rem; }
+ .ad-cta { margin:.5rem 1rem; padding:.6rem .8rem; display:flex; justify-content:space-between; background:#fe2c55; border-radius:3px; font-size:.8rem; font-weight:bold; }
+ .feed-footer { display:flex; justify-content:space-around; align-items:center; padding:.6rem; font-size:1.4rem; border-top:1px solid #ffffff22; }
+ .create { background:white; color:black; padding:0 .35rem; border-radius:5px; box-shadow:3px 0 #fe2c55,-3px 0 #25f4ee; }
+ .home-indicator { width:30%; height:4px; border-radius:4px; background:white; margin:.3rem auto .5rem; }
+ figcaption { text-align:center; font-size:var(--font-size-small); color:var(--color-muted); margin-top:.75rem; }
+</style>

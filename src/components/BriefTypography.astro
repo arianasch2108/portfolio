@@ -5,7 +5,7 @@ interface Props { positioning?: Section['positioning']; copyArtifact?: Section['
 const { positioning, copyArtifact } = Astro.props;
 ---
 {positioning && <div class="positioning-artifact">
- <div class="brand-idea"><div><p class="artifact-label">Project brand idea</p><h3>{positioning.idea}</h3></div><p>{positioning.body}</p></div>
+ <div class="brand-idea"><div><p class="artifact-label">Connecting to brand mission</p><h3>{positioning.idea}</h3></div><p>{positioning.body}</p></div>
  <div class="positioning-system" aria-label="Four ideas behind the product positioning">
   <ul>{positioning.anchors.map(anchor=><li><h4>{anchor.title}</h4><p>{anchor.body}</p></li>)}</ul>
   <p class="positioning-result">{positioning.result}</p>
@@ -13,10 +13,10 @@ const { positioning, copyArtifact } = Astro.props;
 </div>}
 {copyArtifact && <div class="copy-artifacts">
  <figure class="launch-copy">
-  <figcaption class="artifact-label">Selected project messaging</figcaption>
+  <figcaption class="artifact-label">Selected messaging</figcaption>
   <blockquote>
    <p class="campaign-headline">{copyArtifact.headline}</p>
-   <div class="campaign-product"><p><strong>{copyArtifact.product}</strong><br />{copyArtifact.description}</p><p class="campaign-closing">{copyArtifact.closing}</p></div>
+   <div class="campaign-product"><p><strong>{copyArtifact.product}</strong><br />{copyArtifact.description}</p><p class="campaign-closing"><span>{copyArtifact.closing}</span><span aria-hidden="true">›</span></p></div>
    <p class="campaign-signature">{copyArtifact.signature}</p>
   </blockquote>
  </figure>
@@ -40,8 +40,9 @@ const { positioning, copyArtifact } = Astro.props;
  .campaign-headline { font-family:var(--font-family-heading); font-size:clamp(2.5rem,6vw,6rem); line-height:1.03; letter-spacing:-.045em; max-width:17ch; color:var(--color-plum); margin:var(--space-8) 0; }
  .campaign-product { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-10); align-items:end; }
  .campaign-product p { margin:0; } .campaign-product strong { display:inline-block; margin-bottom:.65rem; }
- .campaign-closing { font-family:var(--font-family-heading); font-size:clamp(1.8rem,3.5vw,3.5rem); line-height:1.1; color:var(--color-plum); }
- .campaign-signature { white-space:pre-line; border-top:1px solid #66345d40; padding-top:var(--space-6); margin:var(--space-8) 0 0; font-weight:600; }
+ .campaign-closing { display:inline-flex; align-items:center; justify-content:space-between; gap:1.5rem; justify-self:start; padding:1rem 1.5rem; border-radius:.35rem; background:var(--color-plum); color:var(--color-background); font-family:var(--font-family-body); font-size:clamp(1rem,1.6vw,1.25rem); font-weight:600; line-height:1.25; }
+ .campaign-closing > span:last-child { font-size:1.75em; line-height:1; }
+ .campaign-signature { white-space:normal; border-top:1px solid #66345d40; padding-top:var(--space-6); margin:var(--space-8) 0 0; font-weight:400; }
  .product-story { border-bottom:var(--border-default); padding-block:var(--space-6); }
  summary { cursor:pointer; color:var(--color-plum); font-weight:600; }
  .product-story blockquote { max-width:75ch; margin-top:var(--space-6); }

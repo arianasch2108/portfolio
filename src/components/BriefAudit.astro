@@ -6,6 +6,14 @@ const framework = [
  ['ACCESSIBILITY','Accessibility score · Alt text · Color contrast'],
  ['EXPERIENCE','Navigation · Mobile responsiveness · Content hierarchy · Calls to action'],
 ];
+const observations = [
+ ['Task completion', 'Strong', 'Search and navigation filters made it straightforward to find relevant places to stay.'],
+ ['On-entry messaging', 'Needs improvement', 'A popup announcing prices inclusive of fees interrupted the initial browsing experience. Removing the popup would help users move directly into search.'],
+ ['Accessibility', '91 / 100', 'The Lighthouse review returned an accessibility score of 91. The recorded audit did not flag issues with alternative text, headings, or keyboard navigation.'],
+ ['CTA clarity', 'Strong', 'Action-oriented prompts such as “Start your search” and “Stay in San Juan” provided clear, specific next steps.'],
+ ['CTA balance', 'Strong', 'A limited number of focused calls to action helped maintain a clear path through the page.'],
+ ['Button visibility', 'Strong', 'Bright pink buttons stood out against the predominantly white interface, making key actions easy to identify.'],
+];
 const recommendations = [
  ['Slow LCP / visual loading','Primary content takes longer to become usable or visible.','Optimize large image and video assets.'],
  ['Missing alt text','Important visual information may not be available to users relying on assistive technology.','Add meaningful alternative text to informative imagery.'],
@@ -22,17 +30,28 @@ const recommendations = [
    <dl class="metrics"><div><dt>Speed Index</dt><dd>6.8<span>s</span></dd></div><div><dt>Largest Contentful Paint</dt><dd>14.3<span>s</span></dd></div></dl>
    <div class="interpretation"><h4>INSIGHT</h4><p>The performance data indicated that large visual assets were slowing how quickly meaningful content appeared for users.</p><h4>RECOMMENDATION</h4><p>Optimize image and video assets to improve loading performance and reduce the time users wait for primary content.</p></div>
   </div>
+<section class="audit-observations" aria-labelledby="audit-observations-title">
+ <h3 id="audit-observations-title">Airbnb · UX findings</h3>
+ <div class="findings-table-wrap"><table><thead><tr><th scope="col">Review area</th><th scope="col">Assessment</th><th scope="col">Observation</th></tr></thead><tbody>{observations.map(([area,status,description])=><tr><th scope="row">{area}</th><td><span class:list={["assessment", {opportunity:status === 'Needs improvement'}]}>{status}</span></td><td>{description}</td></tr>)}</tbody></table></div>
+ <p class="findings-summary"><strong>Recommended next steps:</strong> Remove the entry popup and optimize image and video assets to support a faster, less interrupted browsing experience.</p>
+</section>
  </section>
  <section class="nike" aria-labelledby="nike-finding"><h3 id="nike-finding">NIKE</h3><div class="nike-columns"><div><h4>ISSUES IDENTIFIED</h4><ul><li>Performance concerns</li><li>Missing image alt text</li><li>Insufficient color contrast</li></ul></div><div><h4>RECOMMENDATIONS</h4><ul><li>Optimize media assets</li><li>Add meaningful alternative text</li><li>Improve color contrast where needed</li></ul></div></div></section>
 </div>}
-{section === 'recommendations' && <>
- <div class="recommendations" role="table" aria-label="Finding, user impact, and recommendation">
-  <div class="table-head" role="row"><span role="columnheader">FINDING <span aria-hidden="true">›</span></span><span role="columnheader">USER IMPACT <span aria-hidden="true">›</span></span><span role="columnheader">RECOMMENDATION</span></div>
-  {recommendations.map(row=><div class="recommendation-row" role="row">{row.map((cell,i)=><div role="cell"><span class="mobile-label" aria-hidden="true">{['FINDING','USER IMPACT','RECOMMENDATION'][i]}</span>{cell}</div>)}</div>)}
- </div>
+{section === 'recommendations'  && <>
+ <div class="recommendations table-scroll"><table aria-label="Finding, user impact, and recommendation"><thead><tr><th scope="col">Finding</th><th scope="col">User impact</th><th scope="col">Recommendation</th></tr></thead><tbody>{recommendations.map(row=><tr>{row.map((cell,i)=>i === 0 ? <th scope="row">{cell}</th> : <td>{cell}</td>)}</tr>)}</tbody></table></div>
  <p class="audit-takeaway">Technical performance and user experience are not separate problems. Performance, accessibility, content, and interface decisions all shape how easily someone can use a website.</p>
 </>}
 <style>
+ .audit-observations { margin-top:var(--space-12); }
+ .findings-table-wrap { overflow-x:auto; }
+ .audit-observations tbody th { width:22%; font-weight:600; }
+ .audit-observations td:nth-child(2) { width:18%; }
+ .assessment { display:inline-block; font-size:.85rem; color:var(--color-plum); background:var(--color-pale-lilac); padding:.25rem .65rem; border-radius:1rem; white-space:normal; }
+ .assessment.opportunity { background:#f2e4d5; color:#694321; }
+ .findings-summary { padding:1.25rem; background:var(--color-pale-lilac); margin:1.5rem 0 0; }
+ @media(max-width:48rem) { th,td { padding:.75rem .5rem; } table { font-size:.85rem; } .assessment { white-space:normal; font-size:.75rem; } }
+
  .audit-framework,.audit-findings,.recommendations { margin-top:var(--space-8); }
  .framework-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--space-8); margin:0; }
  .framework-grid >div { border-top:var(--border-default); padding-top:var(--space-5); }

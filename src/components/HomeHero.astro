@@ -16,7 +16,7 @@ const points = [[280,116,-17,-50],[244,137,28,-10],[280,116,-17,110],[244,137,28
  <CosmicDetail />
  <div class="container">
   <div class="orbital-composition">
-   <h1 id="hero-title" class="orbital-name"><span class="orbital-first">{first.toUpperCase()}</span><span class="orbital-surname">{last.join(' ')}</span></h1>
+   <div class="orbital-name"><span class="orbital-first">{first.toUpperCase()}</span><span class="orbital-surname">{last.join(' ')}</span></div>
    <div class="discipline-system">
     <svg class="orbit-paths orbit-back" viewBox="0 0 680 400" fill="none" aria-hidden="true" focusable="false">
      <ellipse cx="340" cy="200" rx="280" ry="116" transform="rotate(-17 340 200)" />
@@ -28,16 +28,18 @@ const points = [[280,116,-17,-50],[244,137,28,-10],[280,116,-17,110],[244,137,28
     <svg class="orbit-paths orbit-nodes" viewBox="0 0 680 400" aria-hidden="true" focusable="false">{points.map(p => <circle cx={p.x} cy={p.y} r="3" fill="var(--color-pale-lilac)" stroke="none" />)}</svg>
     <ul class="discipline-labels" aria-label="Disciplines">{disciplines.map((label,i)=><li class={`discipline-${i}`} style={`--node-x:${points[i].x / 680 * 100}%;--node-y:${points[i].y / 400 * 100}%`}><span aria-hidden="true"></span>{label}</li>)}</ul>
    </div>
-   <div class="orbital-positioning"><p>{home.positioning}</p><span class="orbital-location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" /></svg>{site.location}</span></div>
-  </div>
-  <div class="orbital-information">
-   <div class="orbital-intro"><slot /></div>
-   <div class="orbital-links"><a class="orbital-work-button" href="#featured-work">View my work <span aria-hidden="true">›</span></a><a href={`mailto:${site.email}`}>Get in touch <span aria-hidden="true">›</span></a></div>
+   <div class="orbital-positioning"><h1 id="hero-title">{home.positioning}</h1><span class="orbital-location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" /></svg>{site.location}</span></div>
   </div>
  </div>
 </section>
+<section class="hero-introduction" aria-label="Introduction">
+ <div class="container orbital-information">
+   <div class="orbital-intro"><slot /></div>
+   <div class="orbital-links"><a class="orbital-work-button" href="#featured-work">View my work <span aria-hidden="true">›</span></a><a href={`mailto:${site.email}`}>Get in touch <span aria-hidden="true">›</span></a></div>
+ </div>
+</section>
 <style>
- .orbital-hero { padding: 1.5rem 0 2rem; background: var(--color-dark); color: var(--color-on-dark); }
+ .orbital-hero { overflow:hidden; padding: 1.5rem 0 2rem; background: var(--color-dark); color: var(--color-on-dark); }
  .orbital-hero :global(> .orbital-detail) { display: none; }
  .orbital-hero :global(.star-reveal.is-revealed) { opacity: calc(.35 * var(--orbit-fade, 1)); }
  .orbital-composition { position: relative; height: clamp(35rem,43vw,41rem); }
@@ -57,8 +59,9 @@ const points = [[280,116,-17,-50],[244,137,28,-10],[280,116,-17,110],[244,137,28
  .discipline-labels { list-style: none; padding: 0; margin: 0; }
  .discipline-labels li { position: absolute; display: flex; gap: .6rem; align-items: center; font-size: clamp(.7rem,1vw,.85rem); letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; z-index: 3; }
  .discipline-labels li > span { flex: 0 0 .5rem; width: .5rem; height: .5rem; border-radius: 50%; background: var(--gradient-pearl); box-shadow: 0 0 0 3px var(--color-dark); }
- .orbit-nodes { z-index: 3; opacity: var(--node-fade, 1); }
- .discipline-labels { opacity: var(--label-fade, 1); }
+ .orbit-nodes { z-index: 3; }
+ .orbit-nodes circle:not(:first-child):not(:last-child) { opacity: var(--node-fade, 1); }
+ .discipline-labels li:not(.discipline-0):not(.discipline-3) { opacity: var(--label-fade, 1); }
  .discipline-labels li { left: var(--node-x); top: var(--node-y); transform: translateY(-50%); padding-left: 14px; }
  .discipline-labels li > span { display: none; }
  .discipline-labels .discipline-2, .discipline-labels .discipline-3 { transform: translate(-100%,-50%); padding-left: 0; padding-right: 14px; }
@@ -66,17 +69,19 @@ const points = [[280,116,-17,-50],[244,137,28,-10],[280,116,-17,110],[244,137,28
  .orbit-paths :global(ellipse), .orbit-paths :global(path) { vector-effect: non-scaling-stroke; }
  .orbital-hero.is-scroll-orbit .orbit-paths { transition: none; }
  .orbital-positioning { position: absolute; right: 0; bottom: 1.8rem; width: 47%; font-family: var(--font-family-body); font-weight: 500; font-size: clamp(1.8rem,2.8vw,2.8rem); line-height: 1.15; letter-spacing: -.045em; color: var(--color-lilac); margin: 0; text-wrap: balance; }
- .orbital-information { display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; align-items: center; border-top: 1px solid var(--color-dark-border); padding-top: 1.5rem; }
- .orbital-intro { font-size: .95rem; max-width: 62ch; color: var(--color-muted-on-dark); }
- .orbital-intro :global(p) { margin: 0; }
+ .hero-introduction { background:var(--color-lilac); color:var(--color-dark); position:relative; padding-block:2rem; }
+ .orbital-information { display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; align-items: center;  }
+ .orbital-intro { font-size: .95rem; max-width: 62ch; color: var(--color-dark); }
+ .orbital-intro :global(p) { margin:.4rem 0 0; }
+ .orbital-intro :global(h2) { color: inherit; }
  .orbital-links { display: flex; justify-content: flex-end; align-items: center; flex-wrap: wrap; gap: .5rem 2rem; }
- .orbital-links a { font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; text-decoration: none; padding-block: .8rem; border-bottom: 1px solid transparent; }
- .orbital-links a:hover { border-image: var(--gradient-pearl) 1; }
- .orbital-links a.orbital-work-button { display: inline-flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 48px; padding: .85rem 1.35rem; background: var(--color-lilac); color: var(--color-dark); border: 1px solid var(--color-lilac); font-weight: 700; }
- .orbital-links a.orbital-work-button:hover { background: var(--color-pale-lilac); border-color: var(--color-pale-lilac); border-image: none; }
- .orbital-links a:focus-visible { outline: 2px solid var(--color-lilac); outline-offset: 4px; }
+ .orbital-links a { font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; text-decoration: none; display:inline-flex; align-items:center; min-height:48px; padding:.85rem 1.35rem; border:1px solid var(--color-dark); border-radius:var(--radius-button); color:var(--color-dark); font-weight:600; }
+ .orbital-links a:hover { background:var(--color-plum); color:var(--color-on-dark); border-color:var(--color-plum); }
+ .orbital-links a.orbital-work-button { border-radius: var(--radius-button); display: inline-flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 48px; padding: .85rem 1.35rem; background: var(--color-dark); color: var(--color-on-dark); border: 1px solid var(--color-dark); font-weight: 700; }
+ .orbital-links a.orbital-work-button:hover { background: var(--color-plum); border-color: var(--color-plum); }
+ .orbital-links a:focus-visible { outline: 3px solid var(--color-dark); outline-offset: 4px; }
  .orbital-links a span { display: inline-block; margin-left: .4rem; }
- .orbital-positioning > p { margin: 0; }
+ .orbital-positioning > h1 { margin: 0; font-size: inherit; line-height: inherit; letter-spacing: inherit; font-weight: inherit; color: inherit; }
  @media (min-width:58.001rem) and (prefers-reduced-motion:no-preference) {
   .is-scroll-orbit .orbital-positioning { right:calc(var(--orbit-progress, 0) * 53%); }
  }
@@ -115,14 +120,15 @@ const points = [[280,116,-17,-50],[244,137,28,-10],[280,116,-17,110],[244,137,28
   const fronts = Array.from(hero.querySelectorAll<SVGPathElement>('.orbit-front path'));
   const nodes = Array.from(hero.querySelectorAll<SVGCircleElement>('.orbit-nodes circle'));
   const labels = Array.from(hero.querySelectorAll<HTMLElement>('.discipline-labels li'));
+  const occluders = Array.from(hero.querySelectorAll<HTMLElement>('.orbital-positioning > h1, .orbital-name > span'));
   const geometry = [[280,116,-17],[244,137,28],[180,142,-52]];
   const locations = [[0,-50],[1,-10],[0,110],[1,160]];
   const clamp = (n:number) => Math.max(0,Math.min(1,n));
-  let start = 0, distance = 1, pending = 0, previous = -1;
-  const measure = () => { start = hero.getBoundingClientRect().top + window.scrollY; distance = hero.offsetHeight; };
+  let distance = 1, pending = 0, previous = -1;
+  const measure = () => { distance = hero.offsetHeight; };
   const update = () => {
    pending = 0;
-   const progress = enabled.matches ? clamp((window.scrollY - start) / distance) : 0;
+   const progress = enabled.matches ? clamp(window.scrollY / distance) : 0;
    if (progress === previous) return;
    previous = progress;
    const expansion = clamp((progress - .18) / .82);
@@ -148,6 +154,23 @@ const points = [[280,116,-17,-50],[244,137,28,-10],[280,116,-17,110],[244,137,28
     const ly=200+(y-200)*(1+labelExpansion*(2+orbit*.4))/(1+expansion*(2+orbit*.4));
     labels[i].style.setProperty('--node-x',`${lx/680*100}%`);
     labels[i].style.setProperty('--node-y',`${ly/400*100}%`);
+   });
+   const headingRects = occluders.map(element => {
+    const range = document.createRange();
+    range.selectNodeContents(element);
+    return { element, rect: range.getBoundingClientRect() };
+   });
+   labels.forEach((label, i) => {
+    // Digital Strategy stays visible; Marketing only hides beneath ARIANA.
+    const obstacles = i === 0 ? [] : headingRects.filter(({element}) =>
+     i !== 3 || element.classList.contains('orbital-first'));
+    const covered = (rect: DOMRect) => obstacles.some(({rect: heading}) =>
+     rect.left < heading.right && rect.right > heading.left &&
+     // Inset ARIANA’s lower collision edge so Marketing travels farther upward.
+     rect.top < heading.bottom - (i === 3 ? heading.height * 0.18 : 0) && rect.bottom > heading.top);
+    const hidden = covered(label.getBoundingClientRect()) || covered(nodes[i].getBoundingClientRect());
+    label.style.visibility = hidden ? 'hidden' : '';
+    nodes[i].style.visibility = hidden ? 'hidden' : '';
    });
   };
   const schedule = () => { if (!pending) pending=requestAnimationFrame(update); };

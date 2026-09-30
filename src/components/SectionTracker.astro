@@ -3,7 +3,6 @@ import site from '../data/site.json';
 interface Props { sections?: { id: string; label: string }[]; compact?: boolean; }
 const { compact = false } = Astro.props;
 const sections = Astro.props.sections ?? [
-  { id: 'impact', label: 'Achievements' },
   { id: 'featured-work', label: 'Case studies' },
   { id: 'project-briefs', label: 'Project briefs' },
   { id: 'resume', label: 'Resume' },
@@ -13,7 +12,7 @@ const sections = Astro.props.sections ?? [
 <div id="section-tracker-start" aria-hidden="true"></div>
 <nav class:list={['section-tracker', { compact }]} aria-label="On this page" hidden>
   <ol class="container">
-    {sections.map(({ id, label }) => <li><a data-section-id={id} href={id === 'contact' ? `mailto:${site.email}` : `#${id}`}>{label}</a></li>)}
+    {sections.map(({ id, label }) => <li><a data-section-id={id} href={id === 'contact' ? `mailto:${site.email}` : `#${id}`}>{label.toLowerCase().replace(/\b\w/g, letter => letter.toUpperCase())}</a></li>)}
   </ol>
 </nav>
 
@@ -78,6 +77,7 @@ const sections = Astro.props.sections ?? [
     border-bottom: 1px solid var(--color-dark-border);
     --focus-ring: 3px solid var(--color-lilac);
   }
+  .section-tracker { --color-dark:var(--color-background); --color-on-dark:#14151e; --color-muted-on-dark:#45434b; --color-dark-border:#c6c2ca; --color-lilac:#66345d; }
   .section-tracker[hidden] { display: none; }
   ol { display: flex; gap: 0.5rem 1.5rem; list-style: none; padding-block: 0.75rem; margin-block: 0; }
   li { flex: 1; }
@@ -88,7 +88,7 @@ const sections = Astro.props.sections ?? [
     color: var(--color-muted-on-dark);
     font-size: var(--font-size-small);
     text-decoration: none;
-    text-transform: uppercase;
+    text-transform: none;
   }
   a.is-past { border-color: var(--color-lilac); }
   a[aria-current], a:hover { color: var(--color-lilac); border-color: var(--color-lilac); }
@@ -101,10 +101,10 @@ const sections = Astro.props.sections ?? [
   .compact ol::-webkit-scrollbar { display: none; }
   .compact li { flex: 1 0 auto; }
   .compact a { white-space: nowrap; position: relative; text-align: center; padding: .5rem .75rem 1.6rem; border: 0; }
-  .compact a::before { content: ''; position: absolute; left: 0; right: 0; bottom: .55rem; height: 2px; background: var(--color-dark-border); }
+  .compact a::before { content: ''; position: absolute; left: 0; right: 0; bottom: .625rem; height: 2px; transform: translateY(50%); background: var(--color-dark-border); }
   .compact li:first-child a::before { left: 50%; }
   .compact li:last-child a::before { right: 50%; }
-  .compact a::after { content: ''; position: absolute; left: 50%; bottom: .25rem; width: .75rem; height: .75rem; transform: translateX(-50%); border: 2px solid var(--color-muted-on-dark); border-radius: 50%; background: var(--color-dark); }
+  .compact a::after { content: ''; position: absolute; left: 50%; bottom: .625rem; width: .75rem; height: .75rem; box-sizing: border-box; transform: translate(-50%, 50%); border: 2px solid var(--color-muted-on-dark); border-radius: 50%; background: var(--color-dark); }
   .compact a.is-past::before { background: var(--color-lilac); }
   .compact a[aria-current]::before { background: linear-gradient(to right, var(--color-lilac) 50%, var(--color-dark-border) 50%); }
   .compact li:first-child a[aria-current]::before { background: var(--color-dark-border); }
