@@ -1,6 +1,7 @@
 ---
 import socialImage from '../assets/images/headshot-cutout.png';
 import Header from '../components/Header.astro';
+import BackToTop from '../components/BackToTop.astro';
 import Footer from '../components/Footer.astro';
 import site from '../data/site.json';
 import '../styles/global.css';
@@ -49,5 +50,6 @@ const noindex = !Astro.site || import.meta.env.VERCEL_ENV === 'preview' || Astro
     <Header />
     <main id="main-content" class:list={[fullWidth ? 'home-main' : 'container page-main']} tabindex="-1"><slot /></main>
     <Footer />
+    <BackToTop />
   </body>
 </html>
