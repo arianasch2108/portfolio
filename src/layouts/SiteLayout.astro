@@ -1,5 +1,4 @@
 ---
-import socialImage from '../assets/images/headshot-cutout.png';
 import Header from '../components/Header.astro';
 import BackToTop from '../components/BackToTop.astro';
 import Footer from '../components/Footer.astro';
@@ -10,7 +9,7 @@ interface Props { title: string; description: string; fullWidth?: boolean; }
 const { title, description, fullWidth = false } = Astro.props;
 const pageTitle = `${title} | ${site.name} — ${site.title}`;
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefined;
-const imageUrl = Astro.site ? new URL(socialImage.src, Astro.site) : undefined;
+const imageUrl = Astro.site ? new URL('/images/portfolio-social.png', Astro.site) : undefined;
 const noindex = !Astro.site || import.meta.env.VERCEL_ENV === 'preview' || Astro.url.pathname === '/404.html' || Astro.url.pathname === '/404/';
 ---
 <!doctype html>
@@ -21,7 +20,11 @@ const noindex = !Astro.site || import.meta.env.VERCEL_ENV === 'preview' || Astro
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Syne:wght@500;800&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Syne:wght@500;800&display=swap" /></noscript>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
@@ -34,15 +37,16 @@ const noindex = !Astro.site || import.meta.env.VERCEL_ENV === 'preview' || Astro
     {canonical && <meta property="og:url" content={canonical} />}
     {imageUrl && <>
       <meta property="og:image" content={imageUrl} />
-      <meta property="og:image:alt" content={`Portrait of ${site.name}`} />
-      <meta property="og:image:width" content={String(socialImage.width)} />
-      <meta property="og:image:height" content={String(socialImage.height)} />
+      <meta property="og:image:type" content="image/png" />
+      <meta property="og:image:alt" content={`${site.name} — Creating digital experiences rooted in people and purpose.`} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
     </>}
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
     {imageUrl && <meta name="twitter:image" content={imageUrl} />}
-    <meta name="twitter:image:alt" content={`Portrait of ${site.name}`} />
+    <meta name="twitter:image:alt" content={`${site.name} — Creating digital experiences rooted in people and purpose.`} />
     <title>{pageTitle}</title>
   </head>
   <body>
