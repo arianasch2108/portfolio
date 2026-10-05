@@ -416,9 +416,9 @@ dd { margin: var(--space-1) 0 0; }
 .project-card--feature:hover { transform: scale(1.015); }
 }
 }
-.project-card--feature:focus-within { transform: scale(1.015); }
+
 @media (prefers-reduced-motion: reduce) {
-.project-card--feature:focus-within { transform: none; }
+
 @media (hover: hover) and (pointer: fine) {
 .project-card--feature:hover { transform: none; }
 }
@@ -664,4 +664,10 @@ main :is(.phone-frame, .social-phone, .conference-cover .app)::-webkit-scrollbar
     scrollbar-width: thin;
     scrollbar-color: #77717d80 transparent;
   }
+}
+
+/* Touch links activate directly without a double-tap gesture delay. */
+a[href], button { touch-action: manipulation; }
+@media (hover: none), (pointer: coarse) {
+  .project-card--feature { transform:none; transition:none; }
 }
