@@ -47,7 +47,8 @@ const page = await getEntry('pages', 'about');
  .progression { grid-column:1/-1; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:.6rem 1rem; margin:var(--space-4) 0 0; color:var(--color-plum); text-transform:uppercase; font-size:.8rem; letter-spacing:.06em; }
  .translation >h2 { max-width:23ch; }
  .translation-layout { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-12); align-items:center; margin-top:var(--space-8); }
- .connections p { display:grid; grid-template-columns:1fr auto 1fr; gap:var(--space-4); align-items:center; border-bottom:var(--border-default); padding-block:var(--space-5); margin:0; font-size:clamp(.9rem,1.8vw,1.4rem); color:var(--color-plum); }
+ .connections p { display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); gap:var(--space-4); align-items:center; border-bottom:var(--border-default); padding-block:var(--space-5); margin:0; font-size:clamp(.9rem,1.8vw,1.4rem); color:var(--color-plum); }
+ .connections p > span { min-width:0; overflow-wrap:anywhere; }
  .connections p:first-child { border-top:var(--border-default); }
  .connections p>span:last-child { text-align:right; }
  .connector { color:var(--color-muted); }
