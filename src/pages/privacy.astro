@@ -1,0 +1,25 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import site from '../data/site.json';
+---
+<SiteLayout title="Privacy" description="How this portfolio uses optional analytics and how to manage your preferences.">
+ <article class="privacy-page prose">
+  <h1>Privacy</h1>
+  <p>Updated October 5, 2026</p>
+  <p>This portfolio is operated by Ariana Sierra-Chacón. For privacy questions, email <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+  <h2>Optional analytics</h2>
+  <p>When analytics is enabled and you accept, this site uses Google Analytics 4 to understand which pages and projects visitors explore, active engagement time, and interactions with project, resume, email, and LinkedIn links. Analytics is optional. Rejecting it does not limit access to the portfolio.</p>
+  <p>The Google Analytics tag loads only after acceptance. Before a choice or after rejection, this integration sends no analytics requests to Google and sets no analytics cookies. Visitors who decline or block analytics are not included in these reports.</p>
+  <p>After acceptance, Google processes technical and usage information, including cookie identifiers, browser and device information, page views, engagement, and whether you reach 90% of a page. Google may derive approximate location from your connection. Custom portfolio events use controlled page paths and interaction labels, excluding URL query strings, fragments, email addresses, and free-form text. Referrer information is omitted from those events. When automatic outbound-link and download measurement is enabled, Google also collects link destinations and file details such as file names and link text. These reports do not tell me who an individual visitor is or whether clicking Email resulted in a message.</p>
+  <p>This integration does not use advertising features or Google Signals. <a href="https://policies.google.com/privacy">Google’s privacy policy</a> explains its processing, including processing on servers that may be outside your country.</p>
+  <h2>Your choice and cookies</h2>
+  <p>Your accept or reject choice is stored in this browser’s local storage for about six months (183 days). It is used to remember your preference, not to track activity. When local storage is unavailable, a choice applies only to the current page.</p>
+  <p>If you accept, Google Analytics can set <code>_ga</code> and a property-specific <code>_ga_…</code> cookie. This integration limits their lifetime to about six months without extending it on every visit. Browser settings can shorten that lifetime.</p>
+  <p>Use Cookie settings in the footer to change your choice. Withdrawing consent stops this integration’s collection, removes its accessible analytics cookies, and reloads the page. It does not erase data already sent to Google. Clearing browser storage also resets your preference. Cookie settings appears when analytics is configured on the live portfolio.</p>
+  <h2>Other services and links</h2>
+  <p>The website is hosted by Vercel and loads fonts from Google Fonts. The client-story project includes a Datawrapper chart. Those services receive requests needed to deliver their content and may process connection information under their own policies, independently of this analytics preference. This banner controls Google Analytics only.</p>
+  <p>External links, including LinkedIn, lead to services with their own privacy practices. Email links open your email application; this site does not operate an email submission form.</p>
+  <p>See the privacy information from <a href="https://vercel.com/legal/privacy-policy">Vercel</a>, <a href="https://developers.google.com/fonts/faq/privacy">Google Fonts</a>, and <a href="https://www.datawrapper.de/privacy">Datawrapper</a>.</p>
+ </article>
+</SiteLayout>
+<style>.privacy-page { max-width:70ch; padding-block:var(--space-12); } h2 { margin-top:2rem; } code { overflow-wrap:anywhere; }</style>
