@@ -91,7 +91,10 @@ const sections = Astro.props.sections ?? [
     text-transform: none;
   }
   a.is-past { border-color: var(--color-lilac); }
-  a[aria-current], a:hover { color: var(--color-lilac); border-color: var(--color-lilac); }
+a[aria-current] { color: var(--color-lilac); border-color: var(--color-lilac); }
+@media (hover: hover) and (pointer: fine) {
+a:hover { color: var(--color-lilac); border-color: var(--color-lilac); }
+}
   a[aria-current] { font-weight: 700; }
   @media (max-width: 40rem) {
     ol { flex-wrap: wrap; gap: 0.25rem 1rem; }

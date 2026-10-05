@@ -32,14 +32,14 @@ const recommendations = [
   </div>
 <section class="audit-observations" aria-labelledby="audit-observations-title">
  <h3 id="audit-observations-title">Airbnb · UX findings</h3>
- <div class="findings-table-wrap"><table><thead><tr><th scope="col">Review area</th><th scope="col">Assessment</th><th scope="col">Observation</th></tr></thead><tbody>{observations.map(([area,status,description])=><tr><th scope="row">{area}</th><td><span class:list={["assessment", {opportunity:status === 'Needs improvement'}]}>{status}</span></td><td>{description}</td></tr>)}</tbody></table></div>
+ <p class="table-scroll-hint">Swipe or scroll horizontally to view the full table.</p><div class="findings-table-wrap table-scroll" role="region" aria-label="Airbnb UX findings table" tabindex="0"><table><thead><tr><th scope="col">Review area</th><th scope="col">Assessment</th><th scope="col">Observation</th></tr></thead><tbody>{observations.map(([area,status,description])=><tr><th scope="row">{area}</th><td><span class:list={["assessment", {opportunity:status === 'Needs improvement'}]}>{status}</span></td><td>{description}</td></tr>)}</tbody></table></div>
  <p class="findings-summary"><strong>Recommended next steps:</strong> Remove the entry popup and optimize image and video assets to support a faster, less interrupted browsing experience.</p>
 </section>
  </section>
  <section class="nike" aria-labelledby="nike-finding"><h3 id="nike-finding">NIKE</h3><div class="nike-columns"><div><h4>ISSUES IDENTIFIED</h4><ul><li>Performance concerns</li><li>Missing image alt text</li><li>Insufficient color contrast</li></ul></div><div><h4>RECOMMENDATIONS</h4><ul><li>Optimize media assets</li><li>Add meaningful alternative text</li><li>Improve color contrast where needed</li></ul></div></div></section>
 </div>}
 {section === 'recommendations'  && <>
- <div class="recommendations table-scroll"><table aria-label="Finding, user impact, and recommendation"><thead><tr><th scope="col">Finding</th><th scope="col">User impact</th><th scope="col">Recommendation</th></tr></thead><tbody>{recommendations.map(row=><tr>{row.map((cell,i)=>i === 0 ? <th scope="row">{cell}</th> : <td>{cell}</td>)}</tr>)}</tbody></table></div>
+ <p class="table-scroll-hint">Swipe or scroll horizontally to view the full table.</p><div class="recommendations table-scroll" role="region" aria-label="Audit recommendations table" tabindex="0"><table aria-label="Finding, user impact, and recommendation"><thead><tr><th scope="col">Finding</th><th scope="col">User impact</th><th scope="col">Recommendation</th></tr></thead><tbody>{recommendations.map(row=><tr>{row.map((cell,i)=>i === 0 ? <th scope="row">{cell}</th> : <td>{cell}</td>)}</tr>)}</tbody></table></div>
  <p class="audit-takeaway">Technical performance and user experience are not separate problems. Performance, accessibility, content, and interface decisions all shape how easily someone can use a website.</p>
 </>}
 <style>

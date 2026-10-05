@@ -16,7 +16,7 @@ const socialLinks: { label: string; url: string }[] = site.socialLinks;
       <p class="eyebrow">Based in</p><p>{site.location}</p>
       {site.email && <a href={`mailto:${site.email}`}>{site.email}</a>}
       {socialLinks.map((link) => <a href={link.url}>{link.label} <span aria-hidden="true">›</span></a>)}
-      <a class="button footer-cta" href={`mailto:${site.email}`}>Get in touch <span aria-hidden="true">›</span></a>
+      <div class="footer-contact-actions"><a class="button footer-cta" href={`mailto:${site.email}`}>Get in touch <span aria-hidden="true">›</span></a><a class="footer-linkedin" href="https://www.linkedin.com/in/arianasierrachacon" aria-label="Ariana Sierra-Chacón on LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true" focusable="false"><path d="M5.37 24H.4V7.98h4.97V24ZM2.88 5.79a2.89 2.89 0 1 1 .03-5.78 2.89 2.89 0 0 1-.03 5.78ZM24 24h-4.96v-7.8c0-1.86-.04-4.25-2.59-4.25-2.59 0-2.99 2.03-2.99 4.12V24H8.5V7.98h4.76v2.19h.07c.66-1.26 2.28-2.59 4.69-2.59 5.02 0 5.95 3.31 5.95 7.61V24Z"/></svg></a></div>
     </div>
   </div>
   <div class="footer-bottom">
@@ -28,13 +28,23 @@ const socialLinks: { label: string; url: string }[] = site.socialLinks;
 </footer>
 
 <style>
+ .footer-contact-actions { display:flex; align-items:center; gap:1rem; margin-top:var(--space-8); }
+ .site-footer .footer-contact-actions .footer-cta { margin-top:0; flex:1; min-width:0; }
+ .footer-contact-actions .footer-linkedin { flex:0 0 44px; transform:translateY(10px); }
+ .footer-linkedin { display:inline-flex; align-items:center; justify-content:center; width:44px; min-height:44px; color:var(--color-on-dark); }
+ .footer-linkedin svg { display:block; }
+@media (hover: hover) and (pointer: fine) {
+.footer-linkedin:hover { color:var(--color-lilac); }
+}
  @supports (background-clip: text) {
   .footer-statement { background: var(--gradient-pearl); background-size: 160% 100%; background-clip: text; -webkit-background-clip: text; color: transparent; }
  }
  @media (forced-colors: active) { .footer-statement { background: none; color: CanvasText; } }
 
  .site-footer .footer-cta { margin-top:var(--space-8); width:100%; max-width:24rem; min-height:72px; padding:1.25rem 2rem; gap:2.5rem; background:var(--color-pale-lilac); color:var(--color-plum); border:2px solid var(--color-lilac); border-radius:1rem 0 1rem 0; font-size:1.3rem; font-weight:700; box-shadow:0 6px 0 var(--color-plum),0 12px 24px #00000030; }
- .site-footer .footer-cta:hover { background:#fff; border-color:#fff; }
+@media (hover: hover) and (pointer: fine) {
+.site-footer .footer-cta:hover { background:#fff; border-color:#fff; }
+}
  .footer-cta span { font-size:2rem; line-height:1; }
  .footer-cta:focus-visible { outline:3px solid var(--color-on-dark); outline-offset:5px; }
  @media(prefers-reduced-motion:no-preference) { .footer-cta { transition:background 180ms ease,border-color 180ms ease; } }

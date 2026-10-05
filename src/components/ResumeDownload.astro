@@ -4,7 +4,9 @@ import site from '../data/site.json';
 {site.resumeUrl ? <a class="button resume-download" href={site.resumeUrl} download="Ariana-Sierra-Chacon-Resume.pdf">Download Resume PDF <span aria-hidden="true">›</span></a> : <div><button class="button resume-download" disabled>Download Resume PDF <span aria-hidden="true">›</span></button><p class="download-note">PDF download coming soon.</p></div>}
 <style>
  .resume-download { background:var(--color-plum); color:var(--color-on-dark); border-radius:1rem 0 1rem 0; gap:2rem; }
- a.resume-download:hover { background:var(--color-dark); }
+@media (hover: hover) and (pointer: fine) {
+a.resume-download:hover { background:var(--color-dark); }
+}
  .resume-download:disabled { cursor:not-allowed; opacity:.7; }
  .download-note { font-size:.8rem; color:var(--color-muted); margin:.6rem 0 0; }
 </style>
