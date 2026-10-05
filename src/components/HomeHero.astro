@@ -81,12 +81,10 @@ const points = [[280,116,-17,-50],[244,137,28,-10],[280,116,-17,110],[244,137,28
  .orbital-links { display: flex; justify-content: flex-end; align-items: center; flex-wrap: wrap; gap: .5rem 1rem; }
  .orbital-links a { font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; text-decoration: none; display:inline-flex; align-items:center; min-height:48px; padding:.85rem 1.35rem; border:1px solid var(--color-dark); border-radius:var(--radius-button); color:var(--color-dark); font-weight:600; }
 @media (hover: hover) and (pointer: fine) {
-.orbital-links a:hover { background:var(--color-plum); color:var(--color-on-dark); border-color:var(--color-plum); }
+.orbital-links a:not(.orbital-work-button):hover { background:var(--color-plum); color:var(--color-on-dark); border-color:var(--color-plum); }
 }
  .orbital-links a.orbital-work-button { border-radius: var(--radius-button); display: inline-flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 48px; padding: .85rem 2rem; background: var(--color-dark); color: var(--color-on-dark); border: 1px solid var(--color-dark); font-weight: 700; }
-@media (hover: hover) and (pointer: fine) {
-.orbital-links a.orbital-work-button:hover { background: var(--color-plum); border-color: var(--color-plum); }
-}
+
  .orbital-links a:focus-visible { outline: 3px solid var(--color-dark); outline-offset: 4px; }
  .orbital-links a span { display: inline-block; margin-left: .4rem; }
  .orbital-positioning > h1 { margin: 0; font-size: inherit; line-height: inherit; letter-spacing: inherit; font-weight: inherit; color: inherit; }
@@ -202,3 +200,21 @@ const points = [[280,116,-17,-50],[244,137,28,-10],[280,116,-17,110],[244,137,28
   measure(); update();
  }
 </script>
+
+<script>
+ // Mouse-only hover avoids Safari's synthetic hover phase on these native links.
+ const controls = document.querySelectorAll<HTMLAnchorElement>('.orbital-work-button, .project-card .project-link');
+ for (const control of controls) {
+  control.addEventListener('pointerenter', event => {
+   if (event.pointerType === 'mouse') control.setAttribute('data-mouse-hover', '');
+  }, { passive: true });
+  control.addEventListener('pointerleave', () => control.removeAttribute('data-mouse-hover'), { passive: true });
+  control.addEventListener('pointerdown', event => {
+   if (event.pointerType !== 'mouse') control.removeAttribute('data-mouse-hover');
+  }, { passive: true });
+ }
+ window.addEventListener('pageshow', () => controls.forEach(control => control.removeAttribute('data-mouse-hover')));
+</script>
+<style>
+ .orbital-work-button[data-mouse-hover] { background:var(--color-plum) !important; border-color:var(--color-plum) !important; }
+</style>
