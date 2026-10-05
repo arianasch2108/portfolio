@@ -49,8 +49,8 @@ const { assets } = Astro.props;
    button.addEventListener('click',()=>{choice=button;show(button.dataset.priority!);});
   });
   root.querySelectorAll<HTMLElement>('[data-priority],[data-external]').forEach(control=>{
-   control.addEventListener('pointerenter',()=>{if(screen==='priorities')stage(1);});
-   control.addEventListener('focus',()=>{if(screen==='priorities')stage(1);});
+   control.addEventListener('pointerenter',(event)=>{if(event.pointerType==='mouse' && window.matchMedia('(hover: hover) and (pointer: fine)').matches && screen==='priorities')stage(1);});
+   control.addEventListener('focus',()=>{if(control.matches(':focus-visible') && screen==='priorities')stage(1);});
   });
   root.querySelectorAll('[data-back]').forEach(button=>button.addEventListener('click',()=>show('priorities')));
   frame.addEventListener('prototype-reset',()=>{choice=null;show('priorities',true);});
