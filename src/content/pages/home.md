@@ -1,6 +1,6 @@
 ---
 title: Home
-description: "Ariana Sierra-Chacón — digital strategist and creative problem solver based in Washington, DC."
+description: "Digital strategist with 3+ years of experience working across content, design, marketing, and technology to connect organizations with their intended communities."
 homepage:
   eyebrow: "CONTENT MANAGEMENT · DIGITAL STRATEGY · CREATIVE TECHNOLOGY"
   positioning: "Creating digital experiences rooted in people and purpose."
