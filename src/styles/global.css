@@ -88,7 +88,7 @@
 body { font-weight: var(--font-weight-normal); margin: 0; min-width: 0; min-height: 100vh; display: flex; flex-direction: column; }
 a { color: var(--color-link); text-underline-offset: .25em; }
 @media (hover: hover) and (pointer: fine) {
-a:hover { text-decoration-thickness: .12em; }
+a:not(.brief-card-link):hover { text-decoration-thickness: .12em; }
 }
 :focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
 main:focus { outline: none; }
@@ -345,7 +345,7 @@ dd { margin: var(--space-1) 0 0; }
   border: 1px solid var(--color-lilac);
   color: var(--color-on-dark);
   text-decoration: none;
-  transition: background-color var(--duration-short) ease, color var(--duration-short) ease;
+  transition: none;
 }
 .brief-card-top { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); }
 .brief-card .eyebrow { color: var(--color-lilac); margin: 0; }
@@ -664,3 +664,12 @@ html body .orbital-linkedin[data-tap-active] { color:var(--color-plum); backgrou
 html body .footer-linkedin[data-tap-active] { color:var(--color-lilac); text-decoration:none; }
 html body .project-artifact[data-tap-active] { outline:2px solid var(--color-plum); outline-offset:2px; }
 html body .lsc-priority-row :is(button,a)[data-tap-active] { background:#a31920; text-decoration:none; }
+
+/* Each brief is one native link; its decorative children are not separate hit targets. */
+.brief-card-link * { pointer-events: none; }
+.brief-card-link[data-mouse-hover] {
+ background: var(--color-pale-lilac);
+ color: var(--color-text);
+ border-color: var(--color-lilac);
+}
+.brief-card-link[data-mouse-hover] .eyebrow { color: var(--color-plum); }
