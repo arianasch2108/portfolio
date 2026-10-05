@@ -359,38 +359,16 @@ dd { margin: var(--space-1) 0 0; }
 .brief-preview { margin-top: var(--space-5); padding: var(--space-3); background: var(--color-surface); width: min(100%, 12rem); }
 .brief-preview img { max-height: 8rem; width: 100%; object-fit: contain; }
 .brief-cta { display: inline-flex; gap: var(--space-6); font-weight: var(--font-weight-semibold); min-height: var(--target-size-min); align-items: center; }
-.brief-card-link:focus-visible {
-  background: var(--color-pale-lilac);
-  color: var(--color-text);
-  border-color: var(--color-lilac);
-}
-@media (hover: hover) and (pointer: fine) {
-.brief-card-link:hover {
-  background: var(--color-pale-lilac);
-  color: var(--color-text);
-  border-color: var(--color-lilac);
-}
-}
-.brief-card-link:focus-visible .brief-reveal {
-  grid-template-rows: 1fr;
-  visibility: visible;
-  opacity: 1;
-}
-@media (hover: hover) and (pointer: fine) {
-.brief-card-link:hover .brief-reveal {
-  grid-template-rows: 1fr;
-  visibility: visible;
-  opacity: 1;
-}
-}
+
+
+
+
 /* Touch and narrow screens get the summary and direct link without a hover step. */
 @media (hover: hover) and (pointer: fine) and (min-width: 40.001rem) {
   .brief-reveal-inner > p { padding-top: 0; margin-top: 0; }
 }
-.brief-card-link:focus-visible .eyebrow { color:var(--color-plum); }
-@media (hover: hover) and (pointer: fine) {
-.brief-card-link:hover .eyebrow { color:var(--color-plum); }
-}
+
+
 @media (hover: none), (pointer: coarse), (max-width: 40rem) {
   .brief-reveal { grid-template-rows: 1fr; visibility: visible; opacity: 1; }
 }
@@ -410,19 +388,7 @@ dd { margin: var(--space-1) 0 0; }
 /* Homepage refinements; case-study page compositions stay unchanged. */
 .positioning-line { color: var(--color-lilac); }
 .tags li { text-transform: capitalize; background: var(--color-pale-lilac); color: var(--color-text); border-color: var(--color-pale-lilac); }
-.project-card--feature { transition: transform var(--duration-short) ease; transform-origin: center; }
-@media (hover: hover) and (pointer: fine) {
-@media (hover: hover) and (pointer: fine) {
-.project-card--feature:hover { transform: scale(1.015); }
-}
-}
-
-@media (prefers-reduced-motion: reduce) {
-
-@media (hover: hover) and (pointer: fine) {
-.project-card--feature:hover { transform: none; }
-}
-}
+.project-card--feature { transform: none; }
 
 /* Equal card rows size to the longest content; no fixed height or truncation. */
 .project-grid:not(.project-grid--features) { grid-auto-rows: 1fr; align-items: stretch; }
@@ -495,7 +461,8 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-family-heading); }
  font-weight: var(--font-weight-semibold);
 }
 @media (hover: hover) and (pointer: fine) {
-.project-card .project-link:hover {
+.home-main .project-card .project-link[data-mouse-hover],
+body:not(:has(.home-main)) .project-card .project-link:hover {
  background: var(--color-plum);
  border-color: var(--color-plum);
 }
@@ -671,3 +638,29 @@ a[href], button { touch-action: manipulation; }
 @media (hover: none), (pointer: coarse) {
   .project-card--feature { transform:none; transition:none; }
 }
+
+/* Applied only by a completed touch activation, never simulated hover. */
+html body a[data-tap-active], html body button[data-tap-active] {
+  transition: none;
+  text-decoration: underline;
+  text-underline-offset: .18em;
+}
+html body :is(.button, .orbital-work-button)[data-tap-active] {
+  background: var(--color-plum);
+  border-color: var(--color-plum);
+  color: var(--color-on-dark);
+  text-decoration: none;
+}
+html body .brief-card-link[data-tap-active] {
+  background: var(--color-pale-lilac);
+  border-color: var(--color-lilac);
+  color: var(--color-text);
+  text-decoration: none;
+}
+html body .brief-card-link[data-tap-active] .eyebrow { color:var(--color-plum); }
+html body :is(.resume-download, .back-to-top)[data-tap-active] { background:var(--color-dark); color:var(--color-on-dark); text-decoration:none; }
+html body .site-footer .footer-cta[data-tap-active] { background:#fff; border-color:#fff; color:var(--color-plum); }
+html body .orbital-linkedin[data-tap-active] { color:var(--color-plum); background:transparent; text-decoration:none; }
+html body .footer-linkedin[data-tap-active] { color:var(--color-lilac); text-decoration:none; }
+html body .project-artifact[data-tap-active] { outline:2px solid var(--color-plum); outline-offset:2px; }
+html body .lsc-priority-row :is(button,a)[data-tap-active] { background:#a31920; text-decoration:none; }

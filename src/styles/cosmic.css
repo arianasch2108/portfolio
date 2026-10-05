@@ -17,7 +17,7 @@
 .button-light:hover::after { opacity: 1; }
 }
 @media (hover: hover) and (pointer: fine) {
-.project-link:hover span, .resume-link:hover > span, .project-continuation:hover > span:last-child > span { transform: translateX(4px); }
+.resume-link:hover > span, .project-continuation:hover > span:last-child > span { transform: translateX(4px); }
 }
 }
 .project-link span, .resume-link > span, .project-continuation > span:last-child > span { display: inline-block; transition: transform 220ms ease; }
@@ -29,7 +29,7 @@
 .hero-name:hover .hero-first-name { background-position: 0% 50%; }
 }
 @media (hover: hover) and (pointer: fine) {
-.project-link:hover span, .resume-link:hover > span, .project-continuation:hover > span:last-child > span { transform: none; }
+.resume-link:hover > span, .project-continuation:hover > span:last-child > span { transform: none; }
 }
 }
 @media (forced-colors: active) {
