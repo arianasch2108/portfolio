@@ -8,19 +8,29 @@
  .hero-first-name { background: var(--gradient-pearl); background-size: 160% 100%; background-position: 0% 50%; background-clip: text; -webkit-background-clip: text; color: transparent; transition: background-position 1.8s ease; }
 }
 @media (hover: hover) and (pointer: fine) {
- .hero-name:hover .hero-first-name { background-position: 100% 50%; }
+@media (hover: hover) and (pointer: fine) {
+.hero-name:hover .hero-first-name { background-position: 100% 50%; }
+}
  .button-light { position: relative; }
  .button-light::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--gradient-pearl); opacity: 0; transition: opacity 250ms ease; pointer-events: none; }
- .button-light:hover::after { opacity: 1; }
- .project-link:hover span, .resume-link:hover > span, .project-continuation:hover > span:last-child > span { transform: translateX(4px); }
+@media (hover: hover) and (pointer: fine) {
+.button-light:hover::after { opacity: 1; }
+}
+@media (hover: hover) and (pointer: fine) {
+.project-link:hover span, .resume-link:hover > span, .project-continuation:hover > span:last-child > span { transform: translateX(4px); }
+}
 }
 .project-link span, .resume-link > span, .project-continuation > span:last-child > span { display: inline-block; transition: transform 220ms ease; }
 @media (hover: none), (pointer: coarse) { .star-reveal, .orbital-detail { display: none; } }
 @media (prefers-reduced-motion: reduce) {
  .star-reveal { display: none; }
  .hero-first-name { transition: none; }
- .hero-name:hover .hero-first-name { background-position: 0% 50%; }
- .project-link:hover span, .resume-link:hover > span, .project-continuation:hover > span:last-child > span { transform: none; }
+@media (hover: hover) and (pointer: fine) {
+.hero-name:hover .hero-first-name { background-position: 0% 50%; }
+}
+@media (hover: hover) and (pointer: fine) {
+.project-link:hover span, .resume-link:hover > span, .project-continuation:hover > span:last-child > span { transform: none; }
+}
 }
 @media (forced-colors: active) {
  .hero-first-name { background: none; color: CanvasText; }
@@ -30,7 +40,9 @@
 @supports (offset-path: path('M0 0 L1 1')) {
  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .hero .orbital-point { cx: 0; cy: 0; offset-path: path('M10 60 A100 35 0 1 1 210 60 A100 35 0 1 1 10 60'); animation: orbital-pass 32s linear infinite; animation-play-state: paused; }
-  .hero:hover .orbital-point { animation-play-state: running; }
+@media (hover: hover) and (pointer: fine) {
+.hero:hover .orbital-point { animation-play-state: running; }
+}
  }
 }
 @keyframes orbital-pass { to { offset-distance: 100%; } }
@@ -42,6 +54,8 @@
 .hero .portrait-frame::before, .hero .portrait-frame::after { display: none; }
 .hero .portrait-frame img { background: transparent; border: 0; border-radius: 0; object-fit: contain; object-position: center bottom; }
 .nebula-toggle { position: absolute; bottom: .75rem; right: var(--page-gutter); background: transparent; border: 0; color: var(--color-muted-on-dark); font: inherit; font-size: .75rem; padding: .5rem; cursor: pointer; }
+@media (hover: hover) and (pointer: fine) {
 .nebula-toggle:hover { color: var(--color-on-dark); }
+}
 .nebula-paused .hero-nebula { animation-play-state: paused; }
 @media (prefers-reduced-motion: reduce) { .hero-nebula { animation: none; } .nebula-toggle { display: none; } }
