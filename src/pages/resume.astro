@@ -34,11 +34,11 @@ const skills = [
    <nav aria-label="Resume sections"><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#education">Education</a></nav>
   </header>
   <section id="experience" aria-labelledby="experience-heading">
-   <p class="section-marker">Experience</p><h2 id="experience-heading">Where I’ve worked.</h2>
+   <h2 id="experience-heading">Experience</h2>
    {roles.map(role=><article class="resume-role"><p class="role-dates">{role.dates}</p><div class="role-content"><h3>{role.title}</h3><p class="organization">{role.organization}</p><ul>{role.bullets.map(bullet=><li>{bullet}</li>)}</ul></div><dl class="role-metrics">{role.metrics.map(([value,label])=><div><dt>{label}</dt><dd>{value}</dd></div>)}</dl></article>)}
   </section>
   <section id="skills" aria-labelledby="skills-heading">
-   <p class="section-marker">Skills</p><h2 id="skills-heading">What I work with.</h2>
+   <h2 id="skills-heading">Skills</h2>
    <div class="skill-grid">{skills.map(([category,items])=><div><h3>{category}</h3><ul>{items.map(item=><li>{item}</li>)}</ul></div>)}</div>
   </section>
   <section id="education" aria-labelledby="education-heading">

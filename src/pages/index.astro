@@ -32,7 +32,7 @@ const selectedProjects = projects.filter(({ data }) => data.format === 'brief' &
 
   <section id="resume" class="resume-section" aria-labelledby="resume-title"><div class="container resume-inner">
     <div><h2 id="resume-title">{home.resumeHeading}</h2>{home.resumeSupporting && <p class="resume-note">{home.resumeSupporting}</p>}</div>
-    <a class="resume-link" href={site.resumeUrl || '/resume/'} download={site.resumeUrl ? true : undefined}>View resume<span aria-hidden="true">›</span></a>
+    <a class="resume-link" href="/resume/">View resume<span aria-hidden="true">›</span></a>
   </div></section>
 </SiteLayout>
 
