@@ -23,11 +23,16 @@ const socialLinks: { label: string; url: string }[] = site.socialLinks;
     <a class="site-name" href="/">{site.name}</a>
     <nav aria-label="Footer navigation"><ul class="nav-list">{[...site.navigation, { label: 'Resume', href: '/resume/' }].map(({ label, href }) => <li><a href={href}>{label}</a></li>)}</ul></nav>
     <p>© {new Date().getFullYear()}</p>
+    <div class="footer-privacy"><a href="/privacy/">Privacy</a><button type="button" data-cookie-settings hidden>Cookie settings</button></div>
   </div>
  </div>
 </footer>
 
 <style>
+ .footer-privacy { display:flex; flex-wrap:wrap; gap:1.25rem; grid-column:1/-1; font-size:.85rem; }
+ .footer-privacy button { font:inherit; color:inherit; background:none; border:0; padding:0; min-height:44px; text-decoration:underline; cursor:pointer; }
+ .footer-privacy a { display:inline-flex; align-items:center; min-height:44px; }
+ .footer-privacy button[hidden] { display:none; }
  .footer-contact-actions { display:flex; align-items:center; gap:1rem; margin-top:var(--space-8); }
  .site-footer .footer-contact-actions .footer-cta { margin-top:0; flex:1; min-width:0; }
  .footer-contact-actions .footer-linkedin { flex:0 0 44px; transform:translateY(10px); }
