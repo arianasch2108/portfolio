@@ -1,16 +1,18 @@
 ---
+import { Image, getImage } from 'astro:assets';
 import ExplodingMockup from './ExplodingMockup.astro';
 import people from '../assets/projects/brand-refresh/impact.png';
 import web from '../assets/projects/brand-refresh/presentation/mission-1600.png';
 import report from '../assets/projects/brand-refresh/presentation/report-impact-800.png';
 import fullPage from '../assets/projects/brand-refresh/mission.png';
+const peopleOptimized = await getImage({ src: people, width: Math.min(people.width, 1920), format: 'webp', quality: 85 });
 ---
 <div class="brand-cover" role="img" aria-label="Institution to people: family photography leads a collage of LSC’s refreshed mission page and annual report visual system.">
  <ExplodingMockup background={fullPage}>
  <div class="foreground-cluster">
- <div class="cover-human" aria-hidden="true"><svg viewBox="1540 548 1300 723" preserveAspectRatio="xMidYMid slice"><image href={people.src} width={people.width} height={people.height} /></svg></div>
- <div class="cover-system" aria-hidden="true"><img src={report.src} width={report.width} height={report.height} alt="" loading="lazy" /></div>
- <div class="cover-web" aria-hidden="true"><div class="browser-edge"><i></i><i></i><i></i></div><img src={web.src} width={web.width} height={web.height} alt="" loading="lazy" /></div>
+ <div class="cover-human" aria-hidden="true"><svg viewBox="1540 548 1300 723" preserveAspectRatio="xMidYMid slice"><image href={peopleOptimized.src} width={people.width} height={people.height} /></svg></div>
+ <div class="cover-system" aria-hidden="true"><Image src={report} width={report.width} height={report.height} alt="" loading="lazy"  widths={[320, 640, 960, 1280]} sizes="(max-width: 48rem) 24vw, 16vw" format="webp" quality={85} /></div>
+ <div class="cover-web" aria-hidden="true"><div class="browser-edge"><i></i><i></i><i></i></div><Image src={web} width={web.width} height={web.height} alt="" loading="lazy"  widths={[320, 640, 960, 1280]} sizes="(max-width: 48rem) 60vw, 38vw" format="webp" quality={85} /></div>
  </div>
  </ExplodingMockup>
 </div>

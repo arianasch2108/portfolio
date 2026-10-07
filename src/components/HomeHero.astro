@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import CosmicDetail from './CosmicDetail.astro';
 import site from '../data/site.json';
@@ -23,7 +24,7 @@ const points = [[280,116,-17,-50],[244,137,28,-10],[280,116,-17,110],[244,137,28
      <ellipse cx="340" cy="200" rx="244" ry="137" transform="rotate(28 340 200)" />
      <ellipse class="orbit-third" cx="340" cy="200" rx="180" ry="142" transform="rotate(-52 340 200)" />
     </svg>
-    <div class="orbital-portrait">{home.portrait ? <img src={home.portrait.src.src} alt={home.portrait.alt} width={home.portrait.src.width} height={home.portrait.src.height} loading="eager" fetchpriority="high" /> : <span>Portrait to be supplied</span>}</div>
+    <div class="orbital-portrait">{home.portrait ? <Image src={home.portrait.src} widths={[280, 420, 640, 840]} sizes="(max-width: 48rem) 42vw, 280px" format="webp" quality={85} alt={home.portrait.alt} width={home.portrait.src.width} height={home.portrait.src.height} loading="eager" fetchpriority="high" /> : <span>Portrait to be supplied</span>}</div>
     <svg class="orbit-paths orbit-front" viewBox="0 0 680 400" fill="none" aria-hidden="true" focusable="false"><path d="M73 234 C118 327 380 354 598 185" /><path d="M167 309 C251 365 400 352 469 279" /></svg>
     <svg class="orbit-paths orbit-nodes" viewBox="0 0 680 400" aria-hidden="true" focusable="false">{points.map(p => <circle cx={p.x} cy={p.y} r="3" fill="var(--color-pale-lilac)" stroke="none" />)}</svg>
     <ul class="discipline-labels" aria-label="Disciplines">{disciplines.map((label,i)=><li class={`discipline-${i}`} style={`--node-x:${points[i].x / 680 * 100}%;--node-y:${points[i].y / 400 * 100}%`}><span aria-hidden="true"></span>{label}</li>)}</ul>
