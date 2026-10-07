@@ -30,8 +30,8 @@ const projects = defineCollection({
         positioning: z.object({ idea: z.string(), body: z.string(), anchors: z.array(z.object({ title: z.string(), body: z.string() })), result: z.string() }).optional(),
         copyArtifact: z.object({ headline: z.string(), product: z.string(), description: z.string(), closing: z.string(), signature: z.string(), story: z.string() }).optional(),
         artifact: z.object({
-          label: z.string(), src: image().optional(), alt: z.string().min(1),
-          details: z.array(z.object({ src: image(), alt: z.string().min(1), caption: z.string() })).max(3).default([]),
+          label: z.string(), src: image().optional(), alt: z.string().trim().min(1, 'Provide descriptive alternative text for this image.'),
+          details: z.array(z.object({ src: image(), alt: z.string().trim().min(1, 'Provide descriptive alternative text for this image.'), caption: z.string() })).max(3).default([]),
         }).optional(),
       })),
     }).optional(),
@@ -41,7 +41,7 @@ const projects = defineCollection({
       artifactGroups: z.record(z.string(), z.array(z.object({ key: z.string(), label: z.string(), shape: z.enum(['wide', 'portrait', 'square']).default('wide') }))).optional(),
       myRole: z.string().optional(), tools: z.string().optional(), nextSlug: z.string().optional(), relatedText: z.string().optional(),
       relatedSlug: z.string().optional(),
-      assets: z.record(z.string(), z.object({ src: image(), alt: z.string().min(1), caption: z.string().optional(), crop: z.tuple([z.number(), z.number(), z.number().positive(), z.number().positive()]).optional(), presentation: z.enum(["laptop", "tablet"]).optional(), representative: z.boolean().optional() })),
+      assets: z.record(z.string(), z.object({ src: image(), alt: z.string().trim().min(1, 'Provide descriptive alternative text for this image.'), caption: z.string().optional(), crop: z.tuple([z.number(), z.number(), z.number().positive(), z.number().positive()]).optional(), presentation: z.enum(["laptop", "tablet"]).optional(), representative: z.boolean().optional() })),
       video: z.object({
         src: z.string().startsWith('/'), title: z.string().min(1),
         captionsSrc: z.string().startsWith('/'), captionsLanguage: z.string().default('en'),
@@ -65,7 +65,7 @@ const projects = defineCollection({
         outcomes: z.array(z.string()).optional(),
       })),
     }).optional(),
-    cover: z.object({ src: image(), alt: z.string().min(1) }).optional(),
+    cover: z.object({ src: image(), alt: z.string().trim().min(1, 'Provide descriptive alternative text for this image.') }).optional(),
     results: z.array(z.object({ label: z.string(), detail: z.string() })).default([]),
     links: z.array(z.object({ label: z.string(), url: z.url({ protocol: /^https?$/ }) })).default([]),
   }),
@@ -78,7 +78,7 @@ const pages = defineCollection({
     homepage: z.object({
       eyebrow: z.string(), positioning: z.string(),
       positioningIsPlaceholder: z.boolean().default(true),
-      portrait: z.object({ src: image(), alt: z.string().min(1) }).optional(),
+      portrait: z.object({ src: image(), alt: z.string().trim().min(1, 'Provide descriptive alternative text for this image.') }).optional(),
       impactHeading: z.string(),
       achievements: z.array(z.object({ value: z.string(), label: z.string(), placeholder: z.boolean().default(true) })).length(3),
       caseStudyHeading: z.string(), caseStudyIntro: z.string(),
