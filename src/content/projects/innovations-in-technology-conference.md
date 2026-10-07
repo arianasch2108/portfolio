@@ -18,7 +18,7 @@ caseStudy: {
   "myRole": "Visual Design · Web & Mobile Design · Print Design · Brand Governance · Accessibility · QA",
   "platforms": "Cvent · Cvent Attendee Hub App · Box · Social",
   "scope": "",
-  "intro": "Over three conference cycles, I helped shape the visual identity and attendee experience for LSC’s Innovations in Technology Conference by building a cohesive conference brand that could work across marketing campaigns, web and mobile experiences, print materials, signage, merchandise, and the live event.",
+  "intro": "Over three conference cycles, I refined the visual identity and attendee experience for LSC’s Innovations in Technology Conference by building a cohesive conference brand that could work across marketing campaigns, web and mobile experiences, print materials, signage, merchandise, and the live event.",
   "assets": {
   "photoFrame": {"src": "../../assets/projects/conference/attendee-photo-frame.jpg", "alt": "Conference attendees posing together with the blue and white ITC 2026 photo frame in San Antonio", "caption": "A branded photo frame brought the ITC identity into shared attendee moments."},
   "website": {"src": "../../assets/projects/conference/website-2027.png", "alt": "2027 Innovations in Technology Conference website with New Orleans photography, registration links, and conference details", "crop": [349, 182, 1536, 864], "presentation": "laptop", "caption": "2027 conference website in Cvent."},
@@ -71,7 +71,7 @@ caseStudy: {
         "label": "MAKING THE SYSTEM USABLE",
         "heading": "",
         "paragraphs": [
-          "Conference brand assets and guidance were centralized in Box, creating a shared source of truth for applying the identity consistently across teams, vendors, platforms, and event materials."
+          "Centralized conference brand assets and guidance in Box, creating a shared source of truth for applying the identity consistently across teams, vendors, platforms, and event materials."
         ]
       }
     },

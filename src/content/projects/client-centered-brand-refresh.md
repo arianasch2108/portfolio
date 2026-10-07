@@ -18,7 +18,7 @@ caseStudy:
   subtitle: "Building a more people-centered visual identity across LSC’s digital presence."
   timeline: "2024–2025"
   scope: "Web · Design · Brand governance"
-  intro: "I helped evolve LSC’s visual identity from an institution-focused approach to a more human-centered brand experience, using photography, visual storytelling, content design, and brand governance to better connect its digital presence to the people and communities served by civil legal aid organizations."
+  intro: "I evolved LSC’s visual identity from an institution-focused approach to a more human-centered brand experience. Developed a brand system using photography, visual storytelling, content design, and governance to better connect its digital presence to the people and communities served by civil legal aid organizations."
   sections:
     - id: "challenge"
       eyebrow: "CHALLENGE"
@@ -27,7 +27,7 @@ caseStudy:
         - "LSC’s visual approach centered the organization’s relationship to government rather than the people and communities its mission serves."
         - "**Institutional imagery dominated:** Government buildings, monuments, generic graphics, and stock photography made up much of the visual language across digital communications."
         - "**Mission felt less tangible:** While the approach conveyed authority and credibility, there was an opportunity to make the impact of civil legal aid feel more human, personal, and connected to real communities."
-      statement: "How could we make LSC’s digital presence feel more connected to the people behind the mission without abandoning the credibility of a national organization?"
+      statement: "How could LSC’s digital presence feel more connected to the people behind the mission without abandoning the credibility of a national organization?"
     - id: "strategy"
       eyebrow: "STRATEGY"
       heading: "From institutions to people."
@@ -71,7 +71,7 @@ caseStudy:
         - "**More intentional visual storytelling:** Introduced people-centered photography and iconography to make the brand feel more connected to its mission."
         - "**Clearer content hierarchy:** Used custom components on core pages to make complex information more engaging and easier to navigate."
         - "**Brand evolution without a rebuild:** Created meaningful visual change while working within LSC.gov’s established website system."
-      statement: "The challenge was finding the highest-impact opportunities for web within the system we already had."
+      statement: "The challenge was finding the highest-impact opportunities within LSC.gov’s existing website infrastructure."
     - id: "content-design"
       eyebrow: "CONTENT DESIGN"
       heading: "Making complex information easier to navigate."
@@ -106,13 +106,13 @@ caseStudy:
           body: "Centralized assets, templates, photography guidance, and standards in Box and Canva."
         - title: "Enable"
           label: "Launched + educated"
-          body: "Introduced the Branding Box Hub organization-wide and helped staff understand where resources lived and how to use them."
+          body: "Introduced the Branding Box Hub organization-wide and guided staff on where resources lived and how to use them."
       statement: "Governance turned the refresh from a visual direction into a shared organizational practice."
     - id: "impact"
       eyebrow: "IMPACT"
       heading: "Building a system that works harder."
       paragraphs:
-        - "The refresh created a more cohesive digital system for communicating LSC’s mission. This made it easier to connect campaigns across channels, produce consistent content efficiently, and guide audiences from awareness on social media to deeper engagement on the website."
+        - "The refresh created a more cohesive visual system for communicating LSC’s mission. This made it easier to connect campaigns across channels, produce consistent content efficiently, and guide audiences from awareness on social media to deeper engagement on the website."
       items:
         - title: "Brand recognition + mission clarity"
           body: "Stronger brand recognition and mission clarity through a more consistent, people-centered visual identity that connects LSC’s work to the communities it serves."
@@ -131,7 +131,7 @@ caseStudy:
       heading: "Brand is experienced, not just seen."
       paragraphs:
         - "This project reinforced that meaningful brand evolution requires the systems, governance, and collaboration that allow visual direction to become part of an organizational identity."
-        - "By grounding photography, content, and design choices in LSC’s mission, we created a more human and consistent experience across web, social media, campaigns, reports, and other touchpoints. Just as importantly, I worked across teams to translate that direction into practical standards, shared resources, and repeatable processes—while continuing to refine the system based on how teams actually used it."
+        - "By grounding photography, content, and design choices in LSC’s mission, I created a more human and consistent experience across web, social media, campaigns, reports, and other touchpoints. Just as importantly, I worked across teams to translate that direction into practical standards, shared resources, and repeatable processes—while continuing to refine the system based on how teams actually used it."
         - "The result was a brand that could evolve without losing consistency: rooted in mission, supported by governance, and flexible enough to work across channels, teams, and new digital experiences."
   assets: {"hero": {"src": "../../assets/projects/brand-refresh/homepage.png", "alt": "LSC homepage featuring the Veteran Legal Services Toolkit", "presentation": "laptop"}, "before": {"src": "../../assets/projects/brand-refresh/report-before.png", "alt": "2023 annual report cover featuring institutional imagery", "crop": [224, 563, 897, 1160]}, "after": {"src": "../../assets/projects/brand-refresh/report-after.png", "alt": "2024 annual report cover featuring a father holding a child", "crop": [224, 560, 897, 1162]}, "website-implementation": {"src": "../../assets/projects/brand-refresh/homepage.png", "alt": "LSC homepage with people-centered photography and toolkit call to action", "presentation": "laptop", "crop": [0, 530, 2850, 1270]}, "content-hierarchy": {"src": "../../assets/projects/brand-refresh/impact.png", "alt": "LSC impact page with family photography and a clear mission statement", "presentation": "laptop", "crop": [0, 530, 2850, 1270]}, "mission": {"src": "../../assets/projects/brand-refresh/mission.png", "alt": "Our Mission and Impact page pairing mission copy with people-centered photography", "presentation": "laptop", "crop": [0, 465, 2850, 1335]}, "legal-aid": {"src": "../../assets/projects/brand-refresh/legal-aid.png", "alt": "What is legal aid page pairing an explanation with a photograph of two women", "presentation": "laptop", "crop": [0, 465, 2850, 1335]}, "impact-stories": {"src": "../../assets/projects/brand-refresh/impact-stories.png", "alt": "Impact page featuring three client-story cards", "presentation": "laptop", "crop": [0, 465, 2850, 1335]}, "report-impact": {"src": "../../assets/projects/brand-refresh/report-impact.png", "alt": "2024 annual report page combining impact figures and client stories", "crop": [1077, 158, 1078, 1397]}, "report-task-forces": {"src": "../../assets/projects/brand-refresh/report-task-forces.png", "alt": "2024 annual report page illustrating LSC task forces with community photography", "crop": [1077, 158, 1078, 1397]}}
   relatedSlug: "grantee-client-stories"

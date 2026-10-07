@@ -103,7 +103,7 @@ caseStudy: {
         },
         {
           "title": "HUMAN CONTEXT",
-          "body": "Use people-centered photography and stories to connect the issue to lived experience."
+          "body": "Use people-centered photography and stories to connect the issue to staff or clients’ lived experience."
         },
         {
           "title": "LAYERED INFORMATION",
@@ -120,7 +120,7 @@ caseStudy: {
       "eyebrow": "CAMPAIGN STRATEGY",
       "heading": "Giving campaigns somewhere meaningful to land.",
       "paragraphs": [
-        "The priority pages also created dedicated destinations for issue-based social campaigns. Instead of asking a single post to carry the full story, campaign content could introduce an issue and direct audiences to a page where related data, client stories, fact sheets, and other resources could live together."
+        "The priority pages also created dedicated destinations for issue-based social campaigns. Instead of asking a single post to carry the full story, campaign content could introduce an issue and direct audiences to a page where related data, client stories, fact sheets, and other resources could live together to reinforce LSC’s mission."
       ],
       "outcomes": [
         "SOCIAL CAMPAIGN",
@@ -135,7 +135,7 @@ caseStudy: {
       "heading": "Building connections, not just pages.",
       "paragraphs": [
         "The project established a new framework for organizing LSC’s priority issues across the website. Rather than treating each page as an isolated destination, the system creates stronger connections between campaigns, stories, data, resources, and the broader mission of civil legal aid.",
-        "For me, the project reinforced that content strategy is often less about creating more content and more about designing better relationships between what already exists."
+        "The project reinforced that content strategy is often less about creating more content and more about designing better relationships between what already exists."
       ],
       "items": [
         {
