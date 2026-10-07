@@ -3,11 +3,11 @@ import { Image, getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 interface Props { background: ImageMetadata; backgroundCrop?: [number, number, number, number]; }
 const { background, backgroundCrop } = Astro.props;
-const backgroundOptimized = await getImage({ src: background, width: Math.min(background.width, 1920), format: 'webp', quality: 85 });
+const backgroundOptimized = await getImage({ src: background, width: Math.min(background.width, 1920), format: 'webp', quality: 70 });
 ---
 <div class="exploding-mockup">
  <div class="device" aria-hidden="true">
-  <div class="screen">{backgroundCrop ? <svg viewBox={backgroundCrop.join(' ')}><image href={backgroundOptimized.src} width={background.width} height={background.height} /></svg> : <Image src={background} width={background.width} height={background.height} alt="" loading="lazy"  widths={[320, 640, 960, 1280]} sizes="(max-width: 48rem) 80vw, 50vw" format="webp" quality={85} />}</div>
+  <div class="screen">{backgroundCrop ? <svg viewBox={backgroundCrop.join(' ')}><image href={backgroundOptimized.src} width={background.width} height={background.height} /></svg> : <Image src={background} width={background.width} height={background.height} alt="" loading="lazy"  widths={[160, 240, 320, 400, 480, 640, 960, 1280]} sizes="(max-width: 48rem) 80vw, 50vw" format="webp" quality={70} />}</div>
   <div class="base"></div>
  </div>
  <slot />

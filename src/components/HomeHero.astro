@@ -24,7 +24,7 @@ const points = [[280,116,-17,-50],[244,137,28,-10],[280,116,-17,110],[244,137,28
      <ellipse cx="340" cy="200" rx="244" ry="137" transform="rotate(28 340 200)" />
      <ellipse class="orbit-third" cx="340" cy="200" rx="180" ry="142" transform="rotate(-52 340 200)" />
     </svg>
-    <div class="orbital-portrait">{home.portrait ? <Image src={home.portrait.src} widths={[280, 420, 640, 840]} sizes="(max-width: 48rem) 42vw, 280px" format="webp" quality={85} alt={home.portrait.alt} width={home.portrait.src.width} height={home.portrait.src.height} loading="eager" fetchpriority="high" /> : <span>Portrait to be supplied</span>}</div>
+    <div class="orbital-portrait">{home.portrait ? <Image src={home.portrait.src} widths={[200, 280, 320, 420, 560, 640, 840]} sizes="(max-width: 58rem) min(37.3vw, 263px), min(23.78vw, 302px)" format="webp" quality={85} alt={home.portrait.alt} width={home.portrait.src.width} height={home.portrait.src.height} loading="eager" fetchpriority="high" /> : <span>Portrait to be supplied</span>}</div>
     <svg class="orbit-paths orbit-front" viewBox="0 0 680 400" fill="none" aria-hidden="true" focusable="false"><path d="M73 234 C118 327 380 354 598 185" /><path d="M167 309 C251 365 400 352 469 279" /></svg>
     <svg class="orbit-paths orbit-nodes" viewBox="0 0 680 400" aria-hidden="true" focusable="false">{points.map(p => <circle cx={p.x} cy={p.y} r="3" fill="var(--color-pale-lilac)" stroke="none" />)}</svg>
     <ul class="discipline-labels" aria-label="Disciplines">{disciplines.map((label,i)=><li class={`discipline-${i}`} style={`--node-x:${points[i].x / 680 * 100}%;--node-y:${points[i].y / 400 * 100}%`}><span aria-hidden="true"></span>{label}</li>)}</ul>
@@ -153,6 +153,23 @@ const points = [[280,116,-17,-50],[244,137,28,-10],[280,116,-17,110],[244,137,28
    const expansion = clamp((progress - .18) / .82);
    const rotation = progress * 120;
    const sizes = geometry.map(([rx,ry],i) => [rx*(1+expansion*(2.6+i*.5)),ry*(1+expansion*(2+i*.4))]);
+   const headingRects = occluders.map(element => {
+    const range = document.createRange();
+    range.selectNodeContents(element);
+    return { element, rect: range.getBoundingClientRect() };
+   });
+   const visibility = labels.map((label, i) => {
+    // Digital Strategy stays visible; Marketing only hides beneath ARIANA.
+    const obstacles = i === 0 ? [] : headingRects.filter(({element}) =>
+     i !== 3 || element.classList.contains('orbital-first'));
+    const covered = (rect: DOMRect) => obstacles.some(({rect: heading}) =>
+     rect.left < heading.right && rect.right > heading.left &&
+     // Inset ARIANA’s lower collision edge so Marketing travels farther upward.
+     rect.top < heading.bottom - (i === 3 ? heading.height * 0.18 : 0) && rect.bottom > heading.top);
+    const hidden = covered(label.getBoundingClientRect()) || covered(nodes[i].getBoundingClientRect());
+    return hidden ? 'hidden' : '';
+   });
+   visibility.forEach((value, i) => { labels[i].style.visibility = value; nodes[i].style.visibility = value; });
    hero.classList.toggle('is-scroll-orbit', enabled.matches);
    hero.style.setProperty('--orbit-progress',String(progress));
    hero.style.setProperty('--orbit-fade',String(1-clamp((progress-.78)/.22)));
@@ -174,23 +191,7 @@ const points = [[280,116,-17,-50],[244,137,28,-10],[280,116,-17,110],[244,137,28
     labels[i].style.setProperty('--node-x',`${lx/680*100}%`);
     labels[i].style.setProperty('--node-y',`${ly/400*100}%`);
    });
-   const headingRects = occluders.map(element => {
-    const range = document.createRange();
-    range.selectNodeContents(element);
-    return { element, rect: range.getBoundingClientRect() };
-   });
-   labels.forEach((label, i) => {
-    // Digital Strategy stays visible; Marketing only hides beneath ARIANA.
-    const obstacles = i === 0 ? [] : headingRects.filter(({element}) =>
-     i !== 3 || element.classList.contains('orbital-first'));
-    const covered = (rect: DOMRect) => obstacles.some(({rect: heading}) =>
-     rect.left < heading.right && rect.right > heading.left &&
-     // Inset ARIANA’s lower collision edge so Marketing travels farther upward.
-     rect.top < heading.bottom - (i === 3 ? heading.height * 0.18 : 0) && rect.bottom > heading.top);
-    const hidden = covered(label.getBoundingClientRect()) || covered(nodes[i].getBoundingClientRect());
-    label.style.visibility = hidden ? 'hidden' : '';
-    nodes[i].style.visibility = hidden ? 'hidden' : '';
-   });
+
   };
   const schedule = () => { if (!pending) pending=requestAnimationFrame(update); };
   const refresh = () => { measure(); previous=-1; schedule(); };

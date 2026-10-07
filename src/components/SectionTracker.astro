@@ -25,9 +25,15 @@ const sections = Astro.props.sections ?? [
     let previousActive = -1;
     let previousWidth = 0;
     const update = () => {
-      tracker.hidden = start.getBoundingClientRect().top > 0;
+      const hidden = start.getBoundingClientRect().top > 0;
+      if (tracker.hidden !== hidden) {
+        tracker.hidden = hidden;
+        scheduleUpdate();
+        return;
+      }
+      if (hidden) return;
       const offset = tracker.offsetHeight + 24;
-      document.documentElement.style.setProperty('--section-tracker-offset', `${offset}px`);
+
       let current = 0;
       sections.forEach((section, index) => {
         if (section && section.getBoundingClientRect().top <= offset + 2) current = index;
@@ -35,30 +41,32 @@ const sections = Astro.props.sections ?? [
       if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) {
         current = links.length - 1;
       }
-      links.forEach((link, index) => {
-        if (index === current) link.setAttribute('aria-current', 'location');
-        else link.removeAttribute('aria-current');
-        link.classList.toggle('is-past', index < current);
-      });
       const active = links[current];
       const list = active?.parentElement?.parentElement;
       if (list && !tracker.hidden && (current !== previousActive || list.clientWidth !== previousWidth)) {
         const itemBounds = active.getBoundingClientRect();
         const listBounds = list.getBoundingClientRect();
         const target = list.scrollLeft + itemBounds.left - listBounds.left + itemBounds.width / 2 - list.clientWidth / 2;
+        previousWidth = list.clientWidth;
         list.scrollTo({
           left: Math.max(0, Math.min(target, list.scrollWidth - list.clientWidth)),
           behavior: previousActive < 0 || window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
         });
         previousActive = current;
-        previousWidth = list.clientWidth;
       }
+      document.documentElement.style.setProperty('--section-tracker-offset', `${offset}px`);
+      links.forEach((link, index) => {
+        if (index === current) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+        link.classList.toggle('is-past', index < current);
+      });
+
     };
     let pending = false;
     const scheduleUpdate = () => {
       if (pending) return;
       pending = true;
-      requestAnimationFrame(() => { update(); pending = false; });
+      requestAnimationFrame(() => { pending = false; update(); });
     };
     window.addEventListener('scroll', scheduleUpdate, { passive: true });
     window.addEventListener('resize', scheduleUpdate);

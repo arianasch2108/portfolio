@@ -10,9 +10,9 @@ const selfieOptimized = await getImage({ src: selfie, width: Math.min(selfie.wid
 <div class="conference-cover" role="img" aria-label="ITC conference website on a faded laptop, with the Attendee Hub App, attendees holding a branded selfie frame, and conference speakers floating in front.">
  <ExplodingMockup background={website} backgroundCrop={[349,182,1536,864]}>
  <div class="foreground-cluster">
-  <div class="app" aria-hidden="true"><Image src={app} width={app.width} height={app.height} alt="" loading="lazy"  widths={[320, 640, 960, 1280]} sizes="(max-width: 48rem) 25vw, 16vw" format="webp" quality={85} /></div>
+  <div class="app" aria-hidden="true"><Image src={app} width={app.width} height={app.height} alt="" loading="lazy"  widths={[160, 240, 320, 400, 480, 640, 960, 1280]} sizes="(max-width: 48rem) 25vw, 12vw" format="webp" quality={85} /></div>
   <div class="selfie" aria-hidden="true"><svg viewBox={`0 0 ${Math.floor(selfie.width * 0.93)} ${selfie.height}`}><image href={selfieOptimized.src} width={selfie.width} height={selfie.height} /></svg></div>
-  <div class="speakers" aria-hidden="true"><Image src={speakers} width={speakers.width} height={speakers.height} alt="" loading="lazy"  widths={[320, 640, 960, 1280]} sizes="(max-width: 48rem) 40vw, 26vw" format="webp" quality={85} /></div>
+  <div class="speakers" aria-hidden="true"><Image src={speakers} width={speakers.width} height={speakers.height} alt="" loading="lazy"  widths={[160, 240, 320, 400, 480, 640, 960, 1280]} sizes="(max-width: 48rem) 40vw, 26vw" format="webp" quality={85} /></div>
  </div>
  </ExplodingMockup>
 </div>
