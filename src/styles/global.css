@@ -673,3 +673,11 @@ html body .lsc-priority-row :is(button,a)[data-tap-active] { background:#a31920;
  border-color: var(--color-lilac);
 }
 .brief-card-link[data-mouse-hover] .eyebrow { color: var(--color-plum); }
+
+/* Text CTAs share a persistent underline, including on touch screens. */
+.text-link, .resume-link, .child-project-link > a {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .25em;
+}
+.resume-link { border-bottom: 0; }
