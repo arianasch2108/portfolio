@@ -20,7 +20,7 @@ const projectContext = [context, client, year].filter(Boolean).join(' · ');
     {projectContext && <p class="project-context">{projectContext}</p>}
     <p>{summary}</p>
     <a class="button project-link" href={`/work/${slug}/`} aria-label={`${format === 'case-study' ? 'View case study' : 'View project'}: ${title}`}>{format === 'case-study' ? 'View case study' : 'View project'} <span aria-hidden="true">›</span></a>
-    {showChildProject && slug === 'client-centered-brand-refresh' && <div class="child-project-link"><a href="/work/grantee-client-stories/">Explore Child Project: Client Storytelling <span aria-hidden="true">›</span></a></div>}
+    {showChildProject && slug === 'client-centered-brand-refresh' && <div class="child-project-link"><a href="/work/grantee-client-stories/">Explore Related Project: Client Storytelling <span aria-hidden="true">›</span></a></div>}
   </div>
 </article>
 
