@@ -1,6 +1,6 @@
 ---
 title: Home
-description: "Digital strategist with 3+ years of experience working across content, design, marketing, and technology to connect organizations with their intended communities."
+description: "Digital strategist with 4+ years of experience working across content, design, marketing, and technology to connect organizations with their intended communities."
 homepage:
   eyebrow: "CONTENT MANAGEMENT · DIGITAL STRATEGY · CREATIVE TECHNOLOGY"
   positioning: "Creating digital experiences rooted in people and purpose."
@@ -22,8 +22,8 @@ homepage:
   caseStudyHeading: "Dive Deep"
   caseStudyIntro: "A deep dive into how I approach complex digital challenges. I shape strategy and content systems to design and implement the final experience."
   selectedHeading: "Marketing Projects"
-  selectedIntro: "Smaller explorations in marketing, creative strategy, analytics, and design that show how I approach different kinds of problems."
+  selectedIntro: "Smaller explorations in marketing, creative strategy, analytics, and design, each tailored to a specific need."
   resumeHeading: "Want the short version?"
   resumeSupporting: "Experience, skills, tools, and everything else that fits better on one page."
 ---
-Digital strategist with 3+ years of experience working across content, design, marketing, and technology to connect organizations with their intended communities.
+Digital strategist with 4+ years of experience working across content, design, marketing, and technology to connect organizations with their intended communities.
