@@ -9,7 +9,7 @@ order: 30
 draft: false
 sample: false
 client: "Legal Services Corporation"
-role: "Digital Content Manager"
+role: "Digital Content Specialist"
 year: "2026"
 tools: "Drupal"
 cover: {"src": "../../assets/projects/priorities/hub.png", "alt": "LSC priorities hub introducing the issues and communities served by civil legal aid"}

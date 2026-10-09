@@ -9,7 +9,7 @@ order: 40
 draft: false
 sample: false
 client: "Legal Services Corporation"
-role: "Digital Content Manager"
+role: "Digital Content Specialist"
 year: "2024-2027"
 caseStudy: {
   "label": "CASE STUDY",

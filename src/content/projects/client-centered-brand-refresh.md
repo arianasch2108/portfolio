@@ -9,7 +9,7 @@ order: 10
 draft: false
 sample: false
 client: "Legal Services Corporation"
-role: "Digital Content Manager"
+role: "Digital Content Specialist"
 tools: "Box · Canva · Drupal"
 year: "2025"
 cover: {"src": "../../assets/projects/brand-refresh/homepage.png", "alt": "LSC homepage featuring the Veteran Legal Services Toolkit"}
@@ -32,7 +32,8 @@ caseStudy:
       eyebrow: "STRATEGY"
       heading: "From institutions to people."
       paragraphs:
-        - "The refresh was guided by a simple principle: the people and communities connected to civil legal aid should be at the forefront of LSC’s visual identity."
+        - "LSC conducted a focus group and found that client photographs and stories resonated with participants. This qualitative finding informed my shift from institutional imagery toward client photography and stories, supported by photography guidance, templates, and shared brand resources."
+        - "I designed for intended audiences including policymakers and congressional stakeholders, legal aid partners, potential supporters, and members of the public seeking to understand civil legal aid’s impact. These were intended audiences, not verified visitor segments. My goal was to help them connect LSC’s institutional role with the people and communities affected by its work."
       items:
         - title: "People over institutions"
           body: "Shift the visual emphasis from buildings, monuments, and institutional symbolism toward people, communities, and the human impact of legal aid."

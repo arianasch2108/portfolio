@@ -10,7 +10,7 @@ order: 20
 draft: false
 sample: false
 client: "Legal Services Corporation"
-role: "Digital Content Manager"
+role: "Digital Content Specialist"
 year: "2025-2026"
 caseStudy:
   label: "CONTENT + DIGITAL STORYTELLING"
@@ -27,16 +27,16 @@ caseStudy:
       eyebrow: "OPPORTUNITY"
       heading: "Turning individual stories into a connected experience."
       paragraphs:
-        - "Client stories are one of the clearest ways to make the impact of civil legal aid tangible. But publishing stories individually does not automatically create a meaningful storytelling experience."
-        - "The opportunity was to create a centralized destination where audiences could discover client experiences, understand the legal challenges behind them, and see how LSC-funded organizations help people navigate problems that affect their homes, families, finances, health, and livelihoods."
+        - "LSC conducted a focus group and found that client photographs and stories resonated with participants. I used this qualitative finding to inform the storytelling experience, leading with people rather than institutional information."
+        - "I designed for intended audiences including policymakers and congressional stakeholders, legal aid partners, potential supporters, and members of the public seeking to understand civil legal aid’s impact. These were intended audiences, not verified visitor segments. The opportunity was to connect individual experiences with the broader work of LSC-funded organizations."
       statement: "How might we turn a collection of individual client stories into a digital experience that helps audiences understand the broader impact of civil legal aid?"
     - id: "architecture"
       eyebrow: "STRATEGY"
       heading: "Designing the system before designing the pages."
       paragraphs:
-        - "I designed the hub as more than a collection of stories. It creates multiple paths into the content and uses each client experience as a gateway to the larger civil legal aid ecosystem."
-        - "Story cards lead with the people behind the stories, while the interactive map concept introduces another way to explore the collection by state or legal issue. From an individual story, audiences can continue into broader issue context, state-level data, and information about the legal aid organization serving that community."
-        - "This creates a journey from human impact to broader understanding—while giving audiences, including congressional stakeholders, a clearer connection between an individual story and the legal aid landscape in a specific state."
+        - "The focus-group finding informed my use of people-led story cards, prominent client imagery, and a repeatable narrative: the person, their legal challenge, the assistance received, and the outcome."
+        - "I connected stories to issue context, state data, and grantee information so stakeholders could explore both individual outcomes and the broader legal aid landscape. These connections give a personal story context within a community, an issue, and LSC’s national role."
+        - "The live experience uses story cards and individual story pages. I also developed an interactive map prototype for exploring stories by state and legal issue; it is not part of the live experience."
       architecture:
         hub: "STORY HUB"
         story: "INDIVIDUAL STORY"
@@ -88,7 +88,7 @@ caseStudy:
       heading: "Letting people lead the experience."
       paragraphs:
         - "Visual storytelling was central to making each story feel connected to the people behind LSC’s mission. I selected photography and video to complement each narrative, prioritizing authentic client imagery and grantee-produced video when those assets were available and approved for use."
-        - "This people-first approach extended the visual direction established through LSC’s broader brand refresh—using faces, lived experiences, and community-centered imagery to connect individual stories more directly to the larger mission and impact of civil legal aid."
+        - "This people-first approach extended the visual direction established through LSC’s broader brand refresh, using faces, lived experiences, and community-centered imagery to connect individual stories more directly to the larger mission and impact of civil legal aid."
       constraint:
         label: "CONSTRAINT"
         heading: "What if we didn’t have a photo of the client?"
@@ -107,8 +107,8 @@ caseStudy:
       heading: "Seeing the national story."
       paragraphs:
         - "The story cards create a people-first way to browse the collection. I developed an interactive map concept in Datawrapper to add a different lens: where these stories are happening and what legal issues they represent."
-        - "Users could filter the collection by state and legal issue, making it easier to move from LSC’s national footprint to the individual experiences behind it. The map also helps visualize the breadth of LSC’s grantee network—connecting stories across communities while preserving the local context behind each one."
-      status: "INTERACTIVE MAP — PROTOTYPE / NOT CURRENTLY LIVE"
+        - "Users could filter the collection by state and legal issue, making it easier to move from LSC’s national footprint to the individual experiences behind it. The map also helps visualize the breadth of LSC’s grantee network, connecting stories across communities while preserving the local context behind each one."
+      status: "INTERACTIVE MAP: PROTOTYPE / NOT CURRENTLY LIVE"
       items:
         - title: "NATIONAL REACH"
           body: "Visualize stories across LSC’s nationwide grantee network."
