@@ -1,6 +1,6 @@
 ---
 title: Home
-description: "Digital strategist with 4+ years of experience working across content, design, marketing, and technology to connect organizations with their intended communities."
+description: "Content and web strategist with 4+ years of experience building and executing content and web systems alongside cross-functional teams."
 homepage:
   eyebrow: "CONTENT MANAGEMENT · DIGITAL STRATEGY · CREATIVE TECHNOLOGY"
   positioning: "Creating digital experiences rooted in people and purpose."
@@ -26,4 +26,4 @@ homepage:
   resumeHeading: "Want the short version?"
   resumeSupporting: "Experience, skills, tools, and everything else that fits better on one page."
 ---
-Digital strategist with 4+ years of experience working across content, design, marketing, and technology to connect organizations with their intended communities.
+Content and web strategist with 4+ years of experience building and executing content and web systems alongside cross-functional teams.
