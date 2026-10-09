@@ -8,7 +8,6 @@ const socialLinks: { label: string; url: string }[] = site.socialLinks;
  <div class="container">
   <div class="footer-top">
     <div>
-      <p class="section-marker">CONTACT ME</p>
       {site.closingIsPlaceholder && <p class="draft-label">Closing statement / placeholder</p>}
       <h2 class="footer-statement">{site.closingStatement}</h2>
     </div>
@@ -16,7 +15,7 @@ const socialLinks: { label: string; url: string }[] = site.socialLinks;
       <p class="eyebrow">Based in</p><p>{site.location}</p>
       {site.email && <a href={`mailto:${site.email}`}>{site.email}</a>}
       {socialLinks.map((link) => <a href={link.url}>{link.label} <span aria-hidden="true">›</span></a>)}
-      <div class="footer-contact-actions"><a class="button footer-cta" href={`mailto:${site.email}`}>Email me <span aria-hidden="true">›</span></a><a class="footer-linkedin" href="https://www.linkedin.com/in/arianasierrachacon" aria-label="Ariana Sierra-Chacón on LinkedIn (opens in a new tab)" title="LinkedIn (opens in a new tab)" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true" focusable="false"><path d="M5.37 24H.4V7.98h4.97V24ZM2.88 5.79a2.89 2.89 0 1 1 .03-5.78 2.89 2.89 0 0 1-.03 5.78ZM24 24h-4.96v-7.8c0-1.86-.04-4.25-2.59-4.25-2.59 0-2.99 2.03-2.99 4.12V24H8.5V7.98h4.76v2.19h.07c.66-1.26 2.28-2.59 4.69-2.59 5.02 0 5.95 3.31 5.95 7.61V24Z"/></svg></a></div>
+      <div class="footer-contact-actions"><a class="button footer-cta" href={`mailto:${site.email}`}>Email me <span aria-hidden="true">›</span></a><a class="footer-linkedin" href="https://www.linkedin.com/in/arianasierrachacon" aria-label="Ariana Sierra-Chacón on LinkedIn (opens in a new tab)" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true" focusable="false"><path d="M5.37 24H.4V7.98h4.97V24ZM2.88 5.79a2.89 2.89 0 1 1 .03-5.78 2.89 2.89 0 0 1-.03 5.78ZM24 24h-4.96v-7.8c0-1.86-.04-4.25-2.59-4.25-2.59 0-2.99 2.03-2.99 4.12V24H8.5V7.98h4.76v2.19h.07c.66-1.26 2.28-2.59 4.69-2.59 5.02 0 5.95 3.31 5.95 7.61V24Z"/></svg></a></div>
     </div>
   </div>
   <div class="footer-bottom">
@@ -39,7 +38,7 @@ const socialLinks: { label: string; url: string }[] = site.socialLinks;
  .footer-linkedin { display:inline-flex; align-items:center; justify-content:center; flex-direction:column; gap:.35rem; width:6rem; min-height:44px; text-decoration:none; color:var(--color-on-dark); }
  .footer-linkedin svg { display:block; }
 @media (hover: hover) and (pointer: fine) {
-.footer-linkedin:hover { color:var(--color-lilac); }
+.footer-linkedin[data-mouse-hover] { color:var(--color-lilac); }
 }
  @supports (background-clip: text) {
   .footer-statement { background: var(--gradient-pearl); background-size: 160% 100%; background-clip: text; -webkit-background-clip: text; color: transparent; }
@@ -55,3 +54,26 @@ const socialLinks: { label: string; url: string }[] = site.socialLinks;
  @media(prefers-reduced-motion:no-preference) { .footer-cta { transition:background 180ms ease,border-color 180ms ease; } }
 </style>
 
+
+<script>
+ const linkedInLinks = document.querySelectorAll<HTMLAnchorElement>('.orbital-linkedin, .footer-linkedin');
+ const clearLinkedInFeedback = (link: HTMLAnchorElement) => {
+  link.removeAttribute('data-mouse-hover');
+  link.removeAttribute('title');
+ };
+ linkedInLinks.forEach(link => {
+  link.addEventListener('pointerenter', event => {
+   if (event.pointerType !== 'mouse') return;
+   link.setAttribute('data-mouse-hover', '');
+   link.title = 'LinkedIn (opens in a new tab)';
+  }, { passive: true });
+  link.addEventListener('pointerleave', () => clearLinkedInFeedback(link), { passive: true });
+  link.addEventListener('pointerdown', event => {
+   if (event.pointerType !== 'mouse') clearLinkedInFeedback(link);
+  }, { passive: true });
+ });
+ window.addEventListener('pageshow', () => linkedInLinks.forEach(clearLinkedInFeedback));
+</script>
+<style is:global>
+ .orbital-linkedin svg, .orbital-linkedin svg *, .footer-linkedin svg, .footer-linkedin svg * { pointer-events: none; }
+</style>

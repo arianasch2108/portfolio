@@ -9,7 +9,7 @@ const linkedIn = socialLinks.find(({ label }) => label.toLowerCase() === 'linked
   <a class="site-name" href="/" aria-label={`${site.name} — Home`}><span class="site-name-full">{site.name}</span><span class="site-name-mobile" aria-hidden="true">ASC</span></a>
   <nav aria-label="Main navigation">
     <ul class="nav-list">
-      {site.navigation.map(({ label, href }) => (
+      {[...site.navigation, { label: 'Resume', href: '/resume/' }].map(({ label, href }) => (
         <li><a href={href} aria-current={path === href ? 'page' : href !== '/' && path.startsWith(href) ? 'location' : undefined}>{label}</a></li>
       ))}
       {linkedIn && <li><a class="social-nav" href={linkedIn.url} aria-label="LinkedIn"><span aria-hidden="true">in ›</span></a></li>}
